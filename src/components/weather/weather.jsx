@@ -6,6 +6,7 @@ import { Button, Card, Modal } from 'react-bootstrap';
 import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/sunny.gif'
 import cloudy from './../../img/cloudy.gif'
+import brokenClouds from './../../img/brokenClouds.gif'
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -75,6 +76,13 @@ const Weather = () => {
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={cloudy}
+                  />
+                }
+
+                {weatherData.weather[0].description === 'broken clouds' &&
+                  <Card.Img className='w-100 card-image broken-clouds' variant='top'
+                    type="image/gif"
+                    src={brokenClouds}
                   />
                 }
               </Card.Title>
