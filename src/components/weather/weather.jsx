@@ -5,17 +5,27 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Button, Card, Modal } from 'react-bootstrap';
 import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/sunny.gif'
+import moon from './../../img/moon.gif'
 import cloudy from './../../img/cloudy.gif'
+import cloudyMoon from './../../img/scatteredMoon.gif'
 import brokenClouds from './../../img/brokenClouds.gif'
+import brokenCloudsNight from './../../img/brokenCloudsNight.gif'
 import overcast from './../../img/overcast.gif'
 import thunderstorm from './../../img/thunderstorm.gif'
+import thunderstormNight from './../../img/thunderstormNight.gif'
 import haze from './../../img/haze.gif'
+import hazeNight from './../../img/hazeNight.gif'
 import fewClouds from './../../img/fewClouds.gif'
+import fewCloudsNight from './../../img/fewCloudsNight.gif'
+import lightRain from './../../img/lightRain.gif'
+import moderateRain from './../../img/moderateRain.gif'
+import heavyIntensityRain from './../../img/heavyIntensityRain.gif'
 
 const Weather = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-
+  const hours = new Date().getHours()
+  const isDayTime = hours > 6 && hours < 20
 
   const fetchData = async () => {
     try {
@@ -69,51 +79,131 @@ const Weather = () => {
 
               <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info">{weatherData.main.temp}°C</p>
 
-                {weatherData.weather[0].description === 'clear sky' &&
+                {(weatherData.weather[0].description === 'clear sky' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={sunny}
                   />
                 }
 
-                {weatherData.weather[0].description === 'scattered clouds' &&
+                {(weatherData.weather[0].description === 'clear sky' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={moon}
+                  />
+                }
+
+                {(weatherData.weather[0].description === 'scattered clouds' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={cloudy}
                   />
                 }
+                {(weatherData.weather[0].description === 'heavy intensity rain' && isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={heavyIntensityRain}
+                  />
+                }
+                {(weatherData.weather[0].description === 'heavy intensity rain' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={heavyIntensityRain}
+                  />
+                }
 
-                {weatherData.weather[0].description === 'broken clouds' &&
+
+                {(weatherData.weather[0].description === 'scattered clouds' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={cloudyMoon}
+                  />
+                }
+                {(weatherData.weather[0].description === 'broken clouds' && isDayTime) &&
                   <Card.Img className='w-100 card-image broken-clouds' variant='top'
                     type="image/gif"
                     src={brokenClouds}
                   />
                 }
-                {weatherData.weather[0].description === 'overcast clouds' &&
+
+                {(weatherData.weather[0].description === 'broken clouds' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image broken-clouds' variant='top'
+                    type="image/gif"
+                    src={brokenCloudsNight}
+                  />
+                }
+                {(weatherData.weather[0].description === 'overcast clouds' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={overcast}
                   />
                 }
-                {weatherData.weather[0].description === 'thunderstorm' &&
+                {(weatherData.weather[0].description === 'overcast clouds' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={overcast}
+                  />
+                }
+                {(weatherData.weather[0].description === 'thunderstorm' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={thunderstorm}
                   />
                 }
-                 {weatherData.weather[0].description === 'haze' &&
+                {(weatherData.weather[0].description === 'thunderstorm' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={thunderstormNight}
+                  />
+                }
+                {(weatherData.weather[0].description === 'haze' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={haze}
                   />
                 }
-                 {weatherData.weather[0].description === 'few clouds' &&
+                {(weatherData.weather[0].description === 'haze' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={hazeNight}
+                  />
+                }
+                {(weatherData.weather[0].description === 'light rain' && isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={lightRain}
+                  />
+                }
+                {(weatherData.weather[0].description === 'light rain' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={lightRain}
+                  />
+                }
+                 {(weatherData.weather[0].description === 'moderate rain' && isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={moderateRain}
+                  />
+                }
+                {(weatherData.weather[0].description === 'moderate rain' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={moderateRain}
+                  />
+                }
+                {(weatherData.weather[0].description === 'few clouds' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/gif"
                     src={fewClouds}
                   />
                 }
-                
+                {(weatherData.weather[0].description === 'few clouds' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={fewCloudsNight}
+                  />
+                }
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="sky-info">{weatherData.weather[0].description}</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="feels-like-info">Feels like : {weatherData.main.feels_like}°C</p></Card.Title>
