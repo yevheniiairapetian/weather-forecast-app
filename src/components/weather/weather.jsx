@@ -7,6 +7,8 @@ import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/sunny.gif'
 import cloudy from './../../img/cloudy.gif'
 import brokenClouds from './../../img/brokenClouds.gif'
+import overcast from './../../img/overcast.gif'
+import thunderstorm from './../../img/thunderstorm.gif'
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -48,7 +50,7 @@ const Weather = () => {
           value={city}
           onChange={handleInputChange}
         />
-        <button className="get-weather-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} fade size="lg" style={{ color: "#fff", backgroundColor: "#74C0FC", "--fa-animation-iteration-count": "2" }} /></button>
+        <button className="get-weather-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
       </form>
       {weatherData ? (
         <>
@@ -83,6 +85,18 @@ const Weather = () => {
                   <Card.Img className='w-100 card-image broken-clouds' variant='top'
                     type="image/gif"
                     src={brokenClouds}
+                  />
+                }
+                {weatherData.weather[0].description === 'overcast clouds' &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={overcast}
+                  />
+                }
+                {weatherData.weather[0].description === 'thunderstorm' &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={thunderstorm}
                   />
                 }
               </Card.Title>
