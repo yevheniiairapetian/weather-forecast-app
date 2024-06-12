@@ -38,6 +38,37 @@ form:focus-within {
  background-color: #337cb4;
 }
 
+
+.moving-background-dark {
+  background: linear-gradient(270deg, #626565, #090a0a);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationDark 30s ease infinite;
+  -moz-animation: AnimationDark 30s ease infinite;
+  animation: AnimationDark 30s ease infinite;
+}
+
+.moving-background-light {
+  background: linear-gradient(270deg, #b8c5c8, #5b91e6);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationLight 30s ease infinite;
+  -moz-animation: AnimationLight 30s ease infinite;
+  animation: AnimationLight 30s ease infinite;
+}
+
+@keyframes AnimationDark {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@keyframes AnimationLight {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 .weather-city{
   color:#fff;
   font-size: 30px;
