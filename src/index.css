@@ -39,8 +39,72 @@ form:focus-within {
 }
 
 .weather-city{
-  color:#337cb4;
-  font-size: 26px;
+  color:#fff;
+  font-size: 30px;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.card{
+  background-color: #6699CC;
+  display: flex;
+  flex-direction: column;
+  width:50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.temperature-info{
+font-size: 80px;
+padding: 3px 20px;
+}
+
+.card-image{
+  height:150px;
+  width:150px;
+}
+
+.feels-like-info{
+  font-size: 40px;
+  text-align: left;
+  padding: 5px 20px;
+  }
+
+.temp-info-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+  .humidity-info{
+    font-size: 40px;
+    text-align: left;
+    padding: 5px 20px;
+    }
+  
+    .pressure-info{
+      font-size: 40px;
+      text-align: left;
+      padding: 5px 20px;
+      }
+  
+      .wind-speed-info{
+        font-size: 40px;
+        text-align: left;
+        padding: 5px 20px;
+        }
+      
+
+.sky-info{
+  font-size: 40px;
+  text-transform: capitalize;
+  text-align: left;
+  padding: 3px 20px;
+}
+
+.time-date-data{
+  color:#f5f3f3;
 }
 
 @media screen and (max-width:580px) {
