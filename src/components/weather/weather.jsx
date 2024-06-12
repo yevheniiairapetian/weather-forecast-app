@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -32,14 +35,15 @@ const Weather = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="weather-form" onSubmit={handleSubmit}>
         <input
+        className="city-search-input"
           type="text"
           placeholder="Enter city name"
           value={city}
           onChange={handleInputChange}
         />
-        <button type="submit">Get Weather</button>
+        <button className="get-weather-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} fade size="lg" style={{color: "#fff", backgroundColor:"#74C0FC", "--fa-animation-iteration-count": "2"}} /></button>
       </form>
       {weatherData ? (
         <>

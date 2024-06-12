@@ -1,13 +1,43 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  padding:0;
+  margin:0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.weather-form{
+  display:flex;
+  flex-direction:row;
+  border:1px solid #000;
+
+}
+
+.city-search-input {
+  border-radius: 22px;
+  flex-grow:2;
+  /* And hide the input's outline, so the form looks like the outline */
+  border:none;
+  padding:10px;
+}
+
+.city-search-input:focus {
+  outline: none;
+}
+
+/* Add the focus effect to the form so it contains the button */
+form:focus-within { 
+  outline: 1px solid #74C0FC; 
+}
+
+
+.get-weather-button {
+ padding: 10px;
+ margin: 0;
+ outline: none;
+ border:none;
+ background-color: #74C0FC;
+}
+
+@media screen and (max-width:500px) {
+  
+ 
 }
