@@ -8,7 +8,8 @@
   display:flex;
   flex-direction:row;
   border:1px solid #000;
-
+  width: 50%;
+  margin: 0 auto;
 }
 
 .city-search-input {
@@ -25,7 +26,7 @@
 
 /* Add the focus effect to the form so it contains the button */
 form:focus-within { 
-  outline: 1px solid #74C0FC; 
+  outline: 1px solid #337cb4; 
 }
 
 
@@ -34,10 +35,21 @@ form:focus-within {
  margin: 0;
  outline: none;
  border:none;
- background-color: #74C0FC;
+ background-color: #337cb4;
 }
 
-@media screen and (max-width:500px) {
+.weather-city{
+  color:#337cb4;
+  font-size: 26px;
+}
+
+@media screen and (max-width:580px) {
   
- 
+  .weather-form{
+    display:flex;
+    flex-direction:row;
+    border:1px solid #000;
+    width: 100%;
+    margin: 0 auto;
+  }
 }
