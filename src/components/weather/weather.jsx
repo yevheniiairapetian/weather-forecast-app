@@ -9,6 +9,8 @@ import cloudy from './../../img/cloudy.gif'
 import brokenClouds from './../../img/brokenClouds.gif'
 import overcast from './../../img/overcast.gif'
 import thunderstorm from './../../img/thunderstorm.gif'
+import haze from './../../img/haze.gif'
+import fewClouds from './../../img/fewClouds.gif'
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -99,6 +101,19 @@ const Weather = () => {
                     src={thunderstorm}
                   />
                 }
+                 {weatherData.weather[0].description === 'haze' &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={haze}
+                  />
+                }
+                 {weatherData.weather[0].description === 'few clouds' &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={fewClouds}
+                  />
+                }
+                
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="sky-info">{weatherData.weather[0].description}</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="feels-like-info">Feels like : {weatherData.main.feels_like}°C</p></Card.Title>
