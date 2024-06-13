@@ -6,7 +6,7 @@ import { Button, Card, Modal } from 'react-bootstrap';
 import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/clear-day.svg'
 import moon from './../../img/clear-night.svg'
-
+import { Footer } from '../footer/footer';
 import brokenClouds from './../../img/partly-cloudy-day.svg'
 import brokenCloudsNight from './../../img/partly-cloudy-night.svg'
 import cloudy from './../../img/overcast.svg'
@@ -322,6 +322,7 @@ const Weather = () => {
           {/* Loading weather data... */}
         </p>
       )}
+      <Footer/>
     </div>
   );
 };

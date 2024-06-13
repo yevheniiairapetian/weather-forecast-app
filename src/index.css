@@ -4,11 +4,34 @@
   font-family:Georgia, 'Times New Roman', Times, serif
 }
 
+.footer{
+  margin-top: auto;
+  background-color: #337cb4;
+  color: whitesmoke;
+  text-align: center;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.footer-info-title{
+  font-size: 22px;
+  padding-bottom: 16px;
+}
+
+.footer-info-copy{
+  font-size: 16px;
+
+}
 
 .container{
   background-image: url("./img/app-bg.jpg");
   background-size: 50% 50%;
   height:140vh;
+  display: flex;
+  flex-direction: column;
 
 }
 
@@ -239,7 +262,26 @@ padding: 3px 20px;
 }
 }
 
+
+
+
+
+@media screen and (max-width:700px) {
+  .footer{
+    height:150px !important;
+  }
+
+}
+
+@media screen and (max-width:478px) {
+  .app-heading{
+    text-align: center;
+  }
+}
+
+
 @media screen and (max-width:600px) {
+  
   .weather-form{
     border:none;
     padding: 0px 8px;
@@ -251,6 +293,7 @@ padding: 3px 20px;
 .app-heading{
   font-size: 25px;
   padding-bottom: 20px;
+  padding-left:0;
 
 }
 .weather-form{
