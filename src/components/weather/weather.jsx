@@ -14,6 +14,8 @@ import overcast from './../../img/overcast.gif'
 import thunderstorm from './../../img/thunderstorm.gif'
 import thunderstormNight from './../../img/thunderstormNight.gif'
 import haze from './../../img/haze.gif'
+import mist from './../../img/mist.gif'
+import fog from './../../img/fog.gif'
 import hazeNight from './../../img/hazeNight.gif'
 import fewClouds from './../../img/fewClouds.gif'
 import fewCloudsNight from './../../img/fewCloudsNight.gif'
@@ -204,6 +206,30 @@ const Weather = () => {
                     src={fewCloudsNight}
                   />
                 }
+                {(weatherData.weather[0].description === 'mist' && isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={mist}
+                  />
+                }
+                {(weatherData.weather[0].description === 'mist' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={mist}
+                  />
+                }
+                {(weatherData.weather[0].description === 'fog' && isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={fog}
+                  />
+                }
+                {(weatherData.weather[0].description === 'fog' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={fog}
+                  />
+                }
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="sky-info" style={{color:"whitesmoke"}}>{weatherData.weather[0].description}</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="feels-like-info" style={{color:"whitesmoke"}}>Feels like : {weatherData.main.feels_like}°C</p></Card.Title>
@@ -225,7 +251,9 @@ const Weather = () => {
 
         </>
       ) : (
-        <p>Loading weather data...</p>
+        <p>
+          {/* Loading weather data... */}
+        </p>
       )}
     </div>
   );
