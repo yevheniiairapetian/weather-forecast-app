@@ -8,7 +8,10 @@ import sunny from './../../img/clear-day.svg'
 import moon from './../../img/clear-night.svg'
 import cloudyMoon from './../../img/scatteredMoon.gif'
 import coolWeather from './../../img/cool-weather.gif'
+import freezing from './../../img/love.gif'
+import colderWeather from './../../img/colder-weather.gif'
 import warmWeather from './../../img/warm-weather.gif'
+import hotWeather from './../../img/hot-weather.gif'
 import brokenClouds from './../../img/partly-cloudy-day.svg'
 import brokenCloudsNight from './../../img/partly-cloudy-night.svg'
 import cloudy from './../../img/overcast.svg'
@@ -26,6 +29,7 @@ import fewCloudsNight from './../../img/fewCloudsNight.gif'
 import lightRain from './../../img/rain.svg'
 import moderateRain from './../../img/moderate-rain.svg'
 import heavyIntensityRain from './../../img/heavyIntensityRain.gif'
+import heavySnow from './../../img/heavySnow.gif'
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -235,12 +239,38 @@ const Weather = () => {
                     src={fogNight}
                   />
                 }
+                {(weatherData.weather[0].description === 'heavy snow' && isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={heavySnow}
+                  />
+                }
+                {(weatherData.weather[0].description === 'heavy snow' && !isDayTime) &&
+                  <Card.Img className='w-100 card-image' variant='top'
+                    type="image/gif"
+                    src={heavySnow}
+                  />
+                }
               </Card.Title>
               <Card.Title className="item-info text-center pb-1 " ><p className="sky-info" style={{ color: "whitesmoke" }}>{weatherData.weather[0].description}</p>
 
               </Card.Title>
               <Card.Title className="item-info text-center pb-1 temp-info-container" ><p className="feels-like-info" style={{ color: "whitesmoke" }}>Feels like : {weatherData.main.feels_like}°C</p>
-                {(weatherData.main.feels_like > 6 && weatherData.main.feels_like < 19) &&
+              {(weatherData.main.feels_like >= -30 && weatherData.main.feels_like <= -4) &&
+                  <Card.Img className='' variant='top'
+                    type="image/gif"
+                    style={{ height: "330px"}}
+                    src={freezing}
+                  />
+                }
+              {(weatherData.main.feels_like >= -5 && weatherData.main.feels_like <=5) &&
+                  <Card.Img className='' variant='top'
+                    type="image/gif"
+                    style={{ height: "330px"}}
+                    src={colderWeather}
+                  />
+                }                
+                {(weatherData.main.feels_like > 5 && weatherData.main.feels_like < 19) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/svg"
                     style={{ height: "190px", width:"160px"}}
@@ -254,7 +284,15 @@ const Weather = () => {
                     style={{ height: "230px"}}
                     src={warmWeather}
                   />
-                }</Card.Title>
+                }
+                {(weatherData.main.feels_like >= 26 && weatherData.main.feels_like < 45) &&
+                  <Card.Img className='' variant='top'
+                    type="image/gif"
+                    style={{ height: "330px"}}
+                    src={hotWeather}
+                  />
+                }
+                </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {weatherData.main.humidity}%</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {weatherData.main.pressure}</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {weatherData.wind.speed}m/s</p></Card.Title>
