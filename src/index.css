@@ -18,6 +18,8 @@
   margin: 0 auto;
   flex-grow:2;
   height: 40px;
+  padding-right:10px;
+
 
 }
 
@@ -56,7 +58,6 @@ form:focus-within {
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-  
 
 }
 
@@ -248,10 +249,13 @@ padding: 3px 20px;
 }
 .app-heading{
   font-size: 25px;
+  padding-bottom: 20px;
 
 }
 .weather-form{
   width:90% !important;
+  padding-right:none;
+
 }
 .temp-info-container{
   flex-direction: column;
