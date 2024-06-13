@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX } from '@fortawesome/free-solid-svg-icons';
 import { Button, Card, Modal } from 'react-bootstrap';
 import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/clear-day.svg'
 import moon from './../../img/clear-night.svg'
-import cloudyMoon from './../../img/scatteredMoon.gif'
-import coolWeather from './../../img/cool-weather.gif'
-import freezing from './../../img/love.gif'
-import colderWeather from './../../img/colder-weather.gif'
-import warmWeather from './../../img/warm-weather.gif'
-import hotWeather from './../../img/hot-weather.gif'
+
 import brokenClouds from './../../img/partly-cloudy-day.svg'
 import brokenCloudsNight from './../../img/partly-cloudy-night.svg'
 import cloudy from './../../img/overcast.svg'
@@ -30,12 +25,18 @@ import lightRain from './../../img/rain.svg'
 import moderateRain from './../../img/moderate-rain.svg'
 import heavyIntensityRain from './../../img/heavyIntensityRain.gif'
 import heavySnow from './../../img/heavySnow.gif'
+import { faXRay } from '@fortawesome/free-solid-svg-icons/faXRay';
 
 const Weather = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const hours = new Date().getHours()
   const isDayTime = hours > 6 && hours < 20
+
+  function clearInput() {
+
+    document.querySelector(".city-search-input").value = "";
+}
 
   const fetchData = async () => {
     try {
@@ -63,8 +64,11 @@ const Weather = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
+      <div className='form-heading-container'>
+      <h1 className="app-heading">Weather Forecast App</h1>
       <form className="weather-form" onSubmit={handleSubmit}>
+      
         <input
           className="city-search-input"
           type="text"
@@ -73,10 +77,13 @@ const Weather = () => {
           onChange={handleInputChange}
         />
         <button className="get-weather-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
+        <button onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
       </form>
+      </div>
+      
       {weatherData ? (
         <>
-          <Card id="card" className='item card mb-3' >
+          <Card id="card" className='item card ' >
 
 
 
@@ -255,8 +262,8 @@ const Weather = () => {
               <Card.Title className="item-info text-center pb-1 " ><p className="sky-info" style={{ color: "whitesmoke" }}>{weatherData.weather[0].description}</p>
 
               </Card.Title>
-              <Card.Title className="item-info text-center pb-1 temp-info-container" ><p className="feels-like-info" style={{ color: "whitesmoke" }}>Feels like : {weatherData.main.feels_like}°C</p>
-              {(weatherData.main.feels_like >= -30 && weatherData.main.feels_like <= -4) &&
+              <Card.Title className="item-info pb-1 " ><p className="feels-like-info" style={{ color: "whitesmoke" }}>Feels like : {Math.trunc(weatherData.main.feels_like)}°C</p>
+              {/* {(weatherData.main.feels_like >= -30 && weatherData.main.feels_like <= -4) &&
                   <Card.Img className='' variant='top'
                     type="image/gif"
                     style={{ height: "330px"}}
@@ -291,7 +298,7 @@ const Weather = () => {
                     style={{ height: "330px"}}
                     src={hotWeather}
                   />
-                }
+                } */}
                 </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {weatherData.main.humidity}%</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {weatherData.main.pressure}</p></Card.Title>
