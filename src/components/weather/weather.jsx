@@ -28,6 +28,7 @@ import heavySnow from './../../img/heavySnow.gif'
 import { faXRay } from '@fortawesome/free-solid-svg-icons/faXRay';
 
 const Weather = () => {
+
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const hours = new Date().getHours()
@@ -51,9 +52,11 @@ const Weather = () => {
     }
   };
 
+
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [city]);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -63,6 +66,8 @@ const Weather = () => {
     e.preventDefault();
     fetchData();
   };
+
+ 
 
   return (
     <div className='container'>
