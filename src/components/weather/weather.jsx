@@ -95,7 +95,7 @@ const Weather = () => {
 
             <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{weatherData.name}
+              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{weatherData.name}, {weatherData.sys.country}
                 <DisplayDate />
               </h2>
               </Card.Title>
@@ -324,10 +324,12 @@ const Weather = () => {
 
         </>
       ) : (
+        <div style={{height:"100vh"}}>
         <p className="pre-request-text">
           <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
           <span className='pre-request-text-span'>Start by typing the city...</span>
         </p>
+        </div>
       )}
       <Footer/>
     </div>
