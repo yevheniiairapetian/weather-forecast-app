@@ -320,7 +320,7 @@ const Weather = () => {
       ) : (
         <p className="pre-request-text">
           <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
-          <span className='pre-request-text-span'>Srart by typing the city...</span>
+          <span className='pre-request-text-span'>Start by typing the city...</span>
         </p>
       )}
       <Footer/>
