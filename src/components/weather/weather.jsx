@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faX } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { Button, Card, Modal } from 'react-bootstrap';
 import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/clear-day.svg'
@@ -318,8 +318,9 @@ const Weather = () => {
 
         </>
       ) : (
-        <p>
-          {/* Loading weather data... */}
+        <p className="pre-request-text">
+          <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
+          <span className='pre-request-text-span'>Srart by typing the city...</span>
         </p>
       )}
       <Footer/>

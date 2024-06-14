@@ -4,6 +4,23 @@
   font-family:Georgia, 'Times New Roman', Times, serif
 }
 
+.pre-request-text{
+  position: relative;
+  top:20%;
+  margin: 0 auto;
+  height: 60px;
+  background-color: whitesmoke;
+  width:200px;
+  padding: 20px 10px;
+  text-align: center;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+.pre-request-text-span{
+  padding-left: 10px;
+}
+
 .footer{
   margin-top: auto;
   background-color: #337cb4;
