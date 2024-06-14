@@ -95,7 +95,7 @@ const Weather = () => {
               </h2>
               </Card.Title>
 
-              <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info" style={{ color: "whitesmoke" }}>{weatherData.main.temp}°C</p>
+              <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.trunc(weatherData.main.temp)}°C</p>
 
                 {(weatherData.weather[0].description === 'clear sky' && isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
