@@ -21,8 +21,8 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.1.0"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "deploy": "react-scripts deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
