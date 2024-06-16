@@ -38,6 +38,7 @@ When installed, it allows to:
 - Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
 
 Read more about the Progressive Web Apps [here](https://www.itaims.com/blog/benefits-of-progressive-web-apps-pwa-advantages-and-disadvantages)
+
 Read more about the Open Weather Map API [here](https://openweathermap.org/)
 
 
@@ -46,6 +47,10 @@ Read more about the Open Weather Map API [here](https://openweathermap.org/)
 - React Bootstrap
 - Axios
 - Responsive design
+- Progressive Web Apps (PWA)
+- External API
+- Netlify
+- Vercel
 
 ## Project Screenshot
 <a href="[https://ibb.co/vZWMYxN](https://ibb.co/vZWMYxN)"><img src="https://i.ibb.co/GcDrTvZ/2024-06-17-00h45-41.png" alt="2023-10-04-18h22-09" border="0"></a>       
