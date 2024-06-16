@@ -397,13 +397,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[0].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[0].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -578,13 +578,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[1].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[1].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -759,13 +759,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[2].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[2].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -939,13 +939,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[3].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[3].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -1120,13 +1120,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[4].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[4].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -1300,13 +1300,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[5].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[5].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -1480,13 +1480,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[6].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[6].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -1660,13 +1660,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[7].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[7].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
@@ -1840,13 +1840,13 @@ const Weather = () => {
                   />
                 }
                 {(dailyWeatherData.list[8].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
                 }
                 {(dailyWeatherData.list[8].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
+                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
                     type="image/gif"
                     src={heavyIntensityRain}
                   />
