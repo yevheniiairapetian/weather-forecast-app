@@ -108,7 +108,7 @@ const Weather = () => {
         </form>
       </div>
 
-      {(weatherData && dailyWeatherData)? (
+      {weatherData ? (
         <>
           <Card id="card" className='item card ' >
 
@@ -343,13 +343,18 @@ const Weather = () => {
 
 
 
-        
-      
-        
-      
+        </>
+      ) : (
+        <div style={{ height: "100vh" }}>
+          <p className="pre-request-text">
+            <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
+            <span className='pre-request-text-span'>Start by typing the city...</span>
+          </p>
+        </div>
+      )}
 
-       
-        
+      {dailyWeatherData ? (
+        <>
         <h3 className='day-7-heading'>3-hour weather forecast for <span className='day-7-location-span'>{weatherData.name}, {weatherData.sys.country}</span></h3>
         <div className='weather-7-container'>
           <Card id="card" className='item card-7-forecast ' >
@@ -2196,20 +2201,19 @@ const Weather = () => {
 
 
 
-          
+
 
         </>
-      
-) : (
-        <div style={{height:"100vh"}}>
-        <p className="pre-request-text">
-          <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
-          <span className='pre-request-text-span'>Start by typing the city...</span>
-        </p>
-        </div>
-        
+      ) : (
+        // <div style={{height:"100vh"}}>
+        // <p className="pre-request-text">
+        //   <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
+        //   <span className='pre-request-text-span'>Start by typing the city...</span>
+        // </p>
+        // </div>
+        ""
       )}
-  
+
       <Footer />
     </div>
   );
