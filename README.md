@@ -76,3 +76,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `live versions`
 The app is live at [Netlify](https://better-wetter.netlify.app/) and [Vercel](https://better-wetter.vercel.app/)
 
+## Contact:
+Feel free to contact me via[ LinkedIn](https://www.linkedin.com/in/yevheniiairapetian/) or  
+[email](mailto:contact@yevheniiairapetian.com) or 
+via the contact information on the [website](https://yevheniiairapetian.com/#/contact) 
+
