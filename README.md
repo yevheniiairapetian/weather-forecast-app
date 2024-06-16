@@ -7,7 +7,6 @@ Read more about:
 - [Netlify](https://www.netlify.com/)
 - [Vercel](https://vercel.com/)
 
-
 ## Available features
 
 1. Search for a city and see current weather data.
@@ -49,7 +48,7 @@ Read more about the Open Weather Map API [here](https://openweathermap.org/)
 - Responsive design
 
 ## Project Screenshot
-<a href="[https://ibb.co/yX2DGrY](https://ibb.co/ZLnWSNw)"><img src="https://i.ibb.co/TvVm1rn/2024-06-16-20h21-34.png" alt="2023-10-04-18h22-09" border="0"></a>       
+<a href="[https://ibb.co/vZWMYxN](https://ibb.co/vZWMYxN)"><img src="https://i.ibb.co/GcDrTvZ/2024-06-17-00h45-41.png" alt="2023-10-04-18h22-09" border="0"></a>       
 
 ## Project Dependencies
 - Node v 16
