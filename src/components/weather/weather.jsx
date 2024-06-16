@@ -56,8 +56,7 @@ const Weather = () => {
   const fetchDaily = async () => {
     try {
       const response = await axios.get(
-        // https://pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}        
-        `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=37a59afb38bdce13cc1d95a3e10551e5`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=37a59afb38bdce13cc1d95a3e10551e5`
       );
       setDailyWeatherData(response.data);
       console.log(response.data); //You can see all the weather data in console log
