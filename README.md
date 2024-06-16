@@ -7,40 +7,47 @@ Read more about [Netlify](https://www.netlify.com/) and [Vercel](https://vercel.
 ## Available features
 
 1. Search for a city and see current weather data.
-    - Users can see information including (but not limited to):
-   a) City and country names
-   b) Temperature (in Celcius)
-   c) An icon representing the weather (e.g. Light rain or Clear Sky)
-   d) Condition of the sky
-   e) Humidity (in percents)
-   f) Feels like information (real temperature feeling, in Celcius)
-   g) Pressure
-   h) Wind speed (in meters per second)
+   Users can see information including (but not limited to):
+   - City and country names
+   - Temperature (in Celcius)
+   - An icon representing the weather (e.g. Light rain or Clear Sky)
+   - Condition of the sky
+   - Humidity (in percents)
+   - Feels like information (real temperature feeling, in Celcius)
+   - Pressure
+   - Wind speed (in meters per second)
    
 2. Search for a city and see the daily 3-hour weather forecast for that city.
-   - Users can see information including (but not limited to):
-   a) City and country names
-   b) Date and hours (in 3-hour range for a 24-hour timespan)
-   c) Condition of the sky
-   d) Temperature (in Celcius)
-   e) An icon representing the weather (e.g. Light rain or Clear Sky)
+   Users can see information including (but not limited to):
+   - City and country names
+   - Date and hours (in 3-hour range for a 24-hour timespan)
+   - Condition of the sky
+   - Temperature (in Celcius)
+   - An icon representing the weather (e.g. Light rain or Clear Sky)
 3. Install the app on mobile/desktop devices like a native app.
-- When installed, it allows to:
-  a) Use the app, resembling a native-app experience.
-  b) Have an improved user experience
-d) Experience cross-platform compatibility
-e) Make use of faster loading times
-f) Use offline accessibility
-g) Have smaller size than a native desktop app
-h) Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
+When installed, it allows to:
+- Use the app, resembling a native-app experience.
+- Have an improved user experience
+- Experience cross-platform compatibility
+- Make use of faster loading times
+- Use offline accessibility
+- Have smaller size than a native desktop app
+- Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
 
 Read more about the Progressive Web Apps [here](https://www.itaims.com/blog/benefits-of-progressive-web-apps-pwa-advantages-and-disadvantages)
 Read more about the Open Weather Map API [here](https://openweathermap.org/)
 
 
-## Available Scripts
-
-In the project directory, you can run:
+## Clone and Preview 
+To clone the app use the following command:
+```console git clone git@github.com:yevheniiairapetian/weather-forecast-app```
+Or download directly by clicking on <> Code button > Download ZIP. Make sure you have Node installed on your machine. To check if you have Node installed, run the ```node -v``` command. If Node is not installed, use the preferred package manager:
+- For npm on Windows, run the ```npm install nodejs``` command 
+- For Mac, run the ```brew install node``` command
+- For Linux Debian/Ubuntu-based systems run the ```sudo apt-get install nodejs``` command
+- For Red Hat/Fedora-based systems run the ```sudo yum install nodejs
+``` command
+Then navigate to the folder using the ```cd weather-forecast-app``` terminal command. Then run the ```npm i``` command (or similar, depending on the package manager) to install the project dependencies. After that, follow the scripts in the section below.
 
 ### `npm start`
 
