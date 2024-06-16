@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 export const DisplayDate = () =>{
     const time = Date.now();
   const date = new Date(time);
