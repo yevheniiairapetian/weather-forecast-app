@@ -2,6 +2,7 @@
 
 This project contains a responsive Progressive Web App designed with React and React Bootstrap. It fetches weather data from the [Open Weather Map API](https://openweathermap.org/) and displays it in the front-end interface. Users can search for a city and instantly see weather information for that city (current and hourly). The app was deployed to Netlify and Vercel.
 Read more about 
+- [Open Weather Map API](https://openweathermap.org/)
 - [Netlify](https://www.netlify.com/)
 - [Vercel](https://vercel.com/)
 
