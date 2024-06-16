@@ -42,6 +42,30 @@ Read more about the Progressive Web Apps [here](https://www.itaims.com/blog/bene
 Read more about the Open Weather Map API [here](https://openweathermap.org/)
 
 
+## Technologies Used
+- React
+- React Bootstrap
+- Axios
+- Responsive design
+
+## Project Screenshot
+<a href="[https://ibb.co/yX2DGrY](https://ibb.co/ZLnWSNw)"><img src="https://i.ibb.co/TvVm1rn/2024-06-16-20h21-34.png" alt="2023-10-04-18h22-09" border="0"></a>       
+
+## Project Dependencies
+- Node v 16
+- React.js as a framework
+- React Bootstrap for styling
+- Axios for fetching information from an API
+- External [Open Weather Map API](https://openweathermap.org/) (for weather information)
+- Service worker for enabling PWA functionality
+- [Netlify](https://www.netlify.com/) for deployment
+- [Vercel](https://vercel.com/) for deployment
+
+## External API 
+As mentioned, the app relies on the external API: 
+[Open Weather Map API](https://openweathermap.org/)
+
+
 ## Clone and Preview 
 1. To clone the app use the following command:
 ```console git clone git@github.com:yevheniiairapetian/weather-forecast-app```
@@ -49,9 +73,9 @@ Or download directly by clicking on <> Code button > Download ZIP. Make sure you
 - For npm on Windows, run the ```npm install nodejs``` command 
 - For Mac, run the ```brew install node``` command
 - For Linux Debian/Ubuntu-based systems run the ```sudo apt-get install nodejs``` command
-- For Red Hat/Fedora-based systems run the ```sudo yum install nodejs
+- For Red Hat/Fedora-based systems run the ```sudo yum install nodejs```
 command
-2. Then navigate to the folder using the ```cd weather-forecast-app``` terminal command. Then run the ```npm i``` command (or similar, depending on the package manager) to install the project dependencies
+2. Then get back to the project folder and use the ```cd weather-forecast-app``` terminal command. Then run the ```npm i``` command (or similar, depending on the package manager) to install the project dependencies
   3. After that, follow the scripts in the section below.
 
 ### `npm start`
