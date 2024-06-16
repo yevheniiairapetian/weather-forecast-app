@@ -108,7 +108,7 @@ const Weather = () => {
         </form>
       </div>
 
-      {weatherData && dailyWeatherData? (
+      {(weatherData && dailyWeatherData)? (
         <>
           <Card id="card" className='item card ' >
 
