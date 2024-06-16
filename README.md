@@ -1,6 +1,28 @@
-# Getting Started with Create React App
+# Better Wetter App - Weather Forecasts
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project contains a responsive Progressive Web App designed with React and React Bootstrap. It fetches weather data from the [Open Weather Map API](https://openweathermap.org/) and displays it in the front-end interface. Users can search for a city and instantly see weather information for that city.
+
+## Available features
+
+1. Search for a city and see current weather data.
+    - Users can see information including (but not limited to):
+   a) City and country names
+   b) Temperature (in Celcius)
+   c) An icon representing the weather (e.g. Light rain or Clear Sky)
+   d) Condition of the sky
+   e) Humidity (in percents)
+   f) Feels like information (real temperature feeling, in Celcius)
+   g) Pressure
+   h) Wind speed (in meters per second)
+   
+2. Search for a city and see the daily 3-hour weather forecast for that city.
+   - Users can see information including (but not limited to):
+   a) City and country names
+   b) Date and hours (in 3-hour range for a 24-hour timespan)
+   c) Condition of the sky
+   d) Temperature (in Celcius)
+   e) An icon representing the weather (e.g. Light rain or Clear Sky)
+
 
 ## Available Scripts
 
@@ -29,42 +51,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `live versions`
+The app is live at [Netlify](https://better-wetter.netlify.app/) and [Vercel](https://better-wetter.vercel.app/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
