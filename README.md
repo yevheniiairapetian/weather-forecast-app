@@ -22,6 +22,15 @@ This project contains a responsive Progressive Web App designed with React and R
    c) Condition of the sky
    d) Temperature (in Celcius)
    e) An icon representing the weather (e.g. Light rain or Clear Sky)
+3. Install the app on mobile/desktop devices like a native app.
+- When installed, it allows to:
+  a) Use the app, resembling a native-app experience.
+  b) Have an improved user experience
+d) Experience cross-platform compatibility
+e) Make use of faster loading times
+f) Use offline accessibility
+g) Have smaller size than a native desktop app
+h) Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
 
 
 ## Available Scripts
