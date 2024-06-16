@@ -73,7 +73,7 @@ As mentioned, the app relies on the external API:
 ## Clone and Preview 
 1. To clone the app use the following command:
 ```console git clone git@github.com:yevheniiairapetian/weather-forecast-app```
-Or download directly by clicking on <> Code button > Download ZIP. Make sure you have Node installed on your machine. To check if you have Node installed, run the ```node -v``` command. If Node is not installed, use the preferred package manager:
+Or download directly by clicking on <> Code button > Download ZIP. Make sure you have Node installed on your machine. To check if you have Node installed, run the ```node -v``` command in the terminal. If Node is not installed, use the preferred package manager:
 - For npm on Windows, run the ```npm install nodejs``` command 
 - For Mac, run the ```brew install node``` command
 - For Linux Debian/Ubuntu-based systems run the ```sudo apt-get install nodejs``` command
