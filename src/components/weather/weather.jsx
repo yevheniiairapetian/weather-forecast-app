@@ -70,11 +70,10 @@ const Weather = () => {
 
   useEffect(() => {
     fetchData();
-  }, [city]);
-
-  useEffect(() => {
     fetchDaily();
   }, [city]);
+
+
 
 
 
