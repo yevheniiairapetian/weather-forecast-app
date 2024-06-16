@@ -47,7 +47,8 @@ Or download directly by clicking on <> Code button > Download ZIP. Make sure you
 - For Linux Debian/Ubuntu-based systems run the ```sudo apt-get install nodejs``` command
 - For Red Hat/Fedora-based systems run the ```sudo yum install nodejs
 command
-2. Then navigate to the folder using the ```cd weather-forecast-app``` terminal command. Then run the ```npm i``` command (or similar, depending on the package manager) to install the project dependencies. 3. After that, follow the scripts in the section below.
+2. Then navigate to the folder using the ```cd weather-forecast-app``` terminal command. Then run the ```npm i``` command (or similar, depending on the package manager) to install the project dependencies
+  3. After that, follow the scripts in the section below.
 
 ### `npm start`
 
