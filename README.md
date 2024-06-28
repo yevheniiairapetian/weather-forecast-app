@@ -1,6 +1,6 @@
 # Better Wetter App - Weather Forecasts
 
-This project contains a responsive Progressive Web App designed with React and React Bootstrap. It fetches weather data from the [Open Weather Map API](https://openweathermap.org/) and displays it in the front-end interface. Users can search for a city and instantly see weather information for that city (current and hourly). The app was deployed to Netlify and Vercel.
+This project contains a responsive Progressive Web App designed with React and React Bootstrap. It fetches weather data from the [Open Weather Map API](https://openweathermap.org/) and displays it in the front-end interface. Users can search for a city and instantly see weather information for that city (current and hourly). The app is deployed to Vercel.
 
 Read more about:
 - [Open Weather Map API](https://openweathermap.org/)
