@@ -12,9 +12,9 @@ Read more about:
    Users can see information including (but not limited to):
    - City and country names
    - Temperature (in Celcius)
-   - An icon representing the weather (e.g. Light rain or Clear Sky)
-   - Condition of the sky
-   - Humidity (in percents)
+   - Condition of the sky (actual weather)
+   - An icon representing the condition of the sky (e.g. Light rain or Clear Sky)
+   - Humidity (in percentage)
    - Feels like information (real temperature feeling, in Celcius)
    - Pressure
    - Wind speed (in meters per second)
@@ -22,11 +22,14 @@ Read more about:
 2. Search for a city and see the daily 3-hour weather forecast for that city.
    Users can see information including (but not limited to):
    - City and country names
-   - Date and hours (in 3-hour range for a 24-hour timespan)
-   - Condition of the sky
+   - Date and hours (in a 3-hour range for a 24-hour timespan)
+   - Condition of the sky (actual weather)
+   - An icon representing the condition of the sky (e.g. Light rain or Clear Sky)
    - Temperature (in Celcius)
-   - An icon representing the weather (e.g. Light rain or Clear Sky)
-3. Install the app on mobile/desktop devices like a native app.
+3. The interface changes its background and weather condition icons depending on the user's local time (day or night). Therefore:
+   - The app's weather card and 3-hour-forecast cards' background changes to a brighter or darker image
+   - The weather icons are changed to more time-appropriate ones (e.g. Few clouds icon is different for day and night)
+4. Install the app on mobile/desktop devices like a native app.
 When installed, it allows to:
 - Use the app, resembling a native-app experience.
 - Have an improved user experience
