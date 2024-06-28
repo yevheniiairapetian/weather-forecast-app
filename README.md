@@ -4,7 +4,6 @@ This project contains a responsive Progressive Web App designed with React and R
 
 Read more about:
 - [Open Weather Map API](https://openweathermap.org/)
-- [Netlify](https://www.netlify.com/)
 - [Vercel](https://vercel.com/)
 
 ## Available features
@@ -62,7 +61,6 @@ Read more about the Open Weather Map API [here](https://openweathermap.org/)
 - Axios for fetching information from an API
 - External [Open Weather Map API](https://openweathermap.org/) (for weather information)
 - Service worker for enabling PWA functionality
-- [Netlify](https://www.netlify.com/) for deployment
 - [Vercel](https://vercel.com/) for deployment
 
 ## External API 
@@ -116,7 +114,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ### `live versions`
-The app is live at [Netlify](https://better-wetter.netlify.app/) and [Vercel](https://better-wetter.vercel.app/)
+The app is live at [www.better-wetter.com](https://www.better-wetter.com/)
 
 ## Contact:
 Feel free to contact me via[ LinkedIn](https://www.linkedin.com/in/yevheniiairapetian/) or [email](mailto:contact@yevheniiairapetian.com) or via the contact information on my [portfolio](https://yevheniiairapetian.com/#/contact) 
