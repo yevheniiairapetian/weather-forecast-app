@@ -1,5 +1,7 @@
 {
     "name": "Better Wetter App: Weather Today",
+    "homepage": "https://better-wetter.com",
+
     "short_name": "Better Wetter App",
     "theme_color": "whitesmoke",
     "background_color": "#337cb4",
