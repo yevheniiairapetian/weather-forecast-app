@@ -14,7 +14,8 @@ Read more about:
 
 ### Mobile screen
 
-<a href="[https://ibb.co/XfHcGsz](https://ibb.co/XfHcGsz)"><img src="https://i.ibb.co/MydFJVR/2024-07-11-18h01-40.gif" alt="Better Wetter app in use" border="0"></a>
+![https://ibb.co/XfHcGsz](https://ibb.co/XfHcGsz "Better Wetter app in use")
+
 
 ## Available features
 
