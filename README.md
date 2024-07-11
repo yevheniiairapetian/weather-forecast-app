@@ -54,8 +54,6 @@ Read more about the Open Weather Map API [here](https://openweathermap.org/)
 - Netlify
 - Vercel
 
-## Project Screenshot
-<a href="[https://ibb.co/j5pxNHR](https://ibb.co/j5pxNHR)"><img src="https://i.ibb.co/thdNG3X/2024-07-11-10h39-33.png" alt="Gimme Task to do app screenshot" border="0"></a>   
 
 ## Project Dependencies
 - Node v 16
