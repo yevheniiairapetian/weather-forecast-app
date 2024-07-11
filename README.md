@@ -6,6 +6,10 @@ Read more about:
 - [Open Weather Map API](https://openweathermap.org/)
 - [Vercel](https://vercel.com/)
 
+## Project Screenshot
+
+<a href="[https://ibb.co/kqwqg78](https://ibb.co/kqwqg78)"><img src="https://i.ibb.co/L9c9zFt/2024-07-11-17h51-46.png" alt="Better Wetter app screenshot" border="0"></a>   
+
 ## Available features
 
 1. Search for a city and see current weather data.
@@ -36,7 +40,7 @@ When installed, it allows to:
 - Experience cross-platform compatibility
 - Make use of faster loading times
 - Use offline accessibility
-- Have smaller size than a native desktop app
+- Have a smaller size than a native desktop app
 - Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
 
 Read more about the Progressive Web Apps [here](https://www.itaims.com/blog/benefits-of-progressive-web-apps-pwa-advantages-and-disadvantages)
