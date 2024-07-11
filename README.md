@@ -8,8 +8,7 @@ Read more about:
 
 ## Project Screenshot
 
-<a href="[https://ibb.co/bFNxWcn](https://ibb.co/bFNxWcn)"><img src="https://i.ibb.co/0KYkDH3/2024-07-11-17h53-39.png" alt="Better Wetter app screenshot" border="0"></a>   
-
+<a href="[https://ibb.co/Mh7SPnS](https://ibb.co/Mh7SPnS)"><img src="https://i.ibb.co/sPqRsjR/2024-07-11-17h56-16.png" alt="Better Wetter app screenshot" border="0"></a>   
 
 ## Available features
 
