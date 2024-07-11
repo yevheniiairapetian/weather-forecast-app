@@ -14,7 +14,7 @@ Read more about:
 
 ### Mobile screen
 
-<img src="https://ibb.co/XfHcGsz" alt="Better Wetter app in use" width="200" height="60">
+<img src="https://ibb.co/XfHcGsz" alt="Better Wetter app in use" width="200" height="60" />
 
 
 ## Available features
