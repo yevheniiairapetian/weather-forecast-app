@@ -14,7 +14,7 @@ Read more about:
 
 ### Mobile screen
 
-<a href="[https://ibb.co/XfHcGsz](https://ibb.co/XfHcGsz)"></a> 
+Please visit the [GIF Animation](https://ibb.co/XfHcGsz)
 
 ## Available features
 
