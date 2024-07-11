@@ -8,7 +8,13 @@ Read more about:
 
 ## Project Screenshot
 
-<a href="[https://ibb.co/Mh7SPnS](https://ibb.co/Mh7SPnS)"><img src="https://i.ibb.co/sPqRsjR/2024-07-11-17h56-16.png" alt="Better Wetter app screenshot" border="0"></a>   
+### Laptop/desktop screen
+
+<a href="[https://ibb.co/Mh7SPnS](https://ibb.co/Mh7SPnS)"><img src="https://i.ibb.co/sPqRsjR/2024-07-11-17h56-16.png" alt="Better Wetter app screenshot" border="0"></a>  
+
+### Mobile screen
+
+<a href="[https://ibb.co/XfHcGsz](https://ibb.co/XfHcGsz)"><img src="https://i.ibb.co/MydFJVR/2024-07-11-18h01-40.gif" alt="Better Wetter app in use" border="0"></a>
 
 ## Available features
 
