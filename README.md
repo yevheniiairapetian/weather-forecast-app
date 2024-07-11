@@ -55,7 +55,7 @@ Read more about the Open Weather Map API [here](https://openweathermap.org/)
 - Vercel
 
 ## Project Screenshot
-<a href="[https://ibb.co/vZWMYxN](https://ibb.co/vZWMYxN)"><img src="https://i.ibb.co/GcDrTvZ/2024-06-17-00h45-41.png" alt="2023-10-04-18h22-09" border="0"></a>       
+<a href="[https://ibb.co/j5pxNHR](https://ibb.co/j5pxNHR)"><img src="https://i.ibb.co/thdNG3X/2024-07-11-10h39-33.png" alt="Gimme Task to do app screenshot" border="0"></a>   
 
 ## Project Dependencies
 - Node v 16
