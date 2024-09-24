@@ -33,6 +33,7 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [dailyWeatherData, setDailyWeatherData] = useState(null);
   const [hourlyWeatherData, setHourlyWeatherData] = useState(null);
+  const [weekWeatherData, setWeekWeatherData] = useState(null);
   const hours = new Date().getHours()
   const isDayTime = hours > 6 && hours < 20
 
@@ -79,10 +80,26 @@ const Weather = () => {
     }
   };
 
+
+  const fetchWeekly = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=b6b68ae835d04defa94134215242409&q=${city}&days=7&aqi=no&alerts=no
+
+`
+      );
+      setWeekWeatherData(response.data);
+      console.log(response.data); //You can see all the weather data in console log
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
     fetchDaily();
     fetchHourly();
+    fetchWeekly();
   }, [city]);
 
 
@@ -98,9 +115,10 @@ const Weather = () => {
     fetchData();
     fetchDaily();
     fetchHourly();
+    fetchWeekly();
   };
 
-
+  
 
   return (
     <div className='container'>
@@ -132,7 +150,9 @@ const Weather = () => {
               </h2>
               </Card.Title>
 
-              <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_c)}°C</p>
+              <Card.Title className="temp-info-container text-center pb-1" >
+                <p className="degCelcius temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_c)}°C</p>
+                <p className="degFahrenheit temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_f)}°F</p>
 
                 {(isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
@@ -149,12 +169,13 @@ const Weather = () => {
                   />
                 }
 
-                
+
               </Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br/>
+              <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
               <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {hourlyWeatherData.current.humidity}%</p></Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {hourlyWeatherData.current.pressure_mb}</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {hourlyWeatherData.current.wind_kph}m/s</p></Card.Title>
+              <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {hourlyWeatherData.current.wind_kph}km/h</p></Card.Title>
+              <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index : {hourlyWeatherData.current.uv}</p></Card.Title>
 
 
             </Card.Body>
@@ -178,10 +199,13 @@ const Weather = () => {
         </div>
       )}
 
-      
+
       {hourlyWeatherData ? (
         <>
-          <h3 className='day-7-heading'>24-hour weather forecast for <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span></h3>
+          <h3 className='day-24-heading'>24-hour weather forecast for <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span></h3>
+          <h4 className='before-midday'>Before Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+          
+          
           <div className='weather-7-container'>
             <Card id="card" className='item card-7-forecast ' >
 
@@ -194,7 +218,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].temp_c}°C</p>
 
@@ -213,6 +237,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[0].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -227,7 +253,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].temp_c}°C</p>
 
@@ -246,6 +272,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[1].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -260,7 +288,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].temp_c}°C</p>
 
@@ -279,6 +307,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[2].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -293,7 +323,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].temp_c}°C</p>
 
@@ -312,6 +342,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[3].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -326,7 +358,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_c}°C</p>
 
@@ -345,6 +377,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[4].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -359,7 +393,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].temp_c}°C</p>
 
@@ -378,6 +412,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[5].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -392,7 +428,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].temp_c}°C</p>
 
@@ -411,6 +447,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[6].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -426,7 +464,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c}°C</p>
 
@@ -445,6 +483,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[7].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -460,7 +500,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_c}°C</p>
 
@@ -479,6 +519,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[8].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -494,7 +536,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_c}°C</p>
 
@@ -513,6 +555,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[9].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -527,7 +571,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].temp_c}°C</p>
 
@@ -546,6 +590,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[10].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -561,7 +607,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_c}°C</p>
 
@@ -580,6 +626,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[11].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -588,15 +636,17 @@ const Weather = () => {
 
 
 
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
+          {/*  */}
+          {/*  */}
+          {/*  */}
+          {/*  */}
+          {/*  */}
+          {/*  */}
+          <h4 className='before-midday'>After Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
 
-<div className='weather-7-container'>
-          
+
+          <div className='weather-7-container'>
+
 
             <Card id="card" className='item card-7-forecast ' >
 
@@ -609,7 +659,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].temp_c}°C</p>
 
@@ -628,6 +678,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[12].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -642,7 +694,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].temp_c}°C</p>
 
@@ -661,6 +713,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[13].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -675,7 +729,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].temp_c}°C</p>
 
@@ -694,6 +748,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[14].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -708,7 +764,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].temp_c}°C</p>
 
@@ -727,6 +783,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[15].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -741,7 +799,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_c}°C</p>
 
@@ -760,6 +818,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[16].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -774,7 +834,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].temp_c}°C</p>
 
@@ -793,6 +853,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[17].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -808,7 +870,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].temp_c}°C</p>
 
@@ -827,6 +889,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[18].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -842,7 +906,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].temp_c}°C</p>
 
@@ -861,6 +925,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[19].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -876,7 +942,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_c}°C</p>
 
@@ -895,6 +961,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[20].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -909,7 +977,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].temp_c}°C</p>
 
@@ -928,6 +996,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[21].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -943,7 +1013,7 @@ const Weather = () => {
                   {/* <DisplayDate /> */}
                 </h2>
                 </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].condition.text}</p>
                 </Card.Title>
                 <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].temp_c}°C</p>
 
@@ -962,6 +1032,8 @@ const Weather = () => {
                   }
 
                 </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[22].chance_of_rain}%</span>
+
               </Card.Body>
             </Card>
 
@@ -969,34 +1041,324 @@ const Weather = () => {
 
 
 
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].condition.text}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[23].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[23].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[23].chance_of_rain}%</span>
+
+              </Card.Body>
+            </Card>
+
+          </div>
+
+
+
+
+        </>
+      ) : (
+        // <div style={{height:"100vh"}}>
+        // <p className="pre-request-text">
+        //   <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
+        //   <span className='pre-request-text-span'>Start by typing the city...</span>
+        // </p>
+        // </div>
+        ""
+      )}
+
+{weekWeatherData ? (
+        <>
+          
+
+
+
+
+
+
+
+        </>
+      ) : (
+        <div style={{ height: "100vh" }}>
+          <p className="pre-request-text">
+            <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
+            <span className='pre-request-text-span'>Start by typing the city...</span>
+          </p>
+        </div>
+      )}
+
+
+      {weekWeatherData ? (
+        <>
+          <h3 className='week-7-heading'>One week weather forecast for <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
+          <div className='week-container'>
+            <Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[0].date}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.condition.text}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.avgtemp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={weekWeatherData.forecast.forecastday[0].day.condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={weekWeatherData.forecast.forecastday[0].day.condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%</span>
+
+              </Card.Body>
+            </Card>
+            <Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
 <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time}
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[1].date}
 
     {/* <DisplayDate /> */}
   </h2>
   </Card.Title>
-  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.condition.text}</p>
   </Card.Title>
-  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].temp_c}°C</p>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.avgtemp_c}°C</p>
 
     {(isDayTime) &&
       <Card.Img className='w-100 card-image-7' variant='top'
         // type="image/svg"
-        src={hourlyWeatherData.forecast.forecastday[0].hour[23].condition.icon}
+        src={weekWeatherData.forecast.forecastday[1].day.condition.icon}
       />
     }
 
     {(!isDayTime) &&
       <Card.Img className='w-100 card-image-7' variant='top'
         // type="image/svg"
-        src={hourlyWeatherData.forecast.forecastday[0].hour[23].condition.icon}
+        src={weekWeatherData.forecast.forecastday[1].day.condition.icon}
       />
     }
 
   </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[1].day.daily_chance_of_rain}%</span>
+
 </Card.Body>
 </Card>
+
+<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[2].date}
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.avgtemp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[2].day.condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[2].day.condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[2].day.daily_chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+
+<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[3].date}
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.avgtemp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[3].day.condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[3].day.condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[3].day.daily_chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+
+<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[4].date}
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.avgtemp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[4].day.condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[4].day.condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[4].day.daily_chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+
+<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[5].date}
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.avgtemp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[5].day.condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[5].day.condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[5].day.daily_chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+
+<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[6].date}
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.avgtemp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[6].day.condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={weekWeatherData.forecast.forecastday[6].day.condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[6].day.daily_chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+
+
+            
 
           </div>
 
