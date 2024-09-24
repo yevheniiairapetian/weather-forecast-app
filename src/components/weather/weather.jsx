@@ -133,8 +133,8 @@ const Weather = () => {
             value={city}
             onChange={handleInputChange}
           />
-          <button className="get-weather-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
-          <button onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
+          <button className="get-weather-button" type="submit"><FontAwesomeIcon className="get-weather-icon" icon={faMagnifyingGlass} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
+          <button onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
         </form>
       </div>
 
@@ -146,13 +146,12 @@ const Weather = () => {
 
             <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} As of {hourlyWeatherData.location.localtime}
+              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} as of <span style={{color:'#fbbc04'}}>{hourlyWeatherData.location.localtime}</span>
               </h2>
               </Card.Title>
 
               <Card.Title className="temp-info-container text-center pb-1" >
                 <p className="degCelcius temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_c)}°C</p>
-                <p className="degFahrenheit temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_f)}°F</p>
 
                 {(isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'

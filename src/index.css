@@ -112,7 +112,7 @@ form:focus-within {
   font-size: 50px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: #337cb4;
-  color: whitesmoke;
+  color: #fbbc04;
   padding: 10px 0px 10px 40px;
   flex-grow: 1;
 }
@@ -324,6 +324,17 @@ div.week-container {
   justify-content: stretch;
   
 }
+
+.get-weather-icon:hover{
+  color: #fbbc04 !important;
+  transition: all 0.15s ease-in;
+}
+
+.clear-input-icon:hover{
+  color: #330302 !important;
+  transition: all 0.15s ease-in;
+}
+
 
 .hidden{
   display: none;
