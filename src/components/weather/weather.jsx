@@ -32,6 +32,7 @@ const Weather = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [dailyWeatherData, setDailyWeatherData] = useState(null);
+  const [hourlyWeatherData, setHourlyWeatherData] = useState(null);
   const hours = new Date().getHours()
   const isDayTime = hours > 6 && hours < 20
 
@@ -65,11 +66,23 @@ const Weather = () => {
     }
   };
 
-
+  const fetchHourly = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=b6b68ae835d04defa94134215242409&q=${city}&days=1&aqi=no&alerts=no
+`
+      );
+      setHourlyWeatherData(response.data);
+      console.log(response.data); //You can see all the weather data in console log
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchData();
     fetchDaily();
+    fetchHourly();
   }, [city]);
 
 
@@ -84,6 +97,7 @@ const Weather = () => {
     e.preventDefault();
     fetchData();
     fetchDaily();
+    fetchHourly();
   };
 
 
@@ -106,7 +120,7 @@ const Weather = () => {
         </form>
       </div>
 
-      {weatherData ? (
+      {hourlyWeatherData ? (
         <>
           <Card id="card" className='item card ' >
 
@@ -114,220 +128,33 @@ const Weather = () => {
 
             <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{weatherData.name}, {weatherData.sys.country}
-                <DisplayDate />
+              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} As of {hourlyWeatherData.location.localtime}
               </h2>
               </Card.Title>
 
-              <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.trunc(weatherData.main.temp)}°C</p>
+              <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_c)}°C</p>
 
-                {(weatherData.weather[0].description === 'clear sky' && isDayTime) &&
+                {(isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/svg"
-                    src={sunny}
-                  />
-                }
+                    src={hourlyWeatherData.current.condition.icon}
 
-                {(weatherData.weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={moon}
                   />
                 }
 
-                {(weatherData.weather[0].description === 'scattered clouds' && isDayTime) &&
+                {(!isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
                     type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(weatherData.weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
+                    src={hourlyWeatherData.current.condition.icon}
                   />
                 }
 
-
-
-                {(weatherData.weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(weatherData.weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(weatherData.weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(weatherData.weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(weatherData.weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                
               </Card.Title>
-              <Card.Title className="item-info text-center pb-1 " ><p className="sky-info" style={{ color: "whitesmoke" }}>{weatherData.weather[0].description}</p>
-
-              </Card.Title>
-              <Card.Title className="item-info pb-1 " ><p className="feels-like-info" style={{ color: "whitesmoke" }}>Feels like : {Math.trunc(weatherData.main.feels_like)}°C</p>
-                {/* {(weatherData.main.feels_like >= -30 && weatherData.main.feels_like <= -4) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "330px"}}
-                    src={freezing}
-                  />
-                }
-              {(weatherData.main.feels_like >= -5 && weatherData.main.feels_like <=5) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "330px"}}
-                    src={colderWeather}
-                  />
-                }                
-                {(weatherData.main.feels_like > 5 && weatherData.main.feels_like < 19) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    style={{ height: "190px", width:"160px"}}
-
-                    src={coolWeather}
-                  />
-                }
-                {(weatherData.main.feels_like >= 19 && weatherData.main.feels_like < 26) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "230px"}}
-                    src={warmWeather}
-                  />
-                }
-                {(weatherData.main.feels_like >= 26 && weatherData.main.feels_like < 45) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "330px"}}
-                    src={hotWeather}
-                  />
-                } */}
-              </Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {weatherData.main.humidity}%</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {weatherData.main.pressure}</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {weatherData.wind.speed}m/s</p></Card.Title>
+              <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br/>
+              <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {hourlyWeatherData.current.humidity}%</p></Card.Title>
+              <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {hourlyWeatherData.current.pressure_mb}</p></Card.Title>
+              <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {hourlyWeatherData.current.wind_kph}m/s</p></Card.Title>
 
 
             </Card.Body>
@@ -351,1852 +178,827 @@ const Weather = () => {
         </div>
       )}
 
-      {dailyWeatherData ? (
+      
+      {hourlyWeatherData ? (
         <>
-        <h3 className='day-7-heading'>3-hour weather forecast for <span className='day-7-location-span'>{weatherData.name}, {weatherData.sys.country}</span></h3>
-        <div className='weather-7-container'>
-          <Card id="card" className='item card-7-forecast ' >
+          <h3 className='day-7-heading'>24-hour weather forecast for <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span></h3>
+          <div className='weather-7-container'>
+            <Card id="card" className='item card-7-forecast ' >
 
 
 
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[0].dt_txt}
-                
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[0].weather[0].description}</p>
-</Card.Title>
-          <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[0].main.temp)}°C</p>
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[0].time}
 
-              {(dailyWeatherData.list[0].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[0].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[0].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[0].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[0].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[0].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                  {/* <DisplayDate /> */}
+                </h2>
                 </Card.Title>
-            </Card.Body>
-          </Card>
-
-          <Card id="card" className='item card-7-forecast ' >
-
-
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[1].dt_txt}
-                
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[1].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[1].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[1].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[1].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[1].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[1].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[1].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[1].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
                 </Card.Title>
-            </Card.Body>
-          </Card>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].temp_c}°C</p>
 
-          <Card id="card" className='item card-7-forecast ' >
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].day.condition.icon}
+                    />
+                  }
 
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].day.condition.icon}
+                    />
+                  }
 
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[2].dt_txt}
-                
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[2].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[2].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[2].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[2].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[2].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[2].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[2].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[2].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
                 </Card.Title>
-            </Card.Body>
-          </Card>
+              </Card.Body>
+            </Card>
 
-          <Card id="card" className='item card-7-forecast ' >
-
-
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[3].dt_txt}
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[3].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[3].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[3].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[3].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[3].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
+            <Card id="card" className='item card-7-forecast ' >
 
 
 
-                {(dailyWeatherData.list[3].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                {(dailyWeatherData.list[3].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[3].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[1].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
                 </Card.Title>
-            </Card.Body>
-          </Card>
-
-
-          <Card id="card" className='item card-7-forecast ' >
-
-
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[4].dt_txt}
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[4].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[4].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[4].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[4].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[4].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[4].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[4].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[4].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
                 </Card.Title>
-            </Card.Body>
-          </Card>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].temp_c}°C</p>
 
-          <Card id="card" className='item card-7-forecast ' >
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[1].condition.icon}
+                    />
+                  }
 
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[1].condition.icon}
+                    />
+                  }
 
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[5].dt_txt}
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[5].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[5].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[5].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[5].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[5].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[5].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[5].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[5].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
                 </Card.Title>
-            </Card.Body>
-          </Card>
+              </Card.Body>
+            </Card>
 
-          <Card id="card" className='item card-7-forecast ' >
-
-
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[6].dt_txt}
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[6].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[6].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[6].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[6].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[6].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
+            <Card id="card" className='item card-7-forecast ' >
 
 
 
-                {(dailyWeatherData.list[6].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                {(dailyWeatherData.list[6].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[6].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[2].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
                 </Card.Title>
-            </Card.Body>
-          </Card>
-
-          <Card id="card" className='item card-7-forecast ' >
-
-
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[7].dt_txt}
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[7].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[7].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[7].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[7].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[7].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[7].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[7].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[7].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
                 </Card.Title>
-            </Card.Body>
-          </Card>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].temp_c}°C</p>
 
-          <Card id="card" className='item card-7-forecast ' >
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[2].condition.icon}
+                    />
+                  }
 
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[2].condition.icon}
+                    />
+                  }
 
-
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{dailyWeatherData.list[8].dt_txt}
-                {/* <DisplayDate /> */}
-              </h2>
-              </Card.Title>
-              <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{dailyWeatherData.list[8].weather[0].description}</p>
-</Card.Title>
-              <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.trunc(dailyWeatherData.list[8].main.temp)}°C</p>
-
-              {(dailyWeatherData.list[8].weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(dailyWeatherData.list[8].weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(dailyWeatherData.list[8].weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 heavy-rain' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-
-
-
-                {(dailyWeatherData.list[8].weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
-
-                {(dailyWeatherData.list[8].weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7 broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(dailyWeatherData.list[8].weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image-7' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
                 </Card.Title>
-            </Card.Body>
-          </Card>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[3].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[3].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[3].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[4].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[4].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[4].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[5].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[5].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[5].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[6].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[6].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[6].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[7].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[7].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[7].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[8].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[9].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[9].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[9].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[10].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[10].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[10].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[11].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[11].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[11].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
           </div>
-          {/* <Card.Title className="temp-info-container text-center pb-1" ><p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.trunc(weatherData.main.temp)}°C</p> */}
-
-          {/* {(weatherData.weather[0].description === 'clear sky' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={sunny}
-                  />
-                }
-
-                {(weatherData.weather[0].description === 'clear sky' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={moon}
-                  />
-                }
-
-                {(weatherData.weather[0].description === 'scattered clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(weatherData.weather[0].description === 'scattered clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={cloudy}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy intensity rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy intensity rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavyIntensityRain}
-                  />
-                }
 
 
 
-                {(weatherData.weather[0].description === 'broken clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenClouds}
-                  />
-                }
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
 
-                {(weatherData.weather[0].description === 'broken clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image broken-clouds' variant='top'
-                    type="image/svg"
-                    src={brokenCloudsNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'overcast clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={overcastDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'overcast clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={overcastNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'thunderstorm' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={thunderstormDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'thunderstorm' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={thunderstormNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'haze' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={hazeDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'haze' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={hazeNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'light rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'light rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={lightRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'moderate rain' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'moderate rain' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={moderateRain}
-                  />
-                }
-                {(weatherData.weather[0].description === 'few clouds' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={fewClouds}
-                  />
-                }
-                {(weatherData.weather[0].description === 'few clouds' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={fewCloudsNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'mist' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(weatherData.weather[0].description === 'mist' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={mist}
-                  />
-                }
-                {(weatherData.weather[0].description === 'fog' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={fogDay}
-                  />
-                }
-                {(weatherData.weather[0].description === 'fog' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    src={fogNight}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy snow' && isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                }
-                {(weatherData.weather[0].description === 'heavy snow' && !isDayTime) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/gif"
-                    src={heavySnow}
-                  />
-                } */}
-          {/* </Card.Title> */}
-          {/* <Card.Title className="item-info text-center pb-1 " ><p className="sky-info" style={{ color: "whitesmoke" }}>{weatherData.weather[0].description}</p>
+<div className='weather-7-container'>
+          
 
-              </Card.Title> */}
-          {/* <Card.Title className="item-info pb-1 " ><p className="feels-like-info" style={{ color: "whitesmoke" }}>Feels like : {Math.trunc(weatherData.main.feels_like)}°C</p> */}
-          {/* {(weatherData.main.feels_like >= -30 && weatherData.main.feels_like <= -4) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "330px"}}
-                    src={freezing}
-                  />
-                }
-              {(weatherData.main.feels_like >= -5 && weatherData.main.feels_like <=5) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "330px"}}
-                    src={colderWeather}
-                  />
-                }                
-                {(weatherData.main.feels_like > 5 && weatherData.main.feels_like < 19) &&
-                  <Card.Img className='w-100 card-image' variant='top'
-                    type="image/svg"
-                    style={{ height: "190px", width:"160px"}}
-
-                    src={coolWeather}
-                  />
-                }
-                {(weatherData.main.feels_like >= 19 && weatherData.main.feels_like < 26) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "230px"}}
-                    src={warmWeather}
-                  />
-                }
-                {(weatherData.main.feels_like >= 26 && weatherData.main.feels_like < 45) &&
-                  <Card.Img className='' variant='top'
-                    type="image/gif"
-                    style={{ height: "330px"}}
-                    src={hotWeather}
-                  />
-                } */}
-          {/* </Card.Title> */}
-          {/* <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {weatherData.main.humidity}%</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {weatherData.main.pressure}</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {weatherData.wind.speed}m/s</p></Card.Title> */}
-
-
-          {/* </Card.Body> */}
-
-
-          {/* </Card> */}
+            <Card id="card" className='item card-7-forecast ' >
 
 
 
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[12].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[12].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[12].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[13].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[13].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[13].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[14].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[14].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[14].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[15].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[15].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[15].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[16].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[16].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[16].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[17].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[17].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[17].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[18].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[18].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[18].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[19].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[19].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[19].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[20].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[21].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[21].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[21].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[22].time}
+
+                  {/* <DisplayDate /> */}
+                </h2>
+                </Card.Title>
+                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+                </Card.Title>
+                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].temp_c}°C</p>
+
+                  {(isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[22].condition.icon}
+                    />
+                  }
+
+                  {(!isDayTime) &&
+                    <Card.Img className='w-100 card-image-7' variant='top'
+                      // type="image/svg"
+                      src={hourlyWeatherData.forecast.forecastday[0].hour[22].condition.icon}
+                    />
+                  }
+
+                </Card.Title>
+              </Card.Body>
+            </Card>
+
+            <Card id="card" className='item card-7-forecast ' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time}
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[23].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[23].condition.icon}
+      />
+    }
+
+  </Card.Title>
+</Card.Body>
+</Card>
+
+          </div>
 
 
 
