@@ -159,6 +159,56 @@ form:focus-within {
   display: none;
 }
 
+.save-icon{
+  display: none;
+}
+.button-save-city{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-color: transparent;
+
+  border-left-color: #5380a2;
+  height: 41px;
+  padding: 7px 14px 10px 14px;
+  margin-left: -20px;
+  margin-top: 0px;
+  background-color: #eae6e6;
+}
+
+.favorite-modal .modal-dialog, .popup{
+  display: block !important;
+  background:transparent !important;
+  position: fixed !important;
+  bottom:-40px !important;
+  left:0 !important;
+  right:0 !important;
+  width: 96% !important;
+  height: 100px !important;
+}
+
+.got-it-button{
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: max-content;
+}
+
+.got-it-button:hover{
+  background-color: #7caed4 !important;
+}
+
+.modal-header{
+  display: none;
+}
+
+.default-city-note{
+  padding-left: 10px;
+}
+
+.default-city{
+color:#063a61;
+}
+
 .moving-background-dark {
   background-image: url("./img/starry-night.jpg");
   /* background: linear-gradient(270deg, #626565, #090a0a); */
@@ -634,6 +684,16 @@ img.card-image-7 {
     font-size: 24px;
   }
 }
+
+@media screen and (max-width:411px) {
+  .save-city-span{
+    display: none;
+  }
+  .save-icon{
+    display: inline;
+  }
+}
+
 
 @media screen and (max-width:699px) {
   .carousel{

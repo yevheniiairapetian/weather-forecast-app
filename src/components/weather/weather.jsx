@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faX, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX, faCircleInfo, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
 import rain from './img/rain.png';
@@ -32,6 +32,7 @@ import heavyIntensityRain from './../../img/heavyIntensityRain.gif'
 import heavySnow from './../../img/heavySnow.gif'
 import { faXRay } from '@fortawesome/free-solid-svg-icons/faXRay';
 
+
 const Weather = () => {
 
   const [city, setCity] = useState('');
@@ -41,7 +42,12 @@ const Weather = () => {
   const [weekWeatherData, setWeekWeatherData] = useState(null);
   const hours = new Date().getHours()
   const isDayTime = hours > 6 && hours < 20
-
+  const [showCityModal, setShowCityModal] = useState(false);
+	const handleShowCityModal = () => setShowCityModal(true);
+	const handleCloseCityModal = () => setShowCityModal(false);
+  const [showFailedCityModal, setShowFailedCityModal] = useState(false);
+	const handleShowFailedCityModal = () => setShowFailedCityModal(true);
+	const handleCloseFailedCityModal = () => setShowFailedCityModal(false);
   function clearInput() {
 
     document.querySelector(".city-search-input").value = "";
@@ -105,14 +111,36 @@ const Weather = () => {
     fetchDaily();
     fetchHourly();
     fetchWeekly();
+    
   }, [city]);
 
 
-
+  useEffect(() => {
+    const savedCity = localStorage.getItem('defaultCity');
+    if (savedCity) {
+      setCity(savedCity);
+    }
+  }, []);
 
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
+  };
+
+  function saveCity(){
+    let input= document.querySelector(".city-search-input");
+
+    if(input.value==''||input.value=='undefined'||input.value=='null'){
+      
+      handleShowFailedCityModal();
+
+    }
+    else if(city){
+      localStorage.setItem('defaultCity', city);
+      handleShowCityModal();
+    }
+  
+    
   };
 
   const handleSubmit = (e) => {
@@ -121,9 +149,16 @@ const Weather = () => {
     fetchDaily();
     fetchHourly();
     fetchWeekly();
+    saveCity();
   };
 
-  
+  const SaveMyCity = () => {
+		return <button onClick={() => {saveCity();}
+    } className="button-save-city">
+      <FontAwesomeIcon className="save-icon" style={{"--fa-animation-iteration-count": "1"}} icon={faFloppyDisk} fade size="lg" />
+      <span className='save-city-span'>Save City</span></button>
+			
+	};
 
   return (
     <div className='contain'>
@@ -135,9 +170,11 @@ const Weather = () => {
             className="city-search-input"
             type="text"
             placeholder="Search by city name"
-            value={city}
+            value={city.charAt(0).toUpperCase() + city.slice(1)}
             onChange={handleInputChange}
           />
+               <SaveMyCity/>   
+
           <button className="get-weather-button" type="submit"><FontAwesomeIcon className="get-weather-icon" icon={faMagnifyingGlass} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
           <button onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
         </form>
@@ -1517,6 +1554,29 @@ gap={3}
       )}
 
       <Footer />
+      <Modal
+
+				className="favorite-modal" show={showCityModal} onHide={handleCloseCityModal}>
+				<Modal.Header closeButton>
+					{/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+				</Modal.Header>
+				<Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Default city set to </span><span className='default-city'>{city.charAt(0).toUpperCase() + city.slice(1)}</span>  </Modal.Body>
+
+				<Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseCityModal}>OK</Button>
+
+			</Modal>
+
+      <Modal
+
+				className="favorite-modal" show={showFailedCityModal} onHide={handleCloseFailedCityModal}>
+				<Modal.Header closeButton>
+					{/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+				</Modal.Header>
+				<Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Please first type a city name</span> </Modal.Body>
+
+				<Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseFailedCityModal}>OK</Button>
+
+			</Modal>
     </div>
   );
 };
