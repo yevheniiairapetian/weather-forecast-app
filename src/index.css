@@ -4,6 +4,7 @@
   font-family: Georgia, 'Times New Roman', Times, serif
 }
 
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -46,13 +47,13 @@
   background-color: #337cb4;
   color: whitesmoke;
   text-align: center;
-  height: 100px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
 }
 
 .footer-info-title {
@@ -65,11 +66,14 @@
 
 }
 
-.container {
+.contain {
   background-image: url("./img/app-bg.jpg");
   background-size: 100% 100%;
   /* height:120vh; */
   display: flex;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   flex-direction: column;
 
 }
@@ -210,35 +214,48 @@ form:focus-within {
 }
 
 .weather-7-container {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: stretch !important;
-  overflow-x: scroll;
+  overflow-x: scroll; */
 }
 
 div.week-container {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: stretch !important;
-  overflow-x: scroll;
+  overflow-x: scroll; */
 }
 
 .card-7-forecast {
 
   /* height:100% !important; */
   border: 1px solid whitesmoke;
-  width: 20%;
+  /* width: 20%; */
   /* margin: 0px auto; */
   /* text-align: left; */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  height: 100% !important;
+  height: 100% !important; */
 
 
 }
 
+.carousel-control-prev{
+  left:-94px;
+}
+
+.carousel-control-next{
+  right:-94px;
+}
+
 .card-7-forecast .card-body{
   padding:30px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 
 }
 .card-7-forecast .card-body:hover{
@@ -279,12 +296,12 @@ div.week-container {
 }
 
 .card-7-forecast .card-body {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 10px; */
 
 }
 
@@ -316,12 +333,12 @@ div.week-container {
 }
 
 .card-image {
-  height: 150px;
-  width: 150px;
+  height: 150px !important;
+  width: 150px !important;
 }
 
 .week-container{
-  justify-content: stretch;
+  /* justify-content: stretch; */
   
 }
 
@@ -349,7 +366,7 @@ div.week-container {
   padding-bottom: 20px;
 }
 
-.card-image-7 {
+img.card-image-7 {
   height: 60px !important;
   width: 60px !important;
 }
@@ -435,7 +452,7 @@ div.week-container {
 }
 
 .chance-of-rain {
-  color: #9097d2;
+  color: whitesmoke;
   margin-top: 10px;
   line-height: 1.8em;
   
@@ -490,8 +507,8 @@ div.week-container {
     font-size: 23px;
   }
   .card-7-forecast.week-forecast.item#card:last-child{
-    display:block !important;
-    width:100% !important;
+    /* display:block !important;
+    width:100% !important; */
   }
 
   .card {
@@ -525,6 +542,7 @@ div.week-container {
 
   .footer {
     margin-top: auto;
+    
 
   }
 
@@ -533,18 +551,18 @@ div.week-container {
   }
 
   .week-container {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   .card-7-forecast {
 
     /* height:100% !important; */
 
-    width: 33.10% !important;
+    /* width: 33.10% !important; */
     /* margin: 0px 0 20px 0; */
     /* text-align: left; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     /* align-items: stretch !important;  */
     /* height:208px !important;  */
 
@@ -567,6 +585,7 @@ div.week-container {
   .footer {
     height: 150px !important;
     margin-top: auto;
+    
 
 
   }
@@ -579,11 +598,11 @@ div.week-container {
 
     /* height:100% !important; */
 
-    width: 49.5% !important;
+    /* width: 49.5% !important; */
     /* margin: 0px auto; */
     /* text-align: left; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     height: 100%;
 
 
@@ -593,11 +612,11 @@ div.week-container {
 
     /* height:100% !important; */
 
-    width: 100% !important;
+    /* width: 100% !important; */
     /* margin: 0px auto; */
     /* text-align: left; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     height: 100%;
 
 
@@ -684,10 +703,10 @@ div.week-container {
   }
 
   .footer {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
     margin-top: auto;
-    height: 110px !important;
+    height: 150px !important;
   }
 
   .weather-7-container {
@@ -698,11 +717,11 @@ div.week-container {
 
     /* height:100% !important; */
 
-    width: 100% !important;
+    /* width: 100% !important; */
     /* margin: 0px auto; */
     /* text-align: left; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     height: 100%;
 
 

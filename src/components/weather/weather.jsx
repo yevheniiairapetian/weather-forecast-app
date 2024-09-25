@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faX, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { Button, Card, Modal } from 'react-bootstrap';
+import Carousel from 'react-bootstrap/Carousel';
+import Stack from 'react-bootstrap/Stack';
+
+import { WeekSlider } from '../week-forecast-slider/week-forecast-slider';
+import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
 import { DisplayDate } from '../display-date/display-date';
 import sunny from './../../img/clear-day.svg'
 import moon from './../../img/clear-night.svg'
@@ -121,7 +125,7 @@ const Weather = () => {
   
 
   return (
-    <div className='container'>
+    <div className='contain'>
       <div className='form-heading-container'>
         <h1 className="app-heading">Better Wetter</h1>
         <form className="weather-form" onSubmit={handleSubmit}>
@@ -206,13 +210,24 @@ const Weather = () => {
           
           
           <div className='weather-7-container'>
-            <Card id="card" className='item card-7-forecast ' >
+
+          <Carousel 
+          
+          fade>
+            <CarouselItem>
+      <Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={3}
+  >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[0].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[0].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -240,14 +255,15 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+      
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[1].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[1].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -275,14 +291,13 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[2].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[2].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -310,14 +325,22 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+      </Stack>
+      </CarouselItem>
+      <CarouselItem>
+<Stack
+direction="horizontal"
+className="h-100 justify-content-center align-items-center"
+gap={3}
+>
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[3].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[3].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -345,49 +368,49 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
-            <Card id="card" className='item card-7-forecast ' >
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[4].time.split(" ")[1]} AM
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[4].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[4].condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[4].chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[4].time}
-
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_c}°C</p>
-
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[4].condition.icon}
-                    />
-                  }
-
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[4].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[4].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
-
-
-
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[5].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[5].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -415,14 +438,22 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+            </Stack>
+            </CarouselItem>
+            <CarouselItem>
+      <Stack
+      direction="horizontal"
+      className="h-100 justify-content-center align-items-center"
+      gap={3}
+      >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[6].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[6].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -450,122 +481,130 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+       
+        <Card id="card" className='item card-7-forecast ' >
 
 
-            <Card id="card" className='item card-7-forecast ' >
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[7].time.split(" ")[1]} AM
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[7].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[7].condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[7].chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[8].time.split(" ")[1]} AM
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[8].chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+
+
+      </Stack>
+      </CarouselItem>
+      <CarouselItem>
+      <Stack
+      direction="horizontal"
+      className="h-100 justify-content-center align-items-center"
+      gap={3}
+      >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[9].time.split(" ")[1]} AM
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[9].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[9].condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[9].chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[7].time}
-
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c}°C</p>
-
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[7].condition.icon}
-                    />
-                  }
-
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[7].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[7].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
-
-
-            <Card id="card" className='item card-7-forecast ' >
-
-
-
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[8].time}
-
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_c}°C</p>
-
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
-                    />
-                  }
-
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[8].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
-
-
-            <Card id="card" className='item card-7-forecast ' >
-
-
-
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[9].time}
-
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_c}°C</p>
-
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[9].condition.icon}
-                    />
-                  }
-
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[9].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[9].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
-
-
-
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[10].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[10].time.split(" ")[1]} AM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -593,42 +632,45 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
-            <Card id="card" className='item card-7-forecast ' >
 
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[11].time.split(" ")[1]} AM
 
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_c}°C</p>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[11].time}
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[11].condition.icon}
+      />
+    }
 
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_c}°C</p>
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[11].condition.icon}
+      />
+    }
 
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[11].condition.icon}
-                    />
-                  }
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[11].chance_of_rain}%</span>
 
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[11].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[11].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
+</Card.Body>
+</Card>
+</Stack>  
+</CarouselItem>          
+</Carousel>
+            
 
 
           </div>
@@ -646,14 +688,21 @@ const Weather = () => {
 
           <div className='weather-7-container'>
 
-
-            <Card id="card" className='item card-7-forecast ' >
+          <Carousel fade>
+      <Carousel.Item>
+      <Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={3}
+  >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[12].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[12].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -681,14 +730,14 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[13].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[13].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -716,14 +765,14 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[14].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[14].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -751,14 +800,24 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+            </Stack>
+      </Carousel.Item>
 
-            <Card id="card" className='item card-7-forecast ' >
+
+      <Carousel.Item>
+      <Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={3}
+  >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[15].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[15].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -787,48 +846,49 @@ const Weather = () => {
               </Card.Body>
             </Card>
 
-            <Card id="card" className='item card-7-forecast ' >
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
+
+
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[16].time.split(" ")[1]} PM
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[16].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[16].condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[16].chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[16].time}
-
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_c}°C</p>
-
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[16].condition.icon}
-                    />
-                  }
-
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[16].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[16].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
-
-
-
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[17].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[17].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -856,15 +916,24 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+            </Stack>
+      </Carousel.Item>
 
 
-            <Card id="card" className='item card-7-forecast ' >
+      <Carousel.Item>
+      <Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={3}
+  >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[18].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[18].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -892,15 +961,14 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-
-            <Card id="card" className='item card-7-forecast ' >
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[19].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[19].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -928,50 +996,59 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
-            <Card id="card" className='item card-7-forecast ' >
+
+<Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+
+  <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[20].time.split(" ")[1]} PM
+
+    {/* <DisplayDate /> */}
+  </h2>
+  </Card.Title>
+  <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].condition.text}</p>
+  </Card.Title>
+  <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_c}°C</p>
+
+    {(isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+      />
+    }
+
+    {(!isDayTime) &&
+      <Card.Img className='w-100 card-image-7' variant='top'
+        // type="image/svg"
+        src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+      />
+    }
+
+  </Card.Title>
+  <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[20].chance_of_rain}%</span>
+
+</Card.Body>
+</Card>
+</Stack>
+      </Carousel.Item>
+
+
+      <Carousel.Item>
+      <Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={3}
+  >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[20].time}
-
-                  {/* <DisplayDate /> */}
-                </h2>
-                </Card.Title>
-                <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].condition.text}</p>
-                </Card.Title>
-                <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_c}°C</p>
-
-                  {(isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
-                    />
-                  }
-
-                  {(!isDayTime) &&
-                    <Card.Img className='w-100 card-image-7' variant='top'
-                      // type="image/svg"
-                      src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
-                    />
-                  }
-
-                </Card.Title>
-                <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[20].chance_of_rain}%</span>
-
-              </Card.Body>
-            </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
-
-
-
-              <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[21].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[21].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -999,15 +1076,14 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-
-            <Card id="card" className='item card-7-forecast ' >
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[22].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[22].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -1035,14 +1111,14 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-
-            <Card id="card" className='item card-7-forecast ' >
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <Card id="card" className='item card-7-forecast ' >
 
 
 
               <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time}
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time.split(" ")[1]} PM
 
                   {/* <DisplayDate /> */}
                 </h2>
@@ -1070,7 +1146,11 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
+            </Stack>
+      </Carousel.Item>
 
+    </Carousel>
+         
           </div>
 
 
@@ -1090,13 +1170,6 @@ const Weather = () => {
 {weekWeatherData ? (
         <>
           
-
-
-
-
-
-
-
         </>
       ) : (
         <div style={{ height: "100vh" }}>
@@ -1111,8 +1184,16 @@ const Weather = () => {
       {weekWeatherData ? (
         <>
           <h3 className='week-7-heading'>One week weather forecast for <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
-          <div className='week-container'>
-            <Card id="card" className='item card-7-forecast week-forecast' >
+
+    <Carousel fade>
+    <CarouselItem>
+      <Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={4}
+  >
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <Card id="" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1146,7 +1227,7 @@ const Weather = () => {
 
               </Card.Body>
             </Card>
-            <Card id="card" className='item card-7-forecast week-forecast' >
+      <Card id="card" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1181,7 +1262,9 @@ const Weather = () => {
 </Card.Body>
 </Card>
 
-<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+      <Card id="card" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1216,7 +1299,14 @@ const Weather = () => {
 </Card.Body>
 </Card>
 
-<Card id="card" className='item card-7-forecast week-forecast' >
+      
+
+      
+      
+  
+
+
+      <Card id="card" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1251,7 +1341,18 @@ const Weather = () => {
 </Card.Body>
 </Card>
 
-<Card id="card" className='item card-7-forecast week-forecast' >
+</Stack>
+</CarouselItem>
+<Carousel.Item>
+
+<Stack
+    direction="horizontal"
+    className="h-100 justify-content-center align-items-center"
+    gap={3}>
+
+
+
+      <Card id="card" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1286,7 +1387,12 @@ const Weather = () => {
 </Card.Body>
 </Card>
 
-<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+
+
+<Card id="card" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1321,7 +1427,12 @@ const Weather = () => {
 </Card.Body>
 </Card>
 
-<Card id="card" className='item card-7-forecast week-forecast' >
+
+
+
+
+
+<Card id="card" className=' card-7-forecast week-forecast' >
 
 
 
@@ -1355,6 +1466,20 @@ const Weather = () => {
 
 </Card.Body>
 </Card>
+</Stack>
+</Carousel.Item>
+
+    </Carousel>
+  
+
+
+
+          
+          <div className='week-container'>
+            
+           
+
+
 
 
             
