@@ -685,7 +685,7 @@ img.card-image-7 {
   }
 }
 
-@media screen and (max-width:411px) {
+@media screen and (max-width:732px) {
   .save-city-span{
     display: none;
   }
