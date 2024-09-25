@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faX, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
+import rain from './img/rain.png';
 
 import { WeekSlider } from '../week-forecast-slider/week-forecast-slider';
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
@@ -197,7 +198,7 @@ const Weather = () => {
         <div style={{ height: "100vh" }}>
           <p className="pre-request-text">
             <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
-            <span className='pre-request-text-span'>Start by typing the city...</span>
+            <span className='pre-request-text-span'>Start by typing the city above...</span>
           </p>
         </div>
       )}
@@ -252,7 +253,7 @@ const Weather = () => {
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[0].chance_of_rain}%</span>
-
+<img className="rain-icon" src={rain} alt="rain" />
               </Card.Body>
             </Card>
       
@@ -288,6 +289,7 @@ const Weather = () => {
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[1].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -322,6 +324,7 @@ const Weather = () => {
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[2].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -365,6 +368,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[3].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -400,6 +404,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[4].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -435,6 +440,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[5].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -478,6 +484,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[6].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -514,6 +521,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[7].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -549,6 +557,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[8].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -594,6 +603,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[9].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -629,6 +639,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[10].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -664,6 +675,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[11].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -727,6 +739,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[12].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -762,6 +775,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[13].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -797,6 +811,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[14].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -842,6 +857,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[15].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -878,6 +894,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[16].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -913,6 +930,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[17].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -958,6 +976,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[18].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -993,6 +1012,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[19].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -1028,6 +1048,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[20].chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -1073,6 +1094,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[21].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -1108,6 +1130,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[22].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -1143,6 +1166,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[23].chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -1158,12 +1182,7 @@ gap={3}
 
         </>
       ) : (
-        // <div style={{height:"100vh"}}>
-        // <p className="pre-request-text">
-        //   <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
-        //   <span className='pre-request-text-span'>Start by typing the city...</span>
-        // </p>
-        // </div>
+        
         ""
       )}
 
@@ -1172,12 +1191,7 @@ gap={3}
           
         </>
       ) : (
-        <div style={{ height: "100vh" }}>
-          <p className="pre-request-text">
-            <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
-            <span className='pre-request-text-span'>Start by typing the city...</span>
-          </p>
-        </div>
+        ""
       )}
 
 
@@ -1185,8 +1199,8 @@ gap={3}
         <>
           <h3 className='week-7-heading'>One week weather forecast for <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
 
-    <Carousel fade>
-    <CarouselItem>
+    <Carousel className="weekly-carousel " fade>
+    <CarouselItem className="week-4-days">
       <Stack
     direction="horizontal"
     className="h-100 justify-content-center align-items-center"
@@ -1224,6 +1238,7 @@ gap={3}
 
                 </Card.Title>
                 <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%</span>
+                <img className="rain-icon" src={rain} alt="rain" />
 
               </Card.Body>
             </Card>
@@ -1258,6 +1273,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[1].day.daily_chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -1295,6 +1311,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[2].day.daily_chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -1337,13 +1354,14 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[3].day.daily_chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
 
 </Stack>
 </CarouselItem>
-<Carousel.Item>
+<Carousel.Item className='week-3-days'>
 
 <Stack
     direction="horizontal"
@@ -1383,6 +1401,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[4].day.daily_chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -1423,6 +1442,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[5].day.daily_chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -1463,6 +1483,7 @@ gap={3}
 
   </Card.Title>
   <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[6].day.daily_chance_of_rain}%</span>
+  <img className="rain-icon" src={rain} alt="rain" />
 
 </Card.Body>
 </Card>
@@ -1491,12 +1512,7 @@ gap={3}
 
         </>
       ) : (
-        // <div style={{height:"100vh"}}>
-        // <p className="pre-request-text">
-        //   <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{color: "#337cb4",}} />
-        //   <span className='pre-request-text-span'>Start by typing the city...</span>
-        // </p>
-        // </div>
+        
         ""
       )}
 

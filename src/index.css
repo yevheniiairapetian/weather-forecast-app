@@ -4,6 +4,10 @@
   font-family: Georgia, 'Times New Roman', Times, serif
 }
 
+#root, body{
+  width: 100% !important;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -29,9 +33,9 @@
   position: relative;
   top: 20%;
   margin: 0 auto;
-  height: 60px;
+  height: 80px;
   background-color: whitesmoke;
-  width: 200px;
+  width: 300px;
   padding: 20px 10px;
   text-align: center;
   border-radius: 15px;
@@ -40,6 +44,10 @@
 
 .pre-request-text-span {
   padding-left: 10px;
+}
+
+.weekly-carousel{
+  margin-bottom: 70px;
 }
 
 .footer {
@@ -75,6 +83,11 @@
   margin-left: 0 !important;
   margin-right: 0 !important;
   flex-direction: column;
+
+}
+
+html, body{
+  width: 100% !important;
 
 }
 
@@ -142,6 +155,9 @@ form:focus-within {
   background-color: #337cb4;
 }
 
+.rain-icon{
+  display: none;
+}
 
 .moving-background-dark {
   background-image: url("./img/starry-night.jpg");
@@ -241,12 +257,82 @@ div.week-container {
 
 }
 
-.carousel-control-prev{
-  left:-94px;
+.slider-stack-v{
+  display: none;
 }
 
-.carousel-control-next{
-  right:-94px;
+.carousel .temp-7-info-container{
+  display: flex !important;
+  flex-direction: row !important;
+  align-content: center !important;
+  justify-content: center;
+  align-items: center;
+  position: absolute !important;
+  top:46px;
+  /* right:50%; */
+  margin: 0 auto;
+  font-size: 40px;
+
+  
+}
+
+.carousel .weather-city-7{
+  position: absolute;
+  top:0px;
+  left:0;
+}
+
+.carousel .sky-info-7{
+  position: absolute;
+  top:116px;
+  left:10%;
+  font-size: 20px;
+}
+
+.carousel-item .card-image-7{
+  
+  width:80px !important;
+  height:80px !important;
+}
+
+.carousel .temperature-info-7{
+  font-size: 34px;
+
+}
+
+.carousel .chance-of-rain{
+  position: absolute;
+  top:170px;
+  left:12%;
+  font-size: 20px;
+}
+
+.carousel .chance-of-rain-data{
+  position: absolute;
+  top:172px;
+  left:42%;
+  font-size: 24px;
+}
+
+.carousel-item{
+  height:280px;
+}
+
+.week-4-days .chance-of-rain-data{
+  position: absolute;
+  top:176px;
+  left:52%;
+  font-size: 24px;
+}
+.week-3-days .chance-of-rain-data{
+  position: absolute;
+  top:176px;
+  left:42%;
+  font-size: 24px;
+}
+
+.week-3-days .temperature-info-7, .week-4-days .temperature-info-7{
+  font-size: 32px;
 }
 
 .card-7-forecast .card-body{
@@ -328,7 +414,6 @@ div.week-container {
 }
 
 .temperature-info-7 {
-  font-size: 26px;
   padding: 3px 20px;
 }
 
@@ -396,7 +481,6 @@ img.card-image-7 {
 }
 
 .week-forecast .temperature-info-7{
-  font-size:20px;
   line-height: 1.4em;
 }
 
@@ -473,7 +557,6 @@ img.card-image-7 {
 }
 
 .sky-info-7 {
-  font-size: 16px !important;
   text-transform: capitalize;
   padding: 18px 10px 10px 10px !important;
   word-break: break-all !important;
@@ -485,6 +568,165 @@ img.card-image-7 {
 }
 
 
+@media screen and (min-width:1031px) and (max-width:1446px) {
+  .week-4-days .chance-of-rain-data{
+    position: absolute;
+    top:210px;
+    left:13%;
+    font-size: 24px;
+  }
+  .week-3-days .chance-of-rain-data{
+    position: absolute;
+    top:210px;
+    left:13%;
+    font-size: 24px;
+  }
+  .carousel-item .card-image-7{
+  
+    width:60px !important;
+    height:60px !important;
+  }
+  .carousel .chance-of-rain-data{
+    position: absolute;
+    top:210px;
+    left:12%;
+    font-size: 24px;
+  }
+  
+  
+}
+
+@media screen and (min-width:700px) and (max-width:1030px) {
+  .carousel .rain-icon, .card-7-forecast .rain-icon{
+    display:inline-block;
+    width:30px;
+    height: 30px;
+    position: absolute;
+    top:220px;
+    left:34%;
+  }
+  .carousel-item .card-image-7{
+  
+    width:45px !important;
+    height:45px !important;
+  }
+
+  .gap-3, .gap-4{
+    gap: 0rem !important;
+  }
+  .carousel .chance-of-rain{
+    display: none;
+  }
+  .carousel .sky-info-7, .week-3-days .sky-info-7, .week-4-days .sky-info-7{
+    margin: 14px auto !important;
+    /* position: static !important; */
+    font-size: 18px;
+    
+  }
+
+  .week-4-days .temperature-info-7{
+    font-size: 30px;
+  }
+  .carousel .chance-of-rain-data{
+    position: absolute;
+    top:214px;
+    left:50%;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width:699px) {
+  .carousel{
+    display: block;
+  }
+.carousel .card{
+  height: 49px !important;
+  display: block;
+  
+  
+
+} 
+.weather-city-7{
+  padding: 16px 6px !important;
+}
+.chance-of-rain, .sky-info-7{
+  display: none !important;
+}
+
+.gap-4{
+  gap:0rem !important;
+}
+
+.gap-3{
+  gap:0rem !important;
+
+}
+
+div.hstack{
+  display: flex !important;
+  flex: 1 1 auto !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+}
+
+.carousel .temp-7-info-container{
+  position: absolute;
+  top:2px !important;
+  left:56% !important;
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  padding-left: 10px;
+}
+.carousel-item .card-image-7{
+  
+  width:40px !important;
+  height:40px !important;
+  
+}
+
+.temperature-info-7{
+  font-size: 20px !important;
+  margin-bottom: 0;
+  padding-left:10px;
+
+}
+
+.hstack{
+  display: block !important;
+  }
+
+
+.carousel .chance-of-rain-data{
+  position: absolute;
+  top:4px;
+  left:38%;
+  font-size: 20px;
+}
+.carousel .rain-icon, .card-7-forecast .rain-icon{
+  position: absolute;
+  display:inline-block;
+  width:20px;
+  height: 20px;
+  top:12px;
+    left:31%;
+}
+.day-24-heading {
+  padding: 12px 10px 0 10px !important;
+  margin-bottom: 0;
+  
+}
+.before-midday, .after-midday{
+  padding: 56px 24px 0px 24px;
+}
+.week-7-heading {
+  
+  padding: 16px 10px 0px 10px;
+  margin-bottom: 0;
+}
+.weekly-carousel{
+  margin-bottom: 18px;
+}
+}
 
 @media screen and (min-width:981px) and (max-width:1179px) {
   .app-heading {
@@ -589,7 +831,14 @@ img.card-image-7 {
 
 
   }
-
+  
+  .slider-stack-h{
+    display: none;
+  }
+  
+.slider-stack-v{
+  display: initial;
+}
   .weather-7-container {
     flex-wrap: wrap;
   }
@@ -648,7 +897,7 @@ img.card-image-7 {
     border: none;
     padding: 0px 8px;
   }
-
+  
   .form-heading-container {
     flex-direction: column;
     padding: 4px 0px 18px 0px;
