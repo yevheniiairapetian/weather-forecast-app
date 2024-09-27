@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
 import rain from './img/rain.png';
@@ -17,7 +17,7 @@ import { Footer } from '../footer/footer';
 
 const Weather = () => {
 
-	const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [dailyWeatherData, setDailyWeatherData] = useState(null);
@@ -28,9 +28,20 @@ const Weather = () => {
   const [showCityModal, setShowCityModal] = useState(false);
   const handleShowCityModal = () => setShowCityModal(true);
   const handleCloseCityModal = () => setShowCityModal(false);
+  const [showImperialModal, setShowImperialModal] = useState(false);
+  const handleShowImperialModal = () => setShowImperialModal(true);
+  const handleCloseImperialModal = () => setShowImperialModal(false);
+  const [showMetricModal, setShowMetricModal] = useState(false);
+  const handleShowMetricModal = () => setShowMetricModal(true);
+  const handleCloseMetricModal = () => setShowMetricModal(false);
   const [showFailedCityModal, setShowFailedCityModal] = useState(false);
   const handleShowFailedCityModal = () => setShowFailedCityModal(true);
   const handleCloseFailedCityModal = () => setShowFailedCityModal(false);
+  const [isCelcToggled, setIsCelcToggled] = useState(() => {
+    const saved = localStorage.getItem('isCelcToggled');
+    return saved !== null ? JSON.parse(saved) : false;
+  });
+
   function clearInput() {
 
     document.querySelector(".city-search-input").value = "";
@@ -60,6 +71,22 @@ const Weather = () => {
       console.error(error);
     }
   };
+
+  function toggleCelcBGColor() {
+    document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "yellow";
+    document.querySelector(".temp-measure-select-button:first-child").style.transition = "all 0.2s ease-in";
+    document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "lightgrey";
+    document.querySelector(".temp-measure-select-button:last-child").style.transition = "all 0.2s ease-in";
+
+  }
+
+  function toggleFahrBGColor() {
+    document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "lightgrey";
+    document.querySelector(".temp-measure-select-button:first-child").style.transition = "all 0.2s ease-in";
+    document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "yellow";
+    document.querySelector(".temp-measure-select-button:last-child").style.transition = "all 0.2s ease-in";
+
+  }
 
   const fetchHourly = async () => {
     try {
@@ -105,6 +132,9 @@ const Weather = () => {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('isCelcToggled', JSON.stringify(isCelcToggled));
+  }, [isCelcToggled]);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -146,7 +176,7 @@ const Weather = () => {
     <div className='contain'>
 
 
-<Navbar expanded={expanded} className="page-header" expand="xl" id="navigation">
+      <Navbar expanded={expanded} className="page-header" expand="xl" id="navigation">
         <Container className="navigation">
           <ScrollToAnchor />
           <Navbar.Brand className="p-2 brand" as={Link} to="/" expand="lg">
@@ -154,46 +184,48 @@ const Weather = () => {
             <h1 onClick={() => setExpanded(false)}
               className="app-heading">Better Wetter</h1>
 
-
-
-
-
-
           </Navbar.Brand>
           <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} />
 
-					<Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <div className='form-heading-container'>
-        <form className="weather-form" onSubmit={handleSubmit}>
+          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+            <div className='form-heading-container'>
+              <form className="weather-form" onSubmit={handleSubmit}>
 
-          <input
-            className="city-search-input"
-            type="text"
-            placeholder="Search by city name"
-            value={city.charAt(0).toUpperCase() + city.slice(1)}
-            onChange={handleInputChange}
-          />
-          <SaveMyCity />
+                <input
+                  className="city-search-input"
+                  type="text"
+                  placeholder="Search by city name"
+                  value={city.charAt(0).toUpperCase() + city.slice(1)}
+                  onChange={handleInputChange}
+                />
+                <SaveMyCity />
 
-          <button title="Clear the search field" onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
-          {/* <Nav.Link title="User guide" onClick={() => setExpanded(false)} className="text-light pe-4" as={Link} to='/guide'>
+                <button title="Clear the search field" onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
+                {/* <Nav.Link title="User guide" onClick={() => setExpanded(false)} className="text-light pe-4" as={Link} to='/guide'>
       <FontAwesomeIcon className='question-icon' icon={faCircleQuestion} size="lg" />
 							</Nav.Link> */}
-        </form>
-      </div>
-      
-					</Navbar.Collapse>
-       
+
+              </form>
+              <div className="measurement-systems">
+
+                <div className="temp-measure-select">
+                  <button title="Switch to the metric system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(true); toggleCelcBGColor();handleShowMetricModal() }}>SI</button>
+                  <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor();handleShowImperialModal() }}>IMP</button>
+
+                </div>
+
+              </div>
+            </div>
+
+          </Navbar.Collapse>
+
         </Container>
       </Navbar>
 
-      
 
       {hourlyWeatherData ? (
         <>
           <Card id="card" className='item card ' >
-
-
 
             <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
@@ -202,7 +234,7 @@ const Weather = () => {
               </Card.Title>
 
               <Card.Title className="temp-info-container text-center pb-1" >
-                <p className="degCelcius temperature-info" style={{ color: "whitesmoke" }}>{(hourlyWeatherData.current.feelslike_c)}°C</p>
+                {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.feelslike_c + '°C'}</p>} : {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.feelslike_f + '°F'}</p>}
 
                 {(isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
@@ -223,8 +255,15 @@ const Weather = () => {
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
               <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {hourlyWeatherData.current.humidity}%</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure : {hourlyWeatherData.current.pressure_mb}</p></Card.Title>
-              <Card.Title className="item-info text-center pb-1" ><p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed : {hourlyWeatherData.current.wind_kph}km/h</p></Card.Title>
+              <Card.Title className="item-info text-center" >
+                {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: {hourlyWeatherData.current.pressure_mb + ' mbar'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: {hourlyWeatherData.current.pressure_in + ' inHg'}</p>}
+
+              </Card.Title>
+              <Card.Title className="item-info text-center pb-1" >
+                {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {hourlyWeatherData.current.wind_kph + ' km/h'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {hourlyWeatherData.current.wind_kph + ' Mi/h'}</p>}
+
+
+              </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index : {hourlyWeatherData.current.uv}</p></Card.Title>
 
 
@@ -281,7 +320,10 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[0].temp_f + '°F'}</p>}
+
+
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -317,7 +359,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[1].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -352,7 +395,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[2].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -396,7 +440,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[3].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -432,7 +477,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[4].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -468,7 +514,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[5].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -512,7 +559,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[6].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -547,9 +595,11 @@ const Weather = () => {
                         {/* <DisplayDate /> */}
                       </h2>
                       </Card.Title>
-                      <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].condition.text}</p>
+                      <Card.Title className="item-info-7 text-center pb-1 " >
+                        <p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -585,7 +635,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[8].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -631,7 +682,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[9].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -667,7 +719,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[10].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -703,7 +756,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[11].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -767,7 +821,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[12].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -803,7 +858,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[13].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -839,7 +895,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[14].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -885,7 +942,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[15].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -922,7 +980,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[16].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -958,7 +1017,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[17].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1004,7 +1064,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[18].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1040,7 +1101,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[19].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1076,7 +1138,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[20].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1122,7 +1185,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[21].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1158,7 +1222,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[22].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1194,7 +1259,8 @@ const Weather = () => {
                       </Card.Title>
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].condition.text}</p>
                       </Card.Title>
-                      <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].temp_c}°C</p>
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].temp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{hourlyWeatherData.forecast.forecastday[0].hour[23].temp_f + '°F'}</p>}
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
@@ -1266,7 +1332,9 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.avgtemp_f + '°F'}</p>}
+
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1301,7 +1369,8 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.avgtemp_f + '°F'}</p>}
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1339,7 +1408,8 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.avgtemp_f + '°F'}</p>}
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1382,7 +1452,8 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.avgtemp_f + '°F'}</p>}
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1429,7 +1500,8 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.avgtemp_f + '°F'}</p>}
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1470,7 +1542,8 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.avgtemp_f + '°F'}</p>}
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1511,7 +1584,8 @@ const Weather = () => {
                     </Card.Title>
                     <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.condition.text}</p>
                     </Card.Title>
-                    <Card.Title className="temp-7-info-container text-center pb-1" ><p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.avgtemp_c}°C</p>
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.avgtemp_c + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.avgtemp_f + '°F'}</p>}
 
                       {(isDayTime) &&
                         <Card.Img className='w-100 card-image-7' variant='top'
@@ -1539,22 +1613,9 @@ const Weather = () => {
           </Carousel>
 
 
-
-
-
           <div className='week-container'>
 
-
-
-
-
-
-
-
           </div>
-
-
-
 
         </>
       ) : (
@@ -1584,6 +1645,28 @@ const Weather = () => {
         <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Please first type a city name</span> </Modal.Body>
 
         <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseFailedCityModal}>OK</Button>
+
+      </Modal><Modal
+
+        className="favorite-modal" show={showMetricModal} onHide={handleCloseMetricModal}>
+        <Modal.Header closeButton>
+          {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the metric system</span>  </Modal.Body>
+
+        <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>OK</Button>
+
+      </Modal>
+
+      <Modal
+
+        className="favorite-modal" show={showImperialModal} onHide={handleCloseImperialModal}>
+        <Modal.Header closeButton>
+          {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the imperial system</span> </Modal.Body>
+
+        <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>OK</Button>
 
       </Modal>
     </div>
