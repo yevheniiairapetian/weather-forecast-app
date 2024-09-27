@@ -1232,7 +1232,9 @@ img.card-image-7 {
   .weather-form{
     margin-right: 0;
   }
-  
+  .modal-content{
+    bottom: 45% !important;
+  }
 }
 
 @media screen and (max-width:478px) {
