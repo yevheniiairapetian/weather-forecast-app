@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
-
+import imgLogo from './img/img-logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
@@ -182,7 +182,8 @@ const Weather = () => {
           <Navbar.Brand className="p-2 brand" as={Link} to="/" expand="lg">
             {/* <Nav.Link className="" as={Link} to='/'> */}
             <h1 onClick={() => setExpanded(false)}
-              className="app-heading">Better Wetter</h1>
+              className="app-heading">Better Wetter<img className="img-logo" src={imgLogo} alt="Better Wetter App Logo" /></h1>
+              
 
           </Navbar.Brand>
           <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} />

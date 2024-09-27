@@ -9,6 +9,9 @@ body {
   width: 100% !important;
 }
 
+.img-logo{
+  display: none;
+}
 
 /* width */
 ::-webkit-scrollbar {
@@ -1181,7 +1184,6 @@ img.card-image-7 {
     position: absolute;
     top:144px;
     left:-4px;
-   
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
@@ -1193,9 +1195,106 @@ img.card-image-7 {
   }
 }
 
+@media screen and (max-width:476px) {
+  .default-city-note{
+    padding-right: 58px;
+  }
+  .modal-body{
+    padding-right: 80px;
+  }
+}
+
+@media screen and (min-width:288px) and (max-width:400px) {
+  .form-heading-container {
+    flex-direction: column;
+    padding: 4px 0px 18px 0px;
+    width: 100%;
+
+    margin-left: -11px !important;
+  }
+  .clear-input-button{
+    padding-left: 13px;
+  }
+  .temp-measure-select {
+    display: flex;
+    position: absolute;
+    top:144px;
+    left:-4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 80px;
+    height: 42px;
+  }
+  .justify-content-end.navbar-collapse.collapse.show{
+    height: 130px !important;
+  }
+  .weather-form{
+    margin-right: 0;
+  }
+  
+}
+
 @media screen and (max-width:478px) {
   .pre-request-text {
     width: 80%;
     height: fit-content
+  }
+}
+
+@media screen and (max-width:288px) {
+  .form-heading-container {
+  width:80% !important;
+  margin-right: 0 !important;
+  }
+  .clear-input-button{
+    position: relative;
+    right: 44%;
+    background: none;
+  }
+  .fa-x{
+    
+    color:#000 !important;
+  }
+  .app-heading{
+font-size: 0px !important;
+  }
+  .img-logo{
+    display: inline-block;
+    width:70px;
+    height: auto;
+  }
+  .temp-measure-select {
+    display: flex;
+    position: absolute;
+    top:172px;
+    left:-4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 80px;
+    height: 42px;
+  }
+  div.modal-body{
+    position: fixed;
+        top: 0;
+        left: 0;
+    width: 100% !important;
+        height: 100% !important;
+        
+        
+      
+
+
+  }
+  .default-city-note{
+    padding: 70px 70px !important;
+    font-size: 16px;
+    text-align: center;
+  }
+  .got-it-button{
+    position:fixed;
+    top:15%;
+    right:80%;
   }
 }
