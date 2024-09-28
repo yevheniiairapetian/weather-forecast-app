@@ -3,20 +3,28 @@ import axios from 'axios';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 import imgLogo from './img/img-logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
+import useDarkMode from "./../../hooks/useDarkMode";
 import rain from './img/rain.png';
 import { ScrollToAnchor } from "../scroll-to-anchor/scroll-to-anchor";
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import { Footer } from '../footer/footer';
-
+import useSound from 'use-sound';
+import Click from './src/click.mp3';
 
 
 const Weather = () => {
-
+  const [isDarkMode, setDarkMode] = useDarkMode();
+  const [showDarkModal, setShowDarkModal] = useState(false);
+	const [showLightModal, setShowLightModal] = useState(false);
+	const handleShowLightModal = () => setShowLightModal(true);
+	const handleShowDarkModal = () => setShowDarkModal(true);
+	const handleCloseLightModal = () => setShowLightModal(false);
+	const handleCloseDarkModal = () => setShowDarkModal(false);
   const [expanded, setExpanded] = useState(false);
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -73,6 +81,7 @@ const Weather = () => {
   };
 
   function toggleCelcBGColor() {
+    
     document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "yellow";
     document.querySelector(".temp-measure-select-button:first-child").style.transition = "all 0.2s ease-in";
     document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "lightgrey";
@@ -172,6 +181,24 @@ const Weather = () => {
 
   };
 
+  const ClickThemeDark = () => {
+		const [play] = useSound(Click);
+		return <button className="toggle_btn pl-3" onClick={() => { play();setDarkMode(!isDarkMode); handleShowLightModal(); setExpanded(false) }}>
+
+			<FontAwesomeIcon size="2xl" className="sun" title='Switch the light mode on' icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
+		</button>
+		// onClick={() => {setVisible(!visible)}}
+	};
+
+
+	const ClickThemeLight = () => {
+		const [play] = useSound(Click);
+		return <button className="toggle_btn pl-3" onClick={() => { play();setDarkMode(!isDarkMode); handleShowDarkModal(); setExpanded(false) }}>
+			<FontAwesomeIcon size="2xl" className="moon" title='Switch the dark mode on' icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
+		</button>
+		// onClick={() => {setVisible(!visible)}}
+	};
+
   return (
     <div className='contain'>
 
@@ -216,9 +243,15 @@ const Weather = () => {
                 </div>
 
               </div>
-            </div>
+              {isDarkMode ? (
+								<ClickThemeDark />) : (
+								<ClickThemeLight />
 
+							)}
+            </div>
+            
           </Navbar.Collapse>
+          
 
         </Container>
       </Navbar>
@@ -1670,6 +1703,30 @@ const Weather = () => {
         <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>OK</Button>
 
       </Modal>
+
+      <Modal
+
+				className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
+				<Modal.Header closeButton>
+				</Modal.Header>
+				<Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in dark mode</Modal.Body>
+
+				<Button title="Close the notification window"  className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
+
+			</Modal>
+
+			<Modal
+
+				className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
+				<Modal.Header closeButton>
+				</Modal.Header>
+				<Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in light mode
+
+				</Modal.Body>
+
+				<Button title="Close the notification window" className="got-it-button light-modal-button" onClick={handleCloseLightModal}>OK</Button>
+			</Modal>
+
     </div>
   );
 };
