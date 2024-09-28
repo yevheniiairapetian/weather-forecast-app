@@ -37,7 +37,7 @@ export default () => {
       window.document.querySelector(".toggle_btn").classList.add(className);
       window.document.querySelector(".contain").classList.add(className);
       window.document.querySelector(".footer").classList.add(className);
-      // window.document.querySelector(".card-body").classList.add(className);
+      window.document.querySelector(".footer-app-name").classList.add(className);
       
     } else {
       window.document.body.classList.remove(className);
@@ -51,7 +51,7 @@ export default () => {
       window.document.querySelector(".toggle_btn").classList.remove(className);
       window.document.querySelector(".contain").classList.remove(className);
       window.document.querySelector(".footer").classList.remove(className);
-      // window.document.querySelector(".card-body").classList.remove(className);
+      window.document.querySelector(".footer-app-name").classList.remove(className);
       
     }
     try {

@@ -9,6 +9,15 @@ body {
   width: 100% !important;
 }
 
+.footer-app-name{
+  color: #000;
+}
+
+
+.footer-app-name.dark{
+  color: #c5bc15;
+}
+
 .navigation.container{
   background-color: #337cb4;
 }
@@ -26,6 +35,29 @@ body {
   background-color: #272626;
   
 }
+
+.day-24-heading, .before-midday, .week-7-heading{
+  background-color: none;
+  /* color:white; */
+}
+
+.before-midday, .week-7-heading{
+  padding-bottom: 46px !important;
+  padding-top: 46px !important;
+
+}
+
+.dark.day-24-heading, .dark.before-midday, .dark.week-7-heading{
+  background-color: rgba(113, 163, 188, 0.7) !important;
+  color:white;
+}
+
+.dark.before-midday, .dark.week-7-heading{
+  padding-bottom: 46px !important;
+  padding-top: 46px !important;
+
+}
+
 
 .app-heading{
   background-color: #337cb4;
@@ -180,10 +212,39 @@ nav.page-header.dark{
 }
 
 .contain.dark {
-  background-image: url("./img/app-bg-dark.jpg");
-  background-size: 123% 200%;
+    background-image: repeating-linear-gradient(45deg, rgba(142, 141, 141, 0.1) 0px, rgba(142, 141, 141, 0.1) 2px, transparent 2px, transparent 4px), linear-gradient(90deg, rgb(63, 63, 63), rgb(63, 63, 63));
+    color: whitesmoke
 
 }
+
+.contain.dark .day-7-location-span{
+  color:#337cb4;
+}
+
+
+.contain.dark .pre-request-text-span{
+  color:#000000 !important;
+}
+
+
+
+.contain.dark .card-7-forecast .card-body {
+  background-image: repeating-linear-gradient(45deg, rgba(97, 97, 97, 0.1) 0px, rgba(97, 97, 97, 0.1) 2px, transparent 2px, transparent 4px), linear-gradient(90deg, rgb(43, 43, 43), rgb(43, 43, 43)) !important;
+}
+
+.contain .card-7-forecast .card-body {
+  background-image: linear-gradient(37deg, rgb(32, 218, 233), rgb(40, 21, 236)) !important;
+}
+
+.before-midday, .after-midday {
+  padding: 30px 24px 30px 24px;
+}
+
+.contain.dark .week-7-heading{
+  padding: 30px 24px 30px 24px;
+
+}
+
 
 html,
 body {
@@ -345,6 +406,20 @@ form:focus-within {
   top: 10px;
   right: 16px;
   width: max-content;
+}
+
+.celcON{
+  background-color: yellow;
+  transition: all 0.25s ease-in;
+}
+
+.fahrON{
+  background-color: yellow;
+  transition: all 0.25s ease-in;
+}
+
+.dark .rain-icon{
+  content: url("./components/weather/img/rain-dark.png"); 
 }
 
 .got-it-button:hover {
@@ -1170,7 +1245,14 @@ img.card-image-7 {
   .weather-7-container {
     flex-wrap: wrap;
   }
-
+  .contain.dark .before-midday, .contain.dark .after-midday {
+    padding: 52px 24px 0px 24px !important;
+  }
+  
+  .contain.dark .week-7-heading{
+    padding: 46px 24px 0px 24px!important;
+  
+  }
   .card-7-forecast {
 
     /* height:100% !important; */
