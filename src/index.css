@@ -1612,4 +1612,7 @@ font-size: 0px !important;
     margin-left: 0 !important;
 width: 24px !important;
   }
+  .clear-input-button{
+    right:34px !important
+  }
 }
