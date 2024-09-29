@@ -408,6 +408,44 @@ form:focus-within {
   width: max-content;
 }
 
+.co2-polution-good{
+  color:rgb(8, 167, 8);
+}
+
+.co2-polution-satisfactory{
+  color:rgb(41, 245, 5);
+}
+
+.co2-polution-moderate{
+  color:rgb(194, 203, 9);
+}
+
+.co2-polution-poor{
+  color:rgb(250, 175, 13);
+}
+
+.co2-polution-unhealthy{
+  color:rgb(150, 105, 9);
+}
+
+.co2-polution-very-unhealthy{
+  color:rgb(211, 8, 8);
+}
+
+.co2-polution-hazard{
+  color:rgb(206, 7, 7);
+}
+
+.co2-polution-extreme{
+  color:rgb(107, 35, 144);
+}
+
+.air-polution-heading{
+  font-size: 40px;
+  text-align: left;
+  padding: 10px 0 34px 90px;
+}
+
 .celcON{
   background-color: yellow;
   transition: all 0.25s ease-in;
@@ -797,7 +835,11 @@ img.card-image-7 {
 .pressure-info,
 .wind-speed-info,
 .feels-like-info,
-.uv-info {
+.uv-info,
+.co-info,
+.pm25-info,
+.pm10-info,
+.no2-info {
   font-size: 30px;
 
 
@@ -829,6 +871,38 @@ img.card-image-7 {
   text-align: left;
   padding: 5px 20px;
   padding: 0px 0 100px 90px;
+
+}
+
+.co-info {
+  padding: 0px 0 40px 90px;
+  width: fit-content;
+
+}
+
+.pm25-info {
+  padding: 0px 0 26px 90px;
+  width: fit-content;
+
+}
+
+.pm10-info {
+  padding: 0px 0 26px 90px;
+  width: fit-content;
+
+}
+
+.no2-info {
+  padding: 0px 0 40px 90px;
+  width: fit-content;
+
+}
+
+.warning-alert{
+  width:50%;
+  font-size: 20px;
+  margin: 0px 0 26px 90px;
+  line-height: 1.8em;
 
 }
 
@@ -1405,7 +1479,11 @@ img.card-image-7 {
   .wind-speed-info,
   .feels-like-info,
   .sky-info,
-  .uv-info {
+  .uv-info,
+  .co-info,
+  .pm25-info,
+  .pm10-info,
+  .no2-info {
     font-size: 24px;
     padding-left: 50px;
 

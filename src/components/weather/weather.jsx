@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { WeatherAlert } from '../weather-alert/weather-alert';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 import imgLogo from './img/img-logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +12,7 @@ import rain from './img/rain.png';
 import { ScrollToAnchor } from "../scroll-to-anchor/scroll-to-anchor";
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
 
 import { Footer } from '../footer/footer';
 import useSound from 'use-sound';
@@ -20,11 +22,11 @@ import Click from './src/click.mp3';
 const Weather = () => {
   const [isDarkMode, setDarkMode] = useDarkMode();
   const [showDarkModal, setShowDarkModal] = useState(false);
-	const [showLightModal, setShowLightModal] = useState(false);
-	const handleShowLightModal = () => setShowLightModal(true);
-	const handleShowDarkModal = () => setShowDarkModal(true);
-	const handleCloseLightModal = () => setShowLightModal(false);
-	const handleCloseDarkModal = () => setShowDarkModal(false);
+  const [showLightModal, setShowLightModal] = useState(false);
+  const handleShowLightModal = () => setShowLightModal(true);
+  const handleShowDarkModal = () => setShowDarkModal(true);
+  const handleCloseLightModal = () => setShowLightModal(false);
+  const handleCloseDarkModal = () => setShowDarkModal(false);
   const [expanded, setExpanded] = useState(false);
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -45,6 +47,8 @@ const Weather = () => {
   const [showFailedCityModal, setShowFailedCityModal] = useState(false);
   const handleShowFailedCityModal = () => setShowFailedCityModal(true);
   const handleCloseFailedCityModal = () => setShowFailedCityModal(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const [airPollutionData, setAirPollutionData] = useState(null);
   const [isCelcToggled, setIsCelcToggled] = useState(() => {
     const saved = localStorage.getItem('isCelcToggled');
     return saved !== null ? JSON.parse(saved) : false;
@@ -81,7 +85,7 @@ const Weather = () => {
   };
 
   function toggleCelcBGColor() {
-    
+
     document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "yellow";
     document.querySelector(".temp-measure-select-button:first-child").style.transition = "all 0.2s ease-in";
     document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "lightgrey";
@@ -100,7 +104,8 @@ const Weather = () => {
   const fetchHourly = async () => {
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/forecast.json?key=b6b68ae835d04defa94134215242409&q=${city}&days=1&aqi=no&alerts=no
+        `https://api.weatherapi.com/v1/forecast.json?key=b6b68ae835d04defa94134215242409&q=${city}&days=1&aqi=yes&alerts=yes
+
 `
       );
       setHourlyWeatherData(response.data);
@@ -110,7 +115,41 @@ const Weather = () => {
     }
   };
 
-
+  const WeatherAlert = () => {
+    const [show, setShow] = useState(true);
+  
+    useEffect(() => {
+      const alertDismissed = localStorage.getItem('alertDismissed');
+      if (alertDismissed) {
+        setShow(false);
+      }
+    }, []);
+  
+    const handleClose = () => {
+      setShow(false);
+      localStorage.setItem('alertDismissed', 'true');
+    };
+  
+    return (
+      <>
+        {showWarning && (
+          <Alert variant="danger" onClose={handleClose} dismissible>
+             
+  
+            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> Air Quality Alert</Alert.Heading>
+            <p>
+              The levels of air pollutants have exceeded safe limits. For your health and safety, it is advised to stay indoors. Please keep windows closed and use air purifiers if available. Avoid outdoor activities, especially if you have respiratory conditions or other health concerns.
+            </p>
+            <div className="d-flex justify-content-end">
+              {/* <Button onClick={handleClose} variant="outline-danger">
+                Close
+              </Button> */}
+            </div>
+          </Alert>
+        )}
+      </>
+    );
+  };
   const fetchWeekly = async () => {
     try {
       const response = await axios.get(
@@ -145,8 +184,39 @@ const Weather = () => {
     localStorage.setItem('isCelcToggled', JSON.stringify(isCelcToggled));
   }, [isCelcToggled]);
 
+
+  useEffect(() => {
+    const savedWarning = localStorage.getItem('airPollutionWarning');
+    if (savedWarning) {
+      setShowWarning(true);
+    }
+  }, []);
+
+
+  const checkPolution = async ()=>{
+    try {
+    const airPollutionResponse = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=b6b68ae835d04defa94134215242409&q=${city}&days=1&aqi=yes&alerts=yes`);
+      setAirPollutionData(airPollutionResponse.data);
+
+      if (
+        
+        
+        (airPollutionData.current.air_quality.pm2_5 >= 35 || airPollutionResponse.current.air_quality.pm10 >= 45 || airPollutionResponse.current.air_quality.no2 >= 25)
+      ) {
+        setShowWarning(true);
+        localStorage.setItem('airPollutionWarning', `High air pollution in ${city}!`);
+      } else {
+        setShowWarning(false);
+        localStorage.removeItem('airPollutionWarning');
+      }
+    }catch (error) {
+      console.error(error);
+    }
+  }
+
   const handleInputChange = (e) => {
     setCity(e.target.value);
+    checkPolution();
   };
 
   function saveCity() {
@@ -182,22 +252,22 @@ const Weather = () => {
   };
 
   const ClickThemeDark = () => {
-		const [play] = useSound(Click);
-		return <button className="toggle_btn pl-3" onClick={() => { play();setDarkMode(!isDarkMode); handleShowLightModal(); setExpanded(false) }}>
+    const [play] = useSound(Click);
+    return <button className="toggle_btn pl-3" onClick={() => { play(); setDarkMode(!isDarkMode); handleShowLightModal(); setExpanded(false) }}>
 
-			<FontAwesomeIcon size="2xl" className="sun" title='Switch the light mode on' icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
-		</button>
-		// onClick={() => {setVisible(!visible)}}
-	};
+      <FontAwesomeIcon size="2xl" className="sun" title='Switch the light mode on' icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
+    </button>
+    // onClick={() => {setVisible(!visible)}}
+  };
 
 
-	const ClickThemeLight = () => {
-		const [play] = useSound(Click);
-		return <button className="toggle_btn pl-3" onClick={() => { play();setDarkMode(!isDarkMode); handleShowDarkModal(); setExpanded(false) }}>
-			<FontAwesomeIcon size="2xl" className="moon" title='Switch the dark mode on' icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
-		</button>
-		// onClick={() => {setVisible(!visible)}}
-	};
+  const ClickThemeLight = () => {
+    const [play] = useSound(Click);
+    return <button className="toggle_btn pl-3" onClick={() => { play(); setDarkMode(!isDarkMode); handleShowDarkModal(); setExpanded(false) }}>
+      <FontAwesomeIcon size="2xl" className="moon" title='Switch the dark mode on' icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
+    </button>
+    // onClick={() => {setVisible(!visible)}}
+  };
 
   return (
     <div className='contain'>
@@ -210,7 +280,7 @@ const Weather = () => {
             {/* <Nav.Link className="" as={Link} to='/'> */}
             <h1 onClick={() => setExpanded(false)}
               className="app-heading">Better Wetter<img className="img-logo" src={imgLogo} alt="Better Wetter App Logo" /></h1>
-              
+
 
           </Navbar.Brand>
           <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} />
@@ -237,21 +307,21 @@ const Weather = () => {
               <div className="measurement-systems">
 
                 <div className="temp-measure-select">
-                  <button title="Switch to the metric system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(true); toggleCelcBGColor();handleShowMetricModal() }}>SI</button>
-                  <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor();handleShowImperialModal() }}>IMP</button>
+                  <button title="Switch to the metric system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(true); toggleCelcBGColor(); handleShowMetricModal() }}>SI</button>
+                  <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor(); handleShowImperialModal() }}>IMP</button>
 
                 </div>
 
               </div>
               {isDarkMode ? (
-								<ClickThemeDark />) : (
-								<ClickThemeLight />
+                <ClickThemeDark />) : (
+                <ClickThemeLight />
 
-							)}
+              )}
             </div>
-            
+
           </Navbar.Collapse>
-          
+
 
         </Container>
       </Navbar>
@@ -299,6 +369,54 @@ const Weather = () => {
 
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index : {hourlyWeatherData.current.uv}</p></Card.Title>
+              <Card.Title className="item-info text-center pb-1"><h3 className="air-polution-heading" style={{ color: "whitesmoke" }}>Air Polution</h3></Card.Title>
+
+              <Card.Title className="item-info text-center" ><p className="co-info" style={{ color: "whitesmoke" }}>CO<sub>2</sub>:
+                {hourlyWeatherData.current.air_quality.co <= 700 && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-good'> Good</span></>}
+                {(hourlyWeatherData.current.air_quality.co >= 701 && hourlyWeatherData.current.air_quality.co <= 800) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-moderate'> Moderate</span></>}
+                {(hourlyWeatherData.current.air_quality.co >= 801 && hourlyWeatherData.current.air_quality.co <= 1100) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-poor'> Poor</span></>}
+                {(hourlyWeatherData.current.air_quality.co >= 1101 && hourlyWeatherData.current.air_quality.co <= 1500) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-unhealthy'> Unhealthy</span></>}
+                {(hourlyWeatherData.current.air_quality.co >= 1501 && hourlyWeatherData.current.air_quality.co <= 2000) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-very-unhealthy'> Very Unhealthy</span></>}
+                {(hourlyWeatherData.current.air_quality.co >= 2001 && hourlyWeatherData.current.air_quality.co <= 3000) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-hazard'> Hazardous</span></>}
+                {(hourlyWeatherData.current.air_quality.co >= 3001 && hourlyWeatherData.current.air_quality.co <= 5000) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.co}</span><span className='co2-polution-extreme'> Extreme</span></>}
+              </p>
+              </Card.Title>
+
+              <Card.Title className="item-info text-center pb-1" ><p className="pm25-info" style={{ color: "whitesmoke" }}>PM2.5:
+                {hourlyWeatherData.current.air_quality.pm2_5 <= 12 && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-good'> Good</span></>}
+                {(hourlyWeatherData.current.air_quality.pm2_5 > 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 35) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-moderate'> Moderate</span></>}
+                {(hourlyWeatherData.current.air_quality.pm2_5 > 35 && hourlyWeatherData.current.air_quality.pm2_5 <= 56) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-poor'> Poor</span></>}
+                {(hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-unhealthy'> Unhealthy</span></>}
+                {(hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-very-unhealthy'> Very Unhealthy</span></>}
+                {(hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-hazard'> Hazardous</span></>}
+                {(hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm2_5}</span><span className='co2-polution-extreme'> Extreme</span></>}
+              </p>
+              </Card.Title>
+
+
+              <Card.Title className="item-info text-center pb-1" ><p className="pm10-info" style={{ color: "whitesmoke" }}>PM10:
+                {hourlyWeatherData.current.air_quality.pm10 <= 54 && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm10}</span><span className='co2-polution-good'> Good</span></>}
+                {(hourlyWeatherData.current.air_quality.pm10 > 54 && hourlyWeatherData.current.air_quality.pm10 <= 154) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm10}</span><span className='co2-polution-moderate'> Moderate</span></>}
+                {(hourlyWeatherData.current.air_quality.pm10 >= 155 && hourlyWeatherData.current.air_quality.pm10 <= 254) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm10}</span><span className='co2-polution-unhealthy'> Unhealthy (certain senstive groups may be affected)</span></>}
+                {(hourlyWeatherData.current.air_quality.pm10 >= 255 && hourlyWeatherData.current.air_quality.pm10 <= 354) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm10}</span><span className='co2-polution-unhealthy'> Unhealthy</span></>}
+                {(hourlyWeatherData.current.air_quality.pm10 >= 355 && hourlyWeatherData.current.air_quality.pm10 <= 424) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm10}</span><span className='co2-polution-hazard'> Very Unhealthy</span></>}
+                {(hourlyWeatherData.current.air_quality.pm10 >= 425) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.pm10}</span><span className='co2-polution-very-unhealthy'> Hazardous</span></>}
+              </p>
+              </Card.Title>
+
+              <Card.Title className="item-info text-center pb-1" ><p className="no2-info" style={{ color: "whitesmoke" }}>NO2:
+                {hourlyWeatherData.current.air_quality.no2 <= 40 && <><span className=''>{" " + hourlyWeatherData.current.air_quality.no2}</span><span className='co2-polution-good'> Good</span></>}
+                {(hourlyWeatherData.current.air_quality.no2 > 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.no2}</span><span className='co2-polution-satisfactory'> Satisfactory</span></>}
+                {(hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.no2}</span><span className='co2-polution-moderate'> Moderate</span></>}
+                {(hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.no2}</span><span className='co2-polution-poor'> Poor</span></>}
+                {(hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.no2}</span><span className='co2-polution-unhealthy'> Very Poor</span></>}
+                {(hourlyWeatherData.current.air_quality.no2 > 400) && <><span className=''>{" " + hourlyWeatherData.current.air_quality.no2}</span><span className='co2-polution-very-unhealthy'> Severe</span></>}
+              </p>
+              </Card.Title>
+
+                <WeatherAlert />
+
+
 
 
             </Card.Body>
@@ -1706,26 +1824,26 @@ const Weather = () => {
 
       <Modal
 
-				className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
-				<Modal.Header closeButton>
-				</Modal.Header>
-				<Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in dark mode</Modal.Body>
+        className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in dark mode</Modal.Body>
 
-				<Button title="Close the notification window"  className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
+        <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
 
-			</Modal>
+      </Modal>
 
-			<Modal
+      <Modal
 
-				className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
-				<Modal.Header closeButton>
-				</Modal.Header>
-				<Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in light mode
+        className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in light mode
 
-				</Modal.Body>
+        </Modal.Body>
 
-				<Button title="Close the notification window" className="got-it-button light-modal-button" onClick={handleCloseLightModal}>OK</Button>
-			</Modal>
+        <Button title="Close the notification window" className="got-it-button light-modal-button" onClick={handleCloseLightModal}>OK</Button>
+      </Modal>
 
     </div>
   );
