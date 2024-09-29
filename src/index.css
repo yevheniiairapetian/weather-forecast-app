@@ -376,6 +376,10 @@ form:focus-within {
   transition: 0.15s all ease-in;
 }
 
+.air-polution-header{
+  color:#fbbc04;
+}
+
 .button-save-city {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -841,6 +845,8 @@ img.card-image-7 {
 .pm10-info,
 .no2-info {
   font-size: 30px;
+  width: fit-content !important;
+
 
 
 
@@ -876,25 +882,33 @@ img.card-image-7 {
 
 .co-info {
   padding: 0px 0 40px 90px;
-  width: fit-content;
+  width: fit-content !important;
 
 }
 
 .pm25-info {
   padding: 0px 0 26px 90px;
-  width: fit-content;
+  width: fit-content !important;
 
 }
 
 .pm10-info {
-  padding: 0px 0 26px 90px;
-  width: fit-content;
+  padding: 0px 0 15px 90px !important;
+  width: fit-content !important;
+  text-align: left;
+  line-height: 1.8em;
 
 }
 
 .no2-info {
   padding: 0px 0 40px 90px;
-  width: fit-content;
+  width: fit-content !important;
+
+}
+
+.air-info-container{
+  background-color: rgba(54, 55, 55, 0.5) !important;
+  padding: 76px 10px 0px 10px;
 
 }
 
@@ -1389,6 +1403,11 @@ img.card-image-7 {
         width:70px;
         height: auto;
       }
+      p.pm25-info, .pm10-info{
+      font-size: 24px;
+    padding-left: 20px !important;
+    width: fit-content !important;
+}
 }
 
 
@@ -1439,6 +1458,12 @@ img.card-image-7 {
     padding-right: 4;
   }
 
+    .pm25-info{
+      padding-left:50px !important;
+      width: fit-content !important;
+    }
+  
+
   .clear-input-button {
     padding-right: 2;
   }
@@ -1485,7 +1510,8 @@ img.card-image-7 {
   .pm10-info,
   .no2-info {
     font-size: 24px;
-    padding-left: 50px;
+    padding-left: 20px !important;
+    width: fit-content !important;
 
 
 
@@ -1627,7 +1653,7 @@ img.card-image-7 {
 @media screen and (max-width:478px) {
   .pre-request-text {
     width: 80%;
-    height: fit-content
+    height: fit-content;
   }
   .app-heading{
     font-size: 0px !important;
@@ -1654,8 +1680,14 @@ img.card-image-7 {
         padding-left: 10px;
         padding-right: 10px;
       }
+      
+      p.pm25-info, .pm10-info, .no2-info, .c02-info{
+      font-size: 24px;
+    padding-left: 20px !important;
+    width: fit-content !important;
+    text-align: left;
 }
-
+}
 @media screen and (max-width:287.5px) {
   .form-heading-container {
   width:100% !important;
@@ -1728,6 +1760,12 @@ font-size: 0px !important;
     position:absolute;
     right:42px;
   }
+  p.pm25-info, .pm10-info, .no2-info, .co-info{
+    font-size: 24px;
+  padding-left: 20px !important;
+  width: fit-content !important;
+  text-align: left !important;
+}
 }
 
 @media screen and (max-width:287.5px) {
@@ -1775,4 +1813,10 @@ width: 24px !important;
   .clear-input-button{
     right:34px !important
   }
+  p.pm25-info, .pm10-info, .no2-info, .co-info{
+    font-size: 24px;
+  padding-left: 20px !important;
+  width: fit-content !important;
+  text-align: left !important;
+}
 }
