@@ -319,7 +319,7 @@ const Weather = () => {
         <>
           <Card id="card" className='item card ' >
 
-            <Card.Body className={!isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
             <div className='air-info-container'>
               <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} as of <span style={{ color: '#fbbc04' }}> <GetDay/>, {hourlyWeatherData.location.localtime} </span>
               </h2>
