@@ -38,6 +38,7 @@ export default () => {
       window.document.querySelector(".contain").classList.add(className);
       window.document.querySelector(".footer").classList.add(className);
       window.document.querySelector(".footer-app-name").classList.add(className);
+      window.document.querySelector(".clear-input-icon").classList.add(className);
       
     } else {
       window.document.body.classList.remove(className);
@@ -52,6 +53,7 @@ export default () => {
       window.document.querySelector(".contain").classList.remove(className);
       window.document.querySelector(".footer").classList.remove(className);
       window.document.querySelector(".footer-app-name").classList.remove(className);
+      window.document.querySelector(".clear-input-icon").classList.remove(className);
       
     }
     try {

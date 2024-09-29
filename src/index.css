@@ -86,6 +86,22 @@ body {
   
 }
 
+.moving-background-light {
+  background-image: url("./img/sunny-day.jpg") !important;
+  background-size: 200% 100% !important;
+  width: 100% !important;
+
+
+}
+
+.moving-background-dark {
+  background-image: url("./img/starry-night.jpg") !important;
+  background-size: 150% 100% !important;
+  width: 100% !important;
+
+
+}
+
 .weather-form{
   background-color: #337cb4;
 }
@@ -357,6 +373,12 @@ form:focus-within {
   border: none;
 }
 
+.day-7-week-day{
+  display: inline-block;
+  padding:0 10px;
+  width:55px;
+}
+
 .question-icon {
   padding-left: 5px;
   margin-top: 10px;
@@ -485,9 +507,9 @@ form:focus-within {
   /* background: linear-gradient(270deg, #626565, #090a0a); */
   background-size: 100% 100%;
 
-  /* -webkit-animation: AnimationDark 30s ease infinite;
-  -moz-animation: AnimationDark 30s ease infinite;
-  animation: AnimationDark 30s ease infinite; */
+  -webkit-animation: AnimationDark 120s ease infinite;
+  -moz-animation: AnimationDark 120s ease infinite;
+  animation: AnimationDark 120s ease infinite;
 }
 
 .moving-background-light {
@@ -496,9 +518,9 @@ form:focus-within {
   /* background: linear-gradient(270deg, #b8c5c8, #5b91e6); */
   background-size: 100% 100%;
 
-  -webkit-animation: AnimationLight 30s ease infinite;
-  -moz-animation: AnimationLight 30s ease infinite;
-  animation: AnimationLight 30s ease infinite;
+  -webkit-animation: AnimationLight 120s linear infinite;
+  -moz-animation: AnimationLight 120s linear infinite;
+  animation: AnimationLight 120s linear infinite;
 }
 
 @keyframes AnimationDark {
@@ -772,7 +794,12 @@ div.week-container {
 }
 
 .clear-input-icon:hover {
-  color: #330302 !important;
+  color: #080000 !important;
+  transition: all 0.15s ease-in;
+}
+
+.dark.clear-input-icon:hover {
+  color: #337cb4 !important;
   transition: all 0.15s ease-in;
 }
 
@@ -1321,6 +1348,7 @@ img.card-image-7 {
 
 
   }
+  
 
   .slider-stack-h {
     display: none;
@@ -1431,6 +1459,21 @@ img.card-image-7 {
     
   }
 
+  .moving-background-light {
+    background-image: url("./img/sunny-day_cr.jpg") !important;
+    background-size: 200% 100% !important;
+    width: 100% !important;
+
+
+  }
+
+  .moving-background-dark {
+    background-image: url("./img/starry-night_cr.jpg") !important;
+    background-size: 200% 100% !important;
+    width: 100% !important;
+
+
+  }
   
 .temp-measure-select {
   display: flex;

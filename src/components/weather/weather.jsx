@@ -8,6 +8,7 @@ import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, f
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
 import useDarkMode from "./../../hooks/useDarkMode";
+
 import rain from './img/rain.png';
 import { ScrollToAnchor } from "../scroll-to-anchor/scroll-to-anchor";
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
@@ -15,6 +16,14 @@ import { Link } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 
 import { Footer } from '../footer/footer';
+import { GetDay } from '../get-day/get-day';
+import { GetTodayDay } from '../get-today-day copy/get-today-day';
+import { GetTomorrowDay } from '../get-tomorrow-day copy/get-tomorrow-day';
+import { GetAfterTomorrowDay } from '../get-after-tomorrow-day/get-after-tomorrow-day';
+import { GetThirdDay } from '../get-third-day/get-third-day';
+import { GetFourthDay } from '../get-fourth-day/get-fourth-day';
+import { GetFifthDay } from '../get-fifth-day/get-fifth-day';
+import { GetLastDay } from '../get-last-day/get-last-day';
 import useSound from 'use-sound';
 import Click from './src/click.mp3';
 
@@ -57,6 +66,8 @@ const Weather = () => {
 
     document.querySelector(".city-search-input").value = "";
   }
+
+  
 
   const fetchData = async () => {
     try {
@@ -308,14 +319,14 @@ const Weather = () => {
         <>
           <Card id="card" className='item card ' >
 
-            <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
+            <Card.Body className={!isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
             <div className='air-info-container'>
-              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} as of <span style={{ color: '#fbbc04' }}>{hourlyWeatherData.location.localtime}</span>
+              <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} as of <span style={{ color: '#fbbc04' }}> <GetDay/>, {hourlyWeatherData.location.localtime} </span>
               </h2>
               </Card.Title>
 
               <Card.Title className="temp-info-container text-center pb-1" >
-                {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.feelslike_c + '°C'}</p>} : {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.feelslike_f + '°F'}</p>}
+                {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_c) + '°C'}</p>} : {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_f) + '°F'}</p>}
 
                 {(isDayTime) &&
                   <Card.Img className='w-100 card-image' variant='top'
@@ -337,11 +348,11 @@ const Weather = () => {
               <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
               <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {hourlyWeatherData.current.humidity}%</p></Card.Title>
               <Card.Title className="item-info text-center" >
-                {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: {hourlyWeatherData.current.pressure_mb + ' mbar'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
+                {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
 
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" >
-                {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {hourlyWeatherData.current.wind_kph + ' km/h'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
+                {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
 
 
               </Card.Title>
@@ -421,8 +432,8 @@ const Weather = () => {
 
       {hourlyWeatherData ? (
         <>
-          <h3 className='day-24-heading'>24-hour weather forecast for <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span></h3>
-          <h4 className='before-midday'>Before Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+          <h3 className='day-24-heading'>24-hour weather forecast for <span className='day-7-location-span'>{hourlyWeatherData.location.name}  {hourlyWeatherData.location.country}</span></h3>
+          <h4 className='before-midday'>Before Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay/>, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
 
 
           <div className='weather-7-container'>
@@ -925,7 +936,7 @@ const Weather = () => {
           {/*  */}
           {/*  */}
           {/*  */}
-          <h4 className='before-midday'>After Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+          <h4 className='before-midday'>After Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay/>, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
 
 
           <div className='weather-7-container'>
@@ -1455,7 +1466,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[0].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetTodayDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
@@ -1492,7 +1503,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[1].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetTomorrowDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
@@ -1531,7 +1542,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[2].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetAfterTomorrowDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
@@ -1575,7 +1586,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[3].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetThirdDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
@@ -1623,7 +1634,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[4].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetFourthDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
@@ -1665,7 +1676,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[5].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetFifthDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
@@ -1707,7 +1718,7 @@ const Weather = () => {
 
                   <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{weekWeatherData.forecast.forecastday[6].date}
+                    <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7"><span className='day-7-week-day'><GetLastDay/></span>
 
                       {/* <DisplayDate /> */}
                     </h2>
