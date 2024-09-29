@@ -416,7 +416,7 @@ form:focus-within {
   transition: 0.15s all ease-in;
 }
 
-.air-polution-header{
+.air-polution-heading{
   color:#fbbc04;
 }
 
@@ -1475,6 +1475,10 @@ img.card-image-7 {
     margin-left: 0px;
     margin-right: 0px;
     
+  }
+
+  h3.air-polution-heading{
+    padding-left: 24px !important;
   }
 
   .moving-background-light {
