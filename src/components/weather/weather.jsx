@@ -129,18 +129,18 @@ const Weather = () => {
     
 
   useEffect(() => {
-    const alertClosed = localStorage.getItem('alertClosed');
-    if (alertClosed) {
-      setIsVisible(false);
-    }
+    // const alertClosed = localStorage.getItem('alertClosed');
+    // if (alertClosed) {
+    //   setIsVisible(false);
+    // }
   }, []);
 
   const handleClose = () => {
     setIsVisible(false);
-    localStorage.setItem('alertClosed', 'true');
+    // localStorage.setItem('alertClosed', 'true');
   };
 
-  if (!isVisible) return null;
+  // if (!isVisible) return null;
   
     return (
       <>
@@ -154,9 +154,9 @@ const Weather = () => {
             <p>High air pollution in <strong><em>{city}</em></strong>! The levels of air pollutants have exceeded safe limits. For your health and safety, it is advised to stay indoors. Please keep windows closed and use air purifiers if available. Avoid outdoor activities, especially if you have respiratory conditions or other health concerns.
             </p>
             <div className="d-flex justify-content-end">
-              <Button onClick={handleClose} variant="outline-danger">
+              {/* <Button onClick={handleClose} variant="outline-danger">
                 Close
-              </Button>
+              </Button> */}
             </div>
           </Alert>
         )}
@@ -317,7 +317,7 @@ const Weather = () => {
 
       {hourlyWeatherData ? (
         <>
-          <Card id="card" className='item card ' >
+          <Card id="card" className='item main-weather-card card ' >
 
             <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
             <div className='air-info-container'>
@@ -348,11 +348,11 @@ const Weather = () => {
               <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
               <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {hourlyWeatherData.current.humidity}%</p></Card.Title>
               <Card.Title className="item-info text-center" >
-                {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
+                {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
 
               </Card.Title>
               <Card.Title className="item-info text-center pb-1" >
-                {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} : {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
+                {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
 
 
               </Card.Title>
@@ -1816,7 +1816,7 @@ const Weather = () => {
         className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
         <Modal.Header closeButton>
         </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in dark mode</Modal.Body>
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in dark mode</Modal.Body>
 
         <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
 
@@ -1827,7 +1827,7 @@ const Weather = () => {
         className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
         <Modal.Header closeButton>
         </Modal.Header>
-        <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />You are now in light mode
+        <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in light mode
 
         </Modal.Body>
 

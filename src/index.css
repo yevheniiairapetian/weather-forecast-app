@@ -12,7 +12,25 @@ body {
 .footer-app-name{
   color: #000;
 }
+.text-dark.bg-white.dark-modal-body.modal-body{
+  background-color: #ffd43b !important;
+}
 
+.got-it-button.text-dark.bg-white.dark-modal-button.btn.btn-primary{
+  background-color: whitesmoke !important;
+  color: #000 !important;
+}
+
+.got-it-button.text-dark.bg-white.dark-modal-button.btn.btn-primary:hover{
+  background-color: #529fcc !important;
+  color: white !important;
+}
+
+
+
+.got-it-button{
+  /* background-color: #eee7e7 !important; */
+}
 
 .footer-app-name.dark{
   color: #c5bc15;
@@ -86,7 +104,7 @@ body {
   
 }
 
-.moving-background-light {
+.main-weather-card .moving-background-light {
   background-image: url("./img/sunny-day.jpg") !important;
   background-size: 200% 100% !important;
   width: 100% !important;
@@ -94,7 +112,7 @@ body {
 
 }
 
-.moving-background-dark {
+.main-weather-card .moving-background-dark {
   background-image: url("./img/starry-night.jpg") !important;
   background-size: 150% 100% !important;
   width: 100% !important;
