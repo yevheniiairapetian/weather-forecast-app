@@ -151,7 +151,7 @@ const Weather = () => {
              
   
             <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> Air Quality Alert</Alert.Heading>
-            <p>High air pollution in <strong><em>{city}</em></strong>! The levels of air pollutants have exceeded safe limits. For your health and safety, it is advised to stay indoors. Please keep windows closed and use air purifiers if available. Avoid outdoor activities, especially if you have respiratory conditions or other health concerns.
+            <p>High air pollution in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong>! The levels of air pollutants have exceeded safe limits. For your health and safety, it is advised to stay indoors. Please keep windows closed and use air purifiers if available. Avoid outdoor activities, especially if you have respiratory conditions or other health concerns.
             </p>
             <div className="d-flex justify-content-end">
               {/* <Button onClick={handleClose} variant="outline-danger">
