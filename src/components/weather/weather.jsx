@@ -72,7 +72,7 @@ const Weather = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=37a59afb38bdce13cc1d95a3e10551e5
+        `https://api.weatherapi.com/v1/forecast.json?key=b6b68ae835d04defa94134215242409&q=${city}&days=1&aqi=yes&alerts=yes
 `
       );
       setWeatherData(response.data);
@@ -1771,10 +1771,11 @@ const Weather = () => {
         <Modal.Header closeButton>
           {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
         </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Default city set to </span><span className='default-city'>{city.charAt(0).toUpperCase() + city.slice(1)}</span>  </Modal.Body>
-
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Default city set to </span>
+        {hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+        </Modal.Body>
         <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseCityModal}>OK</Button>
-
+        
       </Modal>
 
       <Modal
