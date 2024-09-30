@@ -476,7 +476,7 @@ const Weather = () => {
                   {(hourlyWeatherData.current.uv >= 11) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={fire} alt="Fire icon" /> Extreme</span></>}
                 </p>
                 </Card.Title>
-                <Card.Title className="item-info text-center pb-1 air-polution-header"><h3 className="air-polution-heading" >Air Polution</h3></Card.Title>
+                <Card.Title className="item-info text-center pb-1 air-polution-header"><h4 className="air-polution-heading" >Air Polution</h4></Card.Title>
 
                 <Card.Title className="item-info text-center" ><p className="co-info" style={{ color: "whitesmoke" }}>CO<sub>2</sub>:
                   {hourlyWeatherData.current.air_quality.co <= 700 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-good'><img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good 

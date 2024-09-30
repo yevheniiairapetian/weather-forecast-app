@@ -567,6 +567,11 @@ form:focus-within {
 }
 
 .air-polution-heading{
+  font-size: 37px !important;
+
+}
+
+.air-polution-heading{
   font-size: 40px;
   text-align: left;
   padding: 10px 0 34px 90px;
