@@ -4,12 +4,21 @@ import { WeatherAlert } from '../weather-alert/weather-alert';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 import imgLogo from './img/img-logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
 import useDarkMode from "./../../hooks/useDarkMode";
-
+import leaf from './img/leaf.svg';
+import fallenLeaf from './img/fallenLeaf.svg';
+import sunglasses from './img/sunSunglasses.svg';
+import orangeLeaf from './img/orangeLeaf.svg';
+import redLeaf from './img/redLeaf.svg';
+import cactus from './img/cactus.svg';
+import umbrella from './img/umbrella.svg';
+import fire from './img/fire.svg';
+import violetLeaf from './img/violetLeaf.svg';
 import rain from './img/rain.png';
+import barometer from './img/barometer.svg';
 import { ScrollToAnchor } from "../scroll-to-anchor/scroll-to-anchor";
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
@@ -163,6 +172,108 @@ const Weather = () => {
       </>
     );
   };
+
+  const UVAlert = () => {
+
+
+    useEffect(() => {
+      // const alertClosed = localStorage.getItem('alertClosed');
+      // if (alertClosed) {
+      //   setIsVisible(false);
+      // }
+    }, []);
+
+    const handleUVClose = () => {
+      setIsVisible(false);
+      // localStorage.setItem('alertClosed', 'true');
+    };
+
+    // if (!isVisible) return null;
+
+    return (
+      <>
+
+
+        {(hourlyWeatherData.current.uv >= 6 && hourlyWeatherData.current.uv < 10) && (
+          <Alert variant="danger" onClose={handleUVClose} dismissible>
+
+
+            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /><img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /> UV Index Alert <img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /></Alert.Heading>
+            <p>The UV index in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> is currently <strong><em>{hourlyWeatherData.current.uv}</em></strong>, indicating high levels of UV radiation. </p>
+
+            <p>Please take the following protective measures:</p>
+            <ol>
+              <li>Wear protective clothing, including a wide-brimmed hat and sunglasses.</li>
+              <li>Apply broad-spectrum sunscreen with SPF 30 or higher every 2 hours.
+              </li>
+              <li>Limit outdoor activities during peak sun hours (10 AM - 4 PM).
+              </li>
+
+            </ol>
+            <p>Stay safe and protect your skin! 🌤️</p>
+
+
+
+
+
+
+          </Alert>
+        )}
+      </>
+    );
+  };
+
+  const ExtremeUVAlert = () => {
+
+
+    useEffect(() => {
+      // const alertClosed = localStorage.getItem('alertClosed');
+      // if (alertClosed) {
+      //   setIsVisible(false);
+      // }
+    }, []);
+
+    const handleExtremeUVClose = () => {
+      setIsVisible(false);
+      // localStorage.setItem('alertClosed', 'true');
+    };
+
+    // if (!isVisible) return null;
+
+    return (
+      <>
+
+
+        {(hourlyWeatherData.current.uv >= 10) && (
+          <Alert variant="danger" onClose={handleExtremeUVClose} dismissible>
+
+
+            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> ⚠️ UV Alert: Very High UV Index! ⚠️</Alert.Heading>
+            <p>The UV index in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> is currently at 10 or higher, indicating a very high risk of harm from unprotected sun exposure. </p>
+
+            <p>Please take the following precautions:</p>
+            <ol>
+              <li>Wear protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.</li>
+              <li>Apply broad-spectrum sunscreen with SPF 30+ every 2 hours, even on cloudy days.
+              </li>
+              <li>Seek shade between 10 a.m. and 4 p.m.
+              </li>
+              <li>Stay hydrated and avoid strenuous outdoor activities.</li>
+
+            </ol>
+            <p>Stay safe and protect your skin! 🌤️</p>
+
+
+
+
+
+
+          </Alert>
+        )}
+      </>
+    );
+  };
+
   const fetchWeekly = async () => {
     try {
       const response = await axios.get(
@@ -324,7 +435,7 @@ const Weather = () => {
                 <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} as of <span style={{ color: '#fbbc04' }}> <GetDay />, {hourlyWeatherData.location.localtime} </span>
                 </h2>
                 </Card.Title>
-
+                <div className='weather-air-uv-container'>
                 <Card.Title className="temp-info-container text-center pb-1" >
                   {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_c) + '°C'}</p>}  {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_f) + '°F'}</p>}
 
@@ -345,64 +456,81 @@ const Weather = () => {
 
 
                 </Card.Title>
+                
                 <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
-                <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : {hourlyWeatherData.current.humidity}%</p></Card.Title>
+                <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : <FontAwesomeIcon icon={faHandHoldingDroplet} style={{color: "#FFD43B",}} /> {hourlyWeatherData.current.humidity}%</p></Card.Title>
                 <Card.Title className="item-info text-center" >
-                  {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
+                  {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: <img className="barometer-icon" src={barometer} alt="Barometer icon" /> {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: <img className="barometer-icon" src={barometer} alt="Barometer icon" /> {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
 
                 </Card.Title>
                 <Card.Title className="item-info text-center pb-1" >
-                  {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
+                  {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
 
 
                 </Card.Title>
-                <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index : {hourlyWeatherData.current.uv}</p></Card.Title>
+                <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index :
+                  {hourlyWeatherData.current.uv <= 2 && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-good '> <span >🌞</span> Good </span></>}
+                  {(hourlyWeatherData.current.uv >= 3 && hourlyWeatherData.current.uv <= 5) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={sunglasses} alt="Sun with sunglasses icon" /> Moderate</span></>}
+                  {(hourlyWeatherData.current.uv >= 6 && hourlyWeatherData.current.uv <= 7) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={umbrella} alt="Sun umbrella icon" /> High</span></>}
+                  {(hourlyWeatherData.current.uv >= 8 && hourlyWeatherData.current.uv <= 10) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={cactus} alt="Cactus icon" /> Very High</span></>}
+                  {(hourlyWeatherData.current.uv >= 11) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={fire} alt="Fire icon" /> Extreme</span></>}
+                </p>
+                </Card.Title>
                 <Card.Title className="item-info text-center pb-1 air-polution-header"><h3 className="air-polution-heading" >Air Polution</h3></Card.Title>
 
                 <Card.Title className="item-info text-center" ><p className="co-info" style={{ color: "whitesmoke" }}>CO<sub>2</sub>:
-                  {hourlyWeatherData.current.air_quality.co <= 700 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-good'> Good</span></>}
-                  {(hourlyWeatherData.current.air_quality.co >= 701 && hourlyWeatherData.current.air_quality.co <= 800) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-moderate'> Moderate</span></>}
-                  {(hourlyWeatherData.current.air_quality.co >= 801 && hourlyWeatherData.current.air_quality.co <= 1100) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-poor'> Poor</span></>}
-                  {(hourlyWeatherData.current.air_quality.co >= 1101 && hourlyWeatherData.current.air_quality.co <= 1500) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-unhealthy'> Unhealthy</span></>}
-                  {(hourlyWeatherData.current.air_quality.co >= 1501 && hourlyWeatherData.current.air_quality.co <= 2000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-very-unhealthy'> Very Unhealthy</span></>}
-                  {(hourlyWeatherData.current.air_quality.co >= 2001 && hourlyWeatherData.current.air_quality.co <= 3000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-hazard'> Hazardous</span></>}
-                  {(hourlyWeatherData.current.air_quality.co >= 3001 && hourlyWeatherData.current.air_quality.co <= 5000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-extreme'> Extreme</span></>}
+                  {hourlyWeatherData.current.air_quality.co <= 700 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-good'><img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good 
+                    
+                    </span></>}
+                  {(hourlyWeatherData.current.air_quality.co >= 701 && hourlyWeatherData.current.air_quality.co <= 800) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Yellow leaf icon" /> Moderate</span></>}
+                  {(hourlyWeatherData.current.air_quality.co >= 801 && hourlyWeatherData.current.air_quality.co <= 1100) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-poor'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Poor</span></>}
+                  {(hourlyWeatherData.current.air_quality.co >= 1101 && hourlyWeatherData.current.air_quality.co <= 1500) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-unhealthy'><img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Unhealthy</span></>}
+                  {(hourlyWeatherData.current.air_quality.co >= 1501 && hourlyWeatherData.current.air_quality.co <= 2000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Unhealthy</span></>}
+                  {(hourlyWeatherData.current.air_quality.co >= 2001 && hourlyWeatherData.current.air_quality.co <= 3000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Hazardous</span></>}
+                  {(hourlyWeatherData.current.air_quality.co >= 3001 && hourlyWeatherData.current.air_quality.co <= 5000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-extreme'> <img className="air-uv-icons" src={violetLeaf} alt="Violet leaf icon" /> Extreme</span></>}
                 </p>
                 </Card.Title>
 
                 <Card.Title className="item-info text-center pb-1" ><p className="pm25-info" style={{ color: "whitesmoke" }}>PM2.5:
-                  {hourlyWeatherData.current.air_quality.pm2_5 <= 12 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-good'> Good</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm2_5 > 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 35) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-moderate'> Moderate</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm2_5 > 35 && hourlyWeatherData.current.air_quality.pm2_5 <= 56) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-poor'> Poor</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-unhealthy'> Unhealthy</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-very-unhealthy'> Very Unhealthy</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-hazard'> Hazardous</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-extreme'> Extreme</span></>}
+                  {hourlyWeatherData.current.air_quality.pm2_5 <= 12 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-good'> <img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good 
+                                    </span></>}
+                  {(hourlyWeatherData.current.air_quality.pm2_5 > 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 35) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Green leaf icon" /> Moderate</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm2_5 > 35 && hourlyWeatherData.current.air_quality.pm2_5 <= 56) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-poor'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Poor</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Unhealthy</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Unhealthy</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Hazardous</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-extreme'> <img className="air-uv-icons" src={violetLeaf} alt="Violet leaf icon" /> Extreme</span></>}
                 </p>
                 </Card.Title>
 
 
                 <Card.Title className="item-info text-center pb-1" ><p className="pm10-info" style={{ color: "whitesmoke" }}>PM10:
-                  {hourlyWeatherData.current.air_quality.pm10 <= 54 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-good'> Good</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm10 > 54 && hourlyWeatherData.current.air_quality.pm10 <= 154) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-moderate'> Moderate</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm10 >= 155 && hourlyWeatherData.current.air_quality.pm10 <= 254) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-unhealthy'> Unhealthy (certain senstive groups may be affected)</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm10 >= 255 && hourlyWeatherData.current.air_quality.pm10 <= 354) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-unhealthy'> Unhealthy</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm10 >= 355 && hourlyWeatherData.current.air_quality.pm10 <= 424) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-hazard'> Very Unhealthy</span></>}
-                  {(hourlyWeatherData.current.air_quality.pm10 >= 425) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-very-unhealthy'> Hazardous</span></>}
+                  {hourlyWeatherData.current.air_quality.pm10 <= 54 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-good'> <img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good </span></>}
+                  {(hourlyWeatherData.current.air_quality.pm10 > 54 && hourlyWeatherData.current.air_quality.pm10 <= 154) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Green leaf icon" /> Moderate</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm10 >= 155 && hourlyWeatherData.current.air_quality.pm10 <= 254) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={orangeLeaf} alt="Green leaf icon" /> Unhealthy (certain senstive groups may be affected)</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm10 >= 255 && hourlyWeatherData.current.air_quality.pm10 <= 354) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-unhealthy'><img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" />  Unhealthy</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm10 >= 355 && hourlyWeatherData.current.air_quality.pm10 <= 424) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Unhealthy</span></>}
+                  {(hourlyWeatherData.current.air_quality.pm10 >= 425) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Hazardous</span></>}
                 </p>
                 </Card.Title>
 
                 <Card.Title className="item-info text-center pb-1" ><p className="no2-info" style={{ color: "whitesmoke" }}>NO2:
-                  {hourlyWeatherData.current.air_quality.no2 <= 40 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-good'> Good</span></>}
-                  {(hourlyWeatherData.current.air_quality.no2 > 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-satisfactory'> Satisfactory</span></>}
-                  {(hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-moderate'> Moderate</span></>}
-                  {(hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-poor'> Poor</span></>}
-                  {(hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-unhealthy'> Very Poor</span></>}
-                  {(hourlyWeatherData.current.air_quality.no2 > 400) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-very-unhealthy'> Severe</span></>}
+                  {hourlyWeatherData.current.air_quality.no2 <= 40 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-good'><img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good 
+                  </span></>}
+                  {(hourlyWeatherData.current.air_quality.no2 > 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-satisfactory'> <img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Satisfactory</span></>}
+                  {(hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Green leaf icon" /> Moderate</span></>}
+                  {(hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-poor'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Poor</span></>}
+                  {(hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Poor</span></>}
+                  {(hourlyWeatherData.current.air_quality.no2 > 400) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Severe</span></>}
                 </p>
 
                 </Card.Title>
+                </div>
               </div>
+              <UVAlert />
+
+              <ExtremeUVAlert/>
+
               <WeatherAlert />
 
 
@@ -425,14 +553,14 @@ const Weather = () => {
 
           <div className="pre-request-text">
             <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
-            <span className='pre-request-text-span'>Start by typing a <span className='city-name-pre'>city name</span> or a <span className='postal-code-pre'>postal code</span> in the search field above. </span><br />
+            <span className='pre-request-text-span'>Start by typing a <span className='city-name-pre'>city name</span>, a <span className='postal-code-pre'>postal code</span> or a <span className='postal-code-pre'>latitude/longitude pair</span> in the search field above. </span><br />
             <span className='pre-request-text-example'>For example:</span><br />
             <p>
               <ol className='pre-request-text-list'>
                 <li><em className="city-name-pre">Berlin</em></li>
                 <li><em className="postal-code-pre">10001</em></li>
-                <li><em className="postal-code-pre">G2J</em></li>
-                
+                <li><em className="postal-code-pre">48.8567,2.3508</em></li>
+
               </ol>
             </p>
 

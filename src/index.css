@@ -198,7 +198,15 @@ nav.page-header.dark{
 
 }
 
+ol li::marker{
+  color: rgb(0, 0, 0) !important;
 
+}
+
+.dark ol li::marker{
+  color: whitesmoke !important;
+
+}
 
 .dark.pre-request-text-list li{
   text-align: left;
@@ -511,23 +519,44 @@ form:focus-within {
 }
 
 .co2-polution-poor{
-  color:rgb(250, 175, 13);
+  color:rgb(224, 156, 7);
 }
 
 .co2-polution-unhealthy{
-  color:rgb(150, 105, 9);
+  color:rgb(198, 136, 3);
 }
 
 .co2-polution-very-unhealthy{
-  color:rgb(211, 8, 8);
+  color:rgb(220, 51, 51);
 }
 
 .co2-polution-hazard{
-  color:rgb(206, 7, 7);
+  color:rgb(220, 51, 51);
+}
+
+.air-uv-icons{
+  margin:0px 4px 0px 10px !important;
 }
 
 .co2-polution-extreme{
   color:rgb(107, 35, 144);
+}
+
+.barometer-icon {
+  display: inline-block;
+  animation: barUpDown 3s ease-in-out infinite;
+}
+
+@keyframes barUpDown {
+  0% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-8px);
+  }
+  100% {
+      transform: translateY(0);
+  }
 }
 
 .air-polution-heading{
@@ -1001,6 +1030,16 @@ img.card-image-7 {
   background-color: rgba(54, 55, 55, 0.5) !important;
   padding: 76px 10px 0px 10px;
 
+}
+
+div.weather-air-uv-container{
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  padding: 76px 10px 0px 10px;
+}
+
+.air-info-container > .item-title:first-child{
+  padding-bottom: 0 !important;
+  
 }
 
 .warning-alert{
