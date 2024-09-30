@@ -26,6 +26,16 @@ body {
   color: white !important;
 }
 
+.dark.city-name-pre, .dark.postal-code-pre{
+  color: #337cb4 !important;
+
+}
+
+.city-name-pre, .postal-code-pre{
+  color: #337cb4 !important;
+
+}
+
 
 
 .got-it-button{
@@ -188,21 +198,52 @@ nav.page-header.dark{
 
 }
 
+
+
+.dark.pre-request-text-list li{
+  text-align: left;
+  line-height: 2em;
+  color: #337cb4;
+  
+}
+
+.pre-request-text-list li{
+  text-align: left;
+  line-height: 2em;
+  color: #000000;
+  
+}
+
 .pre-request-text {
   position: relative;
   top: 20%;
   margin: 0 auto;
-  height: 80px;
+  height: fit-content;
   background-color: whitesmoke;
   width: 300px;
-  padding: 20px 10px;
+  padding: 30px 30px;
   text-align: center;
   border-radius: 15px;
   font-size: 18px;
 }
 
-.pre-request-text-span {
-  padding-left: 10px;
+.dark.pre-request-text {
+  
+  background-color: rgb(35, 34, 34) !important;
+  color: white !important;
+ 
+}
+
+span.pre-request-text-span {
+  padding: 20px 0px 20px 12px;
+  line-height: 1.8em;
+}
+
+.pre-request-text-example{
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
 }
 
 .weekly-carousel {
@@ -256,9 +297,7 @@ nav.page-header.dark{
 }
 
 
-.contain.dark .pre-request-text-span{
-  color:#000000 !important;
-}
+
 
 
 
@@ -415,6 +454,13 @@ form:focus-within {
   color: #337cb4;
   transition: 0.15s all ease-in;
 }
+
+.pre-request-text-list li{
+  text-align: left;
+  line-height: 2em;
+}
+
+
 
 .air-polution-heading{
   color:#fbbc04;
