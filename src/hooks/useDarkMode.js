@@ -39,10 +39,7 @@ export default () => {
       window.document.querySelector(".footer").classList.add(className);
       window.document.querySelector(".footer-app-name").classList.add(className);
       window.document.querySelector(".clear-input-icon").classList.add(className);
-      window.document.querySelector(".pre-request-text").classList.add(className);
-      // window.document.querySelector(".city-name-pre").classList.add(className);
-      // window.document.querySelector(".postal-code-pre").classList.add(className);
-      // window.document.querySelector(".pre-request-text-list li").classList.add(className);
+     
       
       
     } else {
@@ -59,10 +56,7 @@ export default () => {
       window.document.querySelector(".footer").classList.remove(className);
       window.document.querySelector(".footer-app-name").classList.remove(className);
       window.document.querySelector(".clear-input-icon").classList.remove(className);
-      window.document.querySelector(".pre-request-text").classList.remove(className);
-      // window.document.querySelector(".city-name-pre").classList.remove(className);
-      // window.document.querySelector(".postal-code-pre").classList.remove(className);
-      // window.document.querySelector(".pre-request-text-list li").classList.remove(className);
+     
       
       
     }

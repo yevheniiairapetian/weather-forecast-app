@@ -204,7 +204,12 @@ ol li::marker{
 }
 
 .dark ol li::marker{
-  color: whitesmoke !important;
+  color: rgb(0, 0, 0) !important;
+
+}
+
+.alert-modal ol li::marker, .dark.alert-modal ol li::marker{
+  color: rgb(0, 0, 0) !important;
 
 }
 
@@ -233,6 +238,8 @@ ol li::marker{
   text-align: center;
   border-radius: 15px;
   font-size: 18px;
+  color: rgb(0, 0, 0) !important;
+
 }
 
 .dark.pre-request-text {

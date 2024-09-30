@@ -195,7 +195,7 @@ const Weather = () => {
 
 
         {(hourlyWeatherData.current.uv >= 6 && hourlyWeatherData.current.uv < 10) && (
-          <Alert variant="danger" onClose={handleUVClose} dismissible>
+          <Alert className="alert-modal" variant="danger" onClose={handleUVClose} dismissible>
 
 
             <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /><img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /> UV Index Alert <img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /></Alert.Heading>
