@@ -458,13 +458,13 @@ const Weather = () => {
                 </Card.Title>
                 
                 <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
-                <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : <FontAwesomeIcon icon={faHandHoldingDroplet} style={{color: "#FFD43B",}} /> {hourlyWeatherData.current.humidity}%</p></Card.Title>
+                <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : <FontAwesomeIcon title="Humidity icon" icon={faHandHoldingDroplet} style={{color: "#FFD43B",}} /> {hourlyWeatherData.current.humidity}%</p></Card.Title>
                 <Card.Title className="item-info text-center" >
                   {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: <img className="barometer-icon" src={barometer} alt="Barometer icon" /> {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: <img className="barometer-icon" src={barometer} alt="Barometer icon" /> {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
 
                 </Card.Title>
                 <Card.Title className="item-info text-center pb-1" >
-                  {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
+                  {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
 
 
                 </Card.Title>
