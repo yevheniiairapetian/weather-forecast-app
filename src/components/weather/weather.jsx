@@ -10,6 +10,15 @@ import Stack from 'react-bootstrap/Stack';
 import useDarkMode from "./../../hooks/useDarkMode";
 import leaf from './img/leaf.svg';
 import fallenLeaf from './img/fallenLeaf.svg';
+import north from './img/north.svg';
+import south from './img/south.svg';
+import west from './img/west.svg';
+import east from './img/east.svg';
+import northEast from './img/northEast.svg';
+import southEast from './img/southEast.svg';
+import northWest from './img/northWest.svg';
+import southWest from './img/southWest.svg';
+
 import sunglasses from './img/sunSunglasses.svg';
 import orangeLeaf from './img/orangeLeaf.svg';
 import redLeaf from './img/redLeaf.svg';
@@ -468,6 +477,31 @@ const Weather = () => {
                 </Card.Title>
                 <Card.Title className="item-info text-center pb-1" >
                   {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{color: "#e3db0d",}} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
+                  
+
+
+                </Card.Title>
+                <Card.Title className="item-info text-center pb-1" >
+                  {(hourlyWeatherData.current.wind_dir==="N") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={north} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="E") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={east} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="W") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={west} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="S") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={south} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="NW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={northWest} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="SW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={southWest} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="NE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={northEast} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  {(hourlyWeatherData.current.wind_dir==="SE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <img src={southEast} className="wind-speed-info" style={{ color: "whitesmoke" }}></img> </p>}
+                  
+{/*                  
+                  
+                  {(hourlyWeatherData.current.wind_dir==="NNE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowUp} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowUp} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="NNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowUp} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowUp} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="SSE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="SSW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="ENE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="WNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="WSW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>}
+                  {(hourlyWeatherData.current.wind_dir==="ESE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon title="Wind icon" icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: <FontAwesomeIcon icon={faArrowDown} fade style={{color: "#e3db0d",}} /> {(hourlyWeatherData.current.wind_dir)}</p>} */}
+                  
 
 
                 </Card.Title>
