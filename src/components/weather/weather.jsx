@@ -497,11 +497,11 @@ const Weather = () => {
 
 
                     {/*  */}
-                    
-                    {(hourlyWeatherData.current.wind_dir === "NNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North-Northwest<img src={northWest} className="wind-info wind-nnw" style={{ color: "whitesmoke" }}></img> </p>}
-                    {(hourlyWeatherData.current.wind_dir === "SSE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South-Southeast<img src={southEast} className="wind-info wind-sse" style={{ color: "whitesmoke" }}></img> </p>}
-                    {(hourlyWeatherData.current.wind_dir === "ESE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: East-Southeast<img src={southEast} className="wind-info wind-ese" style={{ color: "whitesmoke" }}></img> </p>}
-                    {(hourlyWeatherData.current.wind_dir === "WNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: West-Northwest<img src={northWest} className="wind-info wind-wnw" style={{ color: "whitesmoke" }}></img> </p>}
+
+                    {(hourlyWeatherData.current.wind_dir === "NNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North-Northwest<img src={northWest} className="wind-info wind-nw" style={{ color: "whitesmoke" }}></img> </p>}
+                    {(hourlyWeatherData.current.wind_dir === "SSE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South-Southeast<img src={southEast} className="wind-info wind-se" style={{ color: "whitesmoke" }}></img> </p>}
+                    {(hourlyWeatherData.current.wind_dir === "ESE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: East-Southeast<img src={southEast} className="wind-info wind-se" style={{ color: "whitesmoke" }}></img> </p>}
+                    {(hourlyWeatherData.current.wind_dir === "WNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: West-Northwest<img src={northWest} className="wind-info wind-nw" style={{ color: "whitesmoke" }}></img> </p>}
 
                     {/*  */}
 
