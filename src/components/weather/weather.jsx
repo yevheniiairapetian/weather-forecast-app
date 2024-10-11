@@ -476,7 +476,7 @@ const Weather = () => {
 
                   </Card.Title>
                   <Card.Title className="item-info text-center pb-1" >
-                    {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{ color: "#e3db0d", }} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{ color: "#e3db0d", }} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' Mi/h'}</p>}
+                    {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{ color: "#e3db0d", }} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{ color: "#e3db0d", }} /> {Math.round(hourlyWeatherData.current.wind_mph) + ' Mi/h'}</p>}
 
 
 
