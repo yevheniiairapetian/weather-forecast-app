@@ -1628,7 +1628,7 @@ div.weather-air-uv-container {
   }
 }
 
-@media screen and (max-width:732px) {
+@media screen and (max-width:782px) {
   .app-heading {
     font-size: 0px !important;
   }
