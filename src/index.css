@@ -157,14 +157,6 @@ body {
 
 }
 
-.impressum-section {
-  background-color: #ffffff;
-}
-
-.impressum-section.dark {
-  background-color: #272626;
-
-}
 
 nav.page-header {
   background-color: #337cb4;
@@ -697,7 +689,7 @@ span.pre-request-text-span {
 }
 
 .footer-info-title {
-  font-size: 22px;
+  font-size: 20px;
   padding-bottom: 16px;
 }
 
@@ -1270,7 +1262,16 @@ div.week-container {
   background-size: 100% !important;
 }
 
+.footer-links-container{
+  display:flex;
+  flex-direction: row;
+}
 
+.footer-links{
+  display:inline;
+  margin:0 10px;
+  
+}
 
 .weather-city-7 {
   /* width: 100% !important; */
@@ -2290,6 +2291,22 @@ div.weather-air-uv-container {
 
   .app-heading {
     font-size: 0px !important;
+  }
+
+  .footer-links-container{
+    display:flex;
+    flex-direction: column;
+    /* text-align: left; */
+    
+  }
+
+  .footer-links{
+    padding-top: 10px;
+  }
+
+  .footer{
+    height: 270px !important;
+    
   }
 
   .img-logo {

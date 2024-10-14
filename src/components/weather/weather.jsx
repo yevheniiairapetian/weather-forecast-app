@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { WeatherAlert } from '../weather-alert/weather-alert';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
-import imgLogo from './img/img-logo.png'
+import imgLogo from './img/img-logo.png';
+import Cookies from "js-cookie";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
@@ -18,7 +20,6 @@ import northEast from './img/northEast.svg';
 import southEast from './img/southEast.svg';
 import northWest from './img/northWest.svg';
 import southWest from './img/southWest.svg';
-
 import sunglasses from './img/sunSunglasses.svg';
 import orangeLeaf from './img/orangeLeaf.svg';
 import redLeaf from './img/redLeaf.svg';

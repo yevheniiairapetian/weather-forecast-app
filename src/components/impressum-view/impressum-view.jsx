@@ -7,7 +7,7 @@ import impressumCSS from './css/impressum.css';
 import { Link } from "react-router-dom";
 // import { useTranslation } from 'react-i18next';
 import {Modal } from 'react-bootstrap';
-// import useDarkMode from "./../../hooks/useDarkMode";
+import useDarkMode from "./../../hooks/useDarkMode";
 import imgLogo from './img/img-logo.png'
 import { ScrollToAnchor } from "../scroll-to-anchor/scroll-to-anchor";
 
@@ -28,6 +28,8 @@ export const ImpressumView = () =>{
         setIsVisible(false);
         // localStorage.setItem('alertClosed', 'true');
       };
+
+      
     
     return(
         <div>
@@ -41,7 +43,7 @@ export const ImpressumView = () =>{
 
 
           </Navbar.Brand>
-          <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} />
+          {/* <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} /> */}
 
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <div className='form-heading-container'>
@@ -51,7 +53,11 @@ export const ImpressumView = () =>{
                 
 
               </div>
-             
+              {/* {isDarkMode ? (
+                <ClickThemeDark />) : (
+                <ClickThemeLight />
+
+              )} */}
             </div>
 
           </Navbar.Collapse>
@@ -59,11 +65,11 @@ export const ImpressumView = () =>{
 
         </Container>
       </Navbar>
-        <Container className="wrapper">
+        <Container className="wrapper container">
              
-            <Row className="impressum-section">
+            <Row className=''>
                 <Col sm={10} md={10} className="m-auto mb-4 pb-4">
-             
+             <div className="impressum-section">
             <h1 className="impressum-main-heading mt-5">Impressum</h1>
             <h3>Inhalte gemäß §5 DDG</h3><br/>
             <p>Yevhenii Airapetian</p>
@@ -79,7 +85,7 @@ export const ImpressumView = () =>{
             
             <span>Quelle </span> <span className="impressum-links" >Impressum-Privatschutz</span> 
                
-        
+            </div>
                 </Col>
             </Row>
         </Container>

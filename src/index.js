@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
 import { MainView } from './components/main-view/main-view';
+import { CookieComponent } from './components/cookie-consent/cookie-consent';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <HashRouter>
     <MainView />
+    <CookieComponent/>
+
     </HashRouter>
 );
 
