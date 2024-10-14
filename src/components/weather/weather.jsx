@@ -101,17 +101,7 @@ const Weather = () => {
     }
   };
 
-  // const fetchDaily = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=37a59afb38bdce13cc1d95a3e10551e5`
-  //     );
-  //     setDailyWeatherData(response.data);
-  //     console.log(response.data); //You can see all the weather data in console log
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+
 
   function toggleCelcBGColor() {
 
@@ -508,11 +498,11 @@ const Weather = () => {
 
                   </Card.Title>
                   <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index :
-                    {hourlyWeatherData.current.uv <= 2 && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-good '> <span >🌞</span> Good </span></>}
-                    {(hourlyWeatherData.current.uv >= 3 && hourlyWeatherData.current.uv <= 5) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={sunglasses} alt="Sun with sunglasses icon" /> Moderate</span></>}
-                    {(hourlyWeatherData.current.uv >= 6 && hourlyWeatherData.current.uv <= 7) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={umbrella} alt="Sun umbrella icon" /> High</span></>}
-                    {(hourlyWeatherData.current.uv >= 8 && hourlyWeatherData.current.uv <= 10) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={cactus} alt="Cactus icon" /> Very High</span></>}
-                    {(hourlyWeatherData.current.uv >= 11) && <><span className=''>{" " + (hourlyWeatherData.current.uv)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={fire} alt="Fire icon" /> Extreme</span></>}
+                    {hourlyWeatherData.current.uv <= 2 && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-good '> <span >🌞</span> Good </span></>}
+                    {(hourlyWeatherData.current.uv >= 3 && hourlyWeatherData.current.uv <= 5) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={sunglasses} alt="Sun with sunglasses icon" /> Moderate</span></>}
+                    {(hourlyWeatherData.current.uv >= 6 && hourlyWeatherData.current.uv <= 7) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={umbrella} alt="Sun umbrella icon" /> High</span></>}
+                    {(hourlyWeatherData.current.uv >= 8 && hourlyWeatherData.current.uv <= 10) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={cactus} alt="Cactus icon" /> Very High</span></>}
+                    {(hourlyWeatherData.current.uv >= 11) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={fire} alt="Fire icon" /> Extreme</span></>}
                   </p>
                   </Card.Title>
                   <Card.Title className="item-info text-center pb-1 air-polution-header"><h4 className="air-polution-heading" >Air Polution</h4></Card.Title>

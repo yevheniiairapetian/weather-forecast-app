@@ -8,6 +8,7 @@ import ScrollToTop from "./../scroll/scroll-to-top";
 import { ScrollToTopButton } from '../scroll-to-top-button/scroll-to-top-button';
 import Weather from '../weather/weather';
 import { GuideView } from '../guide-view/guide-view';
+import {ImpressumView} from './../impressum-view/impressum-view';
 
 export const MainView = () => {
 
@@ -46,7 +47,26 @@ export const MainView = () => {
 
         />
 
+<Route
+              path='/impressum'
+              element={
+                <>
 
+                  <Col>
+                    <ImpressumView className="content"
+
+                    />
+            
+                    {/* <Footer /> */}
+                  </Col>
+                  <ScrollToTop />
+<ScrollToTopButton/>
+
+
+
+                </>
+              }
+            />
 
 
         <Route

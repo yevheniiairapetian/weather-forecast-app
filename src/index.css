@@ -38,6 +38,10 @@ body {
 
 }
 
+/* .impressum-section.dark{
+  background-color: #272626;
+} */
+
 .city-name-pre,
 .postal-code-pre {
   color: #337cb4 !important;
@@ -149,6 +153,15 @@ body {
 }
 
 .weather-form.dark {
+  background-color: #272626;
+
+}
+
+.impressum-section {
+  background-color: #ffffff;
+}
+
+.impressum-section.dark {
   background-color: #272626;
 
 }
@@ -674,7 +687,7 @@ span.pre-request-text-span {
   /* background-color: #337cb4; */
   color: whitesmoke;
   text-align: center;
-  height: 180px;
+  height: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1638,6 +1651,8 @@ div.weather-air-uv-container {
     width: 70px;
     height: auto;
   }
+
+
 
   .save-city-span {
     display: none;
