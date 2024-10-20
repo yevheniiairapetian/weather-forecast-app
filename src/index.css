@@ -185,6 +185,8 @@ nav.page-header.dark {
 
 }
 
+
+
 .powered-by-link {
   color: #c5bc15;
 }
@@ -1895,7 +1897,8 @@ div.weather-air-uv-container {
 
 @media screen and (min-width:601px) and (max-width:767px) {
   .form-heading-container {
-    width: 88% !important;
+    width: 92% !important;
+    margin-left: 28px !important;
   }
 }
 
@@ -2052,11 +2055,9 @@ div.weather-air-uv-container {
 
   .temp-measure-select {
     display: flex;
-    /* position: absolute;
-  top:84px;
-  right:20px; */
-    margin-left: 24px;
-    align-items: center;
+    position: absolute;
+    top: 184px;
+    left: 0px;
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
@@ -2072,7 +2073,9 @@ div.weather-air-uv-container {
     cursor: pointer;
     text-align: center;
   }
-
+  .justify-content-end.navbar-collapse.collapse.show {
+    height: 130px !important;
+  }
   .get-weather-button {
     padding-right: 4;
   }
@@ -2191,14 +2194,24 @@ div.weather-air-uv-container {
     display: flex;
     position: absolute;
     top: 144px;
-    left: -4px;
+    left: 0px;
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
     width: 80px;
     height: 42px;
   }
-
+  button.toggle_btn.location{
+    /* display: flex; */
+      position: absolute;
+      top: 104px;
+      left: 62% !important;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      /* overflow: hidden; */
+      /* width: 80px; */
+      /* height: 42px; */
+  }
   .justify-content-end.navbar-collapse.collapse.show {
     height: 130px !important;
   }
@@ -2281,6 +2294,8 @@ div.weather-air-uv-container {
     position: absolute;
     left: 74%;
   }
+ 
+
 }
 
 @media screen and (max-width:478px) {
@@ -2432,6 +2447,11 @@ div.weather-air-uv-container {
     position: absolute;
     right: 42px;
   }
+  button.location.toggle_btn {
+    top: 264px !important;
+    position: absolute;
+    left: 48px !important;
+  }
 
   p.pm25-info,
   .pm10-info,
@@ -2492,7 +2512,7 @@ div.weather-air-uv-container {
     margin-left: 0 !important;
     width: 24px !important;
   }
-
+ 
   .clear-input-button {
     right: 34px !important
   }

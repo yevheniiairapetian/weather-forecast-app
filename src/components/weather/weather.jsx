@@ -4,9 +4,9 @@ import { WeatherAlert } from '../weather-alert/weather-alert';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 import imgLogo from './img/img-logo.png';
 import Cookies from "js-cookie";
-
+import { useGeolocated } from "react-geolocated";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faLocationDot, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
 import Stack from 'react-bootstrap/Stack';
 import useDarkMode from "./../../hooks/useDarkMode";
@@ -48,13 +48,17 @@ import Click from './src/click.mp3';
 
 
 const Weather = () => {
+  const [userLocation, setUserLocation] = useState(null);
   const [isDarkMode, setDarkMode] = useDarkMode();
   const [showDarkModal, setShowDarkModal] = useState(false);
+  const [showLocationModal, setShowLocationModal] = useState(false);
   const [showLightModal, setShowLightModal] = useState(false);
   const handleShowLightModal = () => setShowLightModal(true);
   const handleShowDarkModal = () => setShowDarkModal(true);
+  const handleShowLocationModal = () => setShowLocationModal(true);
   const handleCloseLightModal = () => setShowLightModal(false);
   const handleCloseDarkModal = () => setShowDarkModal(false);
+  const handleCloseLocationModal = () => setShowLocationModal(false);
   const [expanded, setExpanded] = useState(false);
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -76,6 +80,13 @@ const Weather = () => {
   const handleShowFailedCityModal = () => setShowFailedCityModal(true);
   const handleCloseFailedCityModal = () => setShowFailedCityModal(false);
   const [isVisible, setIsVisible] = useState(true);
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    });
   const [isCelcToggled, setIsCelcToggled] = useState(() => {
     const saved = localStorage.getItem('isCelcToggled');
     return saved !== null ? JSON.parse(saved) : false;
@@ -86,6 +97,22 @@ const Weather = () => {
     document.querySelector(".city-search-input").value = "";
   }
 
+
+  function FetchUserLocation() {
+
+    return !isGeolocationAvailable ? (
+      <div>Your browser does not support Geolocation</div>
+    ) : !isGeolocationEnabled ? (
+      <div>Geolocation is not enabled</div>
+    ) : coords ? (
+      setCity(coords.latitude + ',' + coords.longitude)
+
+
+
+    ) : (
+      <div>Getting your location&hellip; </div>
+    );
+  };
 
 
   const fetchData = async () => {
@@ -319,6 +346,7 @@ const Weather = () => {
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
+
   };
 
   function saveCity() {
@@ -371,6 +399,14 @@ const Weather = () => {
     // onClick={() => {setVisible(!visible)}}
   };
 
+  const SetMyLocation = () => {
+    const [play] = useSound(Click);
+    return <button className="toggle_btn location pl-3" onClick={() => { play(); FetchUserLocation(); handleShowLocationModal(); setExpanded(false) }}>
+      <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} bounce style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
+    </button>
+
+  }
+
   return (
     <div className='contain'>
 
@@ -395,7 +431,7 @@ const Weather = () => {
                   className="city-search-input"
                   type="text"
                   placeholder="Search by city name"
-                  value={city.charAt(0).toUpperCase() + city.slice(1)}
+                  value={city}
                   onChange={handleInputChange}
                 />
                 <SaveMyCity />
@@ -413,8 +449,9 @@ const Weather = () => {
                   <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor(); handleShowImperialModal() }}>IMP</button>
 
                 </div>
-
               </div>
+              <SetMyLocation />
+
               {isDarkMode ? (
                 <ClickThemeDark />) : (
                 <ClickThemeLight />
@@ -2050,7 +2087,18 @@ const Weather = () => {
         <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
 
       </Modal>
+      <Modal
 
+        className="favorite-modal" show={showLocationModal} onHide={handleCloseLocationModal}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> 
+        <span className=''> The weather is being shown for your location: </span> <br/>{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+         </Modal.Body>
+
+        <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseLocationModal}>OK</Button>
+
+      </Modal>
       <Modal
 
         className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
