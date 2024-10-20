@@ -18,6 +18,10 @@ body {
   color: #000;
 }
 
+button.location.toggle_btn{
+  border: none !important;
+}
+
 .text-dark.bg-white.dark-modal-body.modal-body {
   background-color: #ffd43b !important;
 }
@@ -431,7 +435,7 @@ nav.page-header.dark {
   height: 110px;
   width: 110px;
   left: 50%;
-  top: 60%;
+  top: 80%;
 }
 
 .preloader svg {
@@ -1905,7 +1909,7 @@ div.weather-air-uv-container {
 
 @media screen and (max-width:700px) {
   .footer {
-    height: 150px !important;
+    height: 170px !important;
     margin-top: auto;
 
 
@@ -1985,10 +1989,35 @@ div.weather-air-uv-container {
     text-align: center;
     font-size: 26px !important;
   }
-
-  .footer {
+  .CookieConsent{
+    font-size: 14px;
+  }
+  .CookieConsent div{
+    flex: 1 0 90%;
+  }
+  div.footer {
     margin-top: auto;
+    display: flex;
+    align-items: start;
+height: 300px !important;
 
+  }
+
+  .footer-links-container{
+    align-items: start;
+    line-height: 1.9em;
+    margin-left: 16px;
+  }
+
+  .footer-info-title{
+    margin:0 auto;
+    margin-top: 10px;
+
+  }
+
+  .footer-info-copy{
+    margin:0 auto;
+    margin-bottom: 20px;
 
   }
 
@@ -2138,7 +2167,15 @@ div.weather-air-uv-container {
 
 
   }
-
+  .preloader {
+    position: relative;
+    margin-left: -55px;
+    margin-top: -100px;
+    height: 110px;
+    width: 110px;
+    left: 50%;
+    top: 280px;
+  }
   .wind-speed-info {
     padding-bottom: 25px;
   }
@@ -2154,7 +2191,7 @@ div.weather-air-uv-container {
     padding-top: 25px !important;
     padding-bottom: 25px !important;
     margin-top: auto;
-    height: 150px !important;
+    height: 170px !important;
   }
 
   .weather-7-container {
@@ -2234,6 +2271,15 @@ div.weather-air-uv-container {
 
   .modal-body {
     padding-right: 80px;
+  }
+  .preloader {
+    position: relative;
+    margin-left: -55px;
+    margin-top: -100px;
+    height: 110px;
+    width: 110px;
+    left: 50%;
+    top: 380px;
   }
 }
 
@@ -2526,4 +2572,30 @@ div.weather-air-uv-container {
     width: fit-content !important;
     text-align: left !important;
   }
+  .pre-request-text{
+    font-size: 16px;
+    padding-bottom: 4px !important;
+    word-break: break-all;
+    width: 100%;
+  }
+  .footer-info-title{
+    font-size: 17px !important;
+  }
+  .footer-links-container{
+    font-size: 15px;
+
+  }
+  .footer-info-copy{
+    font-size: 14px;
+
+  }
+ .temp-measure-select{
+  border-bottom-left-radius: 0px 0px !important;
+        border-top-left-radius: 0px 0px !important;
+        height: 40.5px;
+
+ }
+ .button.save-city{
+  height: 40.8px;
+ }
 }

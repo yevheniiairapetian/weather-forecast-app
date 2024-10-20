@@ -664,7 +664,7 @@ const Weather = () => {
 
               <div className="pre-request-text">
                 <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
-                <span className='pre-request-text-span'>Start by typing a <span className='city-name-pre'>city name</span>, a <span className='postal-code-pre'>postal code</span> or a <span className='postal-code-pre'>latitude/longitude pair</span> in the search field above. </span><br />
+                <span className='pre-request-text-span'>Start by typing a <span className='city-name-pre'>city name</span>, a <span className='postal-code-pre'>postal code</span> or a <span className='postal-code-pre'>latitude / longitude pair</span> in the search field or clicking on the <em className='city-name-pre'>map icon </em>above. </span><br />
                 <span className='pre-request-text-example'>For example:</span><br />
                 <p>
                   <ol className='pre-request-text-list'>
