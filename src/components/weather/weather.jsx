@@ -462,6 +462,8 @@ const Weather = () => {
               </div>
             </div>
             <div className='weather-forecast-options'>
+              <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
+                <span className="weather-forecast-option-text">All</span></Link>
               <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
                 <span className="weather-forecast-option-text">Now</span></Link>
 
