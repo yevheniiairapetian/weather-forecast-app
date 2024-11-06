@@ -391,7 +391,7 @@ export const CurrentView = () => {
                                 <SaveMyCity />
 
                                 <button title="Clear the search field" onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
-                                
+
 
                             </form>
                             <div className="measurement-systems">
@@ -402,19 +402,20 @@ export const CurrentView = () => {
 
                                 </div>
                             </div>
+                            <div className='toggle-location-container'>
 
-                            <SetMyLocation />
+                                <SetMyLocation />
 
-                            {isDarkMode ? (
-                                <ClickThemeDark />) : (
-                                <ClickThemeLight />
+                                {isDarkMode ? (
+                                    <ClickThemeDark />) : (
+                                    <ClickThemeLight />
 
-                            )}
-
+                                )}
+                            </div>
                         </div>
                         <div className='weather-forecast-options'>
-                        <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
-                        <span className="weather-forecast-option-text">All</span></Link>
+                            <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
+                                <span className="weather-forecast-option-text">All</span></Link>
                             <Nav.Link className="weather-forecast-option" as={Link} nClick={() => setExpanded(!expanded)} to={"./"}  >
                                 <span className="weather-forecast-option-text">Now</span></Nav.Link>
 
@@ -658,92 +659,93 @@ export const CurrentView = () => {
             )
             }
             <Footer />
-      <Modal
+            <Modal
 
-        className="favorite-modal" show={showCityModal} onHide={handleCloseCityModal}>
-        <Modal.Header closeButton>
-          {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Default city set to </span>
-          {hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
-        </Modal.Body>
-        <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseCityModal}>OK</Button>
+                className="favorite-modal" show={showCityModal} onHide={handleCloseCityModal}>
+                <Modal.Header closeButton>
+                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Default city set to </span>
+                    {hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+                </Modal.Body>
+                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseCityModal}>OK</Button>
 
-      </Modal>
+            </Modal>
 
-      <Modal
+            <Modal
 
-        className="favorite-modal" show={showFailedCityModal} onHide={handleCloseFailedCityModal}>
-        <Modal.Header closeButton>
-          {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Please first type a city name</span> </Modal.Body>
+                className="favorite-modal" show={showFailedCityModal} onHide={handleCloseFailedCityModal}>
+                <Modal.Header closeButton>
+                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Please first type a city name</span> </Modal.Body>
 
-        <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseFailedCityModal}>OK</Button>
+                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseFailedCityModal}>OK</Button>
 
-      </Modal><Modal
+            </Modal><Modal
 
-        className="favorite-modal" show={showMetricModal} onHide={handleCloseMetricModal}>
-        <Modal.Header closeButton>
-          {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the metric system</span>  </Modal.Body>
+                className="favorite-modal" show={showMetricModal} onHide={handleCloseMetricModal}>
+                <Modal.Header closeButton>
+                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the metric system</span>  </Modal.Body>
 
-        <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>OK</Button>
+                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>OK</Button>
 
-      </Modal>
+            </Modal>
 
-      <Modal
+            <Modal
 
-        className="favorite-modal" show={showImperialModal} onHide={handleCloseImperialModal}>
-        <Modal.Header closeButton>
-          {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the imperial system</span> </Modal.Body>
+                className="favorite-modal" show={showImperialModal} onHide={handleCloseImperialModal}>
+                <Modal.Header closeButton>
+                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the imperial system</span> </Modal.Body>
 
-        <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>OK</Button>
+                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>OK</Button>
 
-      </Modal>
+            </Modal>
 
-      <Modal
+            <Modal
 
-        className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
-        <Modal.Header closeButton>
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in dark mode</Modal.Body>
+                className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in dark mode</Modal.Body>
 
-        <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
+                <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
 
-      </Modal>
-      <Modal
+            </Modal>
+            <Modal
 
-        className="favorite-modal" show={showLocationModal} onHide={handleCloseLocationModal}>
-        <Modal.Header closeButton>
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />
-          <span className=''> The weather is being shown for your location: </span> <br />{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
-        </Modal.Body>
+                className="favorite-modal" show={showLocationModal} onHide={handleCloseLocationModal}>
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />
+                    <span className=''> The weather is being shown for your location: </span> <br />{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+                </Modal.Body>
 
-        <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseLocationModal}>OK</Button>
+                <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseLocationModal}>OK</Button>
 
-      </Modal>
-      <Modal
+            </Modal>
+            <Modal
 
-        className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
-        <Modal.Header closeButton>
-        </Modal.Header>
-        <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in light mode
+                className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in light mode
 
-        </Modal.Body>
+                </Modal.Body>
 
-        <Button title="Close the notification window" className="got-it-button light-modal-button" onClick={handleCloseLightModal}>OK</Button>
-      </Modal>
+                <Button title="Close the notification window" className="got-it-button light-modal-button" onClick={handleCloseLightModal}>OK</Button>
+            </Modal>
 
-    </div >
-
-
+        </div >
 
 
-    )}
+
+
+    )
+}
 
 

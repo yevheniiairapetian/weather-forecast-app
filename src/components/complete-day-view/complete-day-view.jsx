@@ -319,19 +319,20 @@ export const CompleteDayView = () => {
 
                                 </div>
                             </div>
+                            <div className='toggle-location-container'>
 
-                            <SetMyLocation />
+                                <SetMyLocation />
 
-                            {isDarkMode ? (
-                                <ClickThemeDark />) : (
-                                <ClickThemeLight />
+                                {isDarkMode ? (
+                                    <ClickThemeDark />) : (
+                                    <ClickThemeLight />
 
-                            )}
-
+                                )}
+                            </div>
                         </div>
                         <div className='weather-forecast-options'>
-                        <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
-                        <span className="weather-forecast-option-text">All</span></Link>
+                            <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
+                                <span className="weather-forecast-option-text">All</span></Link>
                             <Nav.Link className="weather-forecast-option" as={Link} nClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
                                 <span className="weather-forecast-option-text">Now</span></Nav.Link>
 
