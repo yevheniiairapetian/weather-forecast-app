@@ -8,6 +8,7 @@ import { useGeolocated } from "react-geolocated";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faLocationDot, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
 import Carousel from 'react-bootstrap/Carousel';
+import { CurrentView } from '../current-view/current-view';
 import Stack from 'react-bootstrap/Stack';
 import useDarkMode from "./../../hooks/useDarkMode";
 import leaf from './img/leaf.svg';
@@ -450,19 +451,35 @@ const Weather = () => {
 
                 </div>
               </div>
-              <SetMyLocation />
+              <div className='toggle-location-container'>
+                <SetMyLocation />
 
-              {isDarkMode ? (
-                <ClickThemeDark />) : (
-                <ClickThemeLight />
+                {isDarkMode ? (
+                  <ClickThemeDark />) : (
+                  <ClickThemeLight />
 
-              )}
+                )}
+              </div>
+            </div>
+            <div className='weather-forecast-options'>
+              <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
+                <span className="weather-forecast-option-text">Now</span></Link>
+
+              <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../complete-day-view"}  >
+                <span className="weather-forecast-option-text">Today</span></Link>
+
+              <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../week-view"}  >
+                <span className="weather-forecast-option-text">Week</span></Link>
+
+
             </div>
 
           </Navbar.Collapse>
 
 
+
         </Container>
+
       </Navbar>
 
 
@@ -2092,9 +2109,9 @@ const Weather = () => {
         className="favorite-modal" show={showLocationModal} onHide={handleCloseLocationModal}>
         <Modal.Header closeButton>
         </Modal.Header>
-        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> 
-        <span className=''> The weather is being shown for your location: </span> <br/>{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
-         </Modal.Body>
+        <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />
+          <span className=''> The weather is being shown for your location: </span> <br />{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+        </Modal.Body>
 
         <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseLocationModal}>OK</Button>
 
