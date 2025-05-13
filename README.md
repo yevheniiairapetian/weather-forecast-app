@@ -50,11 +50,18 @@ When installed, it allows to:
    - Have a smaller size than a native desktop app
    - Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
 
-4. For user's convenience, the interface is split to separate views:
+5. For user's convenience, the interface is split to separate views:
 - "All" view that displays current, hourly, and weekly weather.
 - "Now" view with the current weather data.
 - "Today" view with the daily weather data (24 hours, 1 hour difference).
 - "Week" view with daily weather data split by days (1 week, 1 day difference)
+
+6. Users can also benefit from the following features:
+- Quickly get the weather in the region by allowing the app to track location.
+- Save the entered location to local storage to show on the next visit
+- Toggle the weather data between the Metric and Imperial systems for convenience (e.g. Celcius or Fahrenheit).
+- Toggle app themes (between dark and light).
+- See user-friendly animations when the app is busy getting the weather
 
 Read more about the Progressive Web Apps [here](https://www.itaims.com/blog/benefits-of-progressive-web-apps-pwa-advantages-and-disadvantages)
 
