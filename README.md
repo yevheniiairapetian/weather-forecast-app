@@ -36,6 +36,7 @@ Please visit the [GIF Animation](https://ibb.co/XfHcGsz)
    - Condition of the sky (actual weather)
    - An icon representing the condition of the sky (e.g. Light rain or Clear Sky)
    - Temperature (in Celcius)
+
 3. The interface changes its background and weather condition icons depending on the user's local time (day or night). Therefore:
    - The app's weather card and 3-hour-forecast cards' background changes to a brighter or darker image
    - The weather icons are changed to more time-appropriate ones (e.g. Few clouds icon is different for day and night)
@@ -48,6 +49,12 @@ When installed, it allows to:
    - Use offline accessibility
    - Have a smaller size than a native desktop app
    - Access the app quickly via a mobile home screen, a Windows/Mac taskbar, etc
+
+4. For user's convenience, the interface is split to separate views:
+- "All" view that displays current, hourly, and weekly weather.
+- "Now" view with the current weather data.
+- "Today" view with the daily weather data (24 hours, 1 hour difference).
+- "Week" view with daily weather data split by days (1 week, 1 day difference)
 
 Read more about the Progressive Web Apps [here](https://www.itaims.com/blog/benefits-of-progressive-web-apps-pwa-advantages-and-disadvantages)
 
