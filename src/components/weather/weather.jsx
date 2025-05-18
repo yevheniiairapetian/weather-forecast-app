@@ -190,8 +190,8 @@ const Weather = () => {
 
 
             <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> Air Quality Alert</Alert.Heading>
-            <p>High air pollution in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong>! The levels of air pollutants have exceeded safe limits. For your health and safety, it is advised to stay indoors. Please keep windows closed and use air purifiers if available. Avoid outdoor activities, especially if you have respiratory conditions or other health concerns.
-            </p>
+            <p>Air quality in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> is currently high in pollutants. While it’s advisable to limit outdoor activities, taking simple precautions can help. If possible, keep windows closed and use air purifiers to maintain indoor air quality. Those with respiratory conditions or sensitivities may want to take extra care.</p>
+
             <div className="d-flex justify-content-end">
               {/* <Button onClick={handleClose} variant="outline-danger">
                 Close
@@ -403,7 +403,7 @@ const Weather = () => {
   const SetMyLocation = () => {
     const [play] = useSound(Click);
     return <button className="toggle_btn location pl-3" onClick={() => { play(); FetchUserLocation(); handleShowLocationModal(); setExpanded(false) }}>
-      <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} bounce style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
+      <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
     </button>
 
   }
@@ -609,38 +609,38 @@ const Weather = () => {
                                       <span className="co2-polution-extreme">Extreme</span>
                                     )}
 
-                                  {(hourlyWeatherData.current.air_quality.co > 2000 ||
-                                    hourlyWeatherData.current.air_quality.pm2_5 > 300 ||
-                                    hourlyWeatherData.current.air_quality.pm10 > 425 ||
+                                  {(hourlyWeatherData.current.air_quality.co > 2000 && hourlyWeatherData.current.air_quality.co <= 3000 ||
+                                    hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500 ||
+                                    hourlyWeatherData.current.air_quality.pm10 > 425 && hourlyWeatherData.current.air_quality.pm10 <= 500 ||
                                     hourlyWeatherData.current.air_quality.no2 > 400) && (
                                       <span className="co2-polution-hazard">Hazardous</span>
                                     )}
 
-                                  {(hourlyWeatherData.current.air_quality.co > 1500 ||
-                                    hourlyWeatherData.current.air_quality.pm2_5 > 250 ||
-                                    hourlyWeatherData.current.air_quality.pm10 > 355 ||
-                                    hourlyWeatherData.current.air_quality.no2 > 280) && (
+                                  {(hourlyWeatherData.current.air_quality.co > 1500 && hourlyWeatherData.current.air_quality.co <= 2000 ||
+                                    hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300 ||
+                                    hourlyWeatherData.current.air_quality.pm10 > 355 && hourlyWeatherData.current.air_quality.pm10 <= 425 ||
+                                    hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && (
                                       <span className="co2-polution-very-unhealthy">Very Unhealthy</span>
                                     )}
 
-                                  {(hourlyWeatherData.current.air_quality.co > 1100 ||
-                                    hourlyWeatherData.current.air_quality.pm2_5 > 150 ||
-                                    hourlyWeatherData.current.air_quality.pm10 > 255 ||
-                                    hourlyWeatherData.current.air_quality.no2 > 180) && (
+                                  {(hourlyWeatherData.current.air_quality.co > 1100 && hourlyWeatherData.current.air_quality.co <= 1500 ||
+                                    hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250||
+                                    hourlyWeatherData.current.air_quality.pm10 > 255 && hourlyWeatherData.current.air_quality.pm10 <= 355 ||
+                                    hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && (
                                       <span className="co2-polution-unhealthy">Unhealthy</span>
                                     )}
 
-                                  {(hourlyWeatherData.current.air_quality.co > 800 ||
-                                    hourlyWeatherData.current.air_quality.pm2_5 > 56 ||
-                                    hourlyWeatherData.current.air_quality.pm10 > 155 ||
-                                    hourlyWeatherData.current.air_quality.no2 > 80) && (
+                                  {(hourlyWeatherData.current.air_quality.co > 800 && hourlyWeatherData.current.air_quality.co <= 1100||
+                                    hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150 ||
+                                    hourlyWeatherData.current.air_quality.pm10 > 155 && hourlyWeatherData.current.air_quality.pm10 <= 255 ||
+                                    hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && (
                                       <span className="co2-polution-poor">Poor</span>
                                     )}
 
-                                  {(hourlyWeatherData.current.air_quality.co > 700 ||
-                                    hourlyWeatherData.current.air_quality.pm2_5 > 12 ||
-                                    hourlyWeatherData.current.air_quality.pm10 > 54 ||
-                                    hourlyWeatherData.current.air_quality.no2 > 40) && (
+                                  {(hourlyWeatherData.current.air_quality.co >= 700 && hourlyWeatherData.current.air_quality.co <= 800 ||
+                                    hourlyWeatherData.current.air_quality.pm2_5 >= 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 56 ||
+                                    hourlyWeatherData.current.air_quality.pm10 >= 54 && hourlyWeatherData.current.air_quality.pm10 <= 155 ||
+                                    hourlyWeatherData.current.air_quality.no2 >= 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && (
                                       <span className="co2-polution-moderate">Moderate</span>
                                     )}
 

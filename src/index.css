@@ -36,6 +36,11 @@ body {
 
 }
 
+.dark .weather-forecast-option-text {
+  color: cornflowerblue !important;
+
+}
+
 .card-now-weather{
   border-radius: 50px !important;
 }
@@ -1154,9 +1159,16 @@ color: whitesmoke !important;
 
 }
 
-.weather-city p{
+.dark .weather-city p{
  color: #FFB300 !important;
+ font-weight: 200;
 }
+
+.weather-city p{
+ color: #000411 !important;
+ font-weight: 200;
+}
+
 
 
 
@@ -1655,6 +1667,14 @@ div.weather-air-uv-container {
 
 .info-sky-temp .temperature-info{
   font-size: 70px;
+}
+
+.temperature-info{
+  margin-bottom: 0px;
+}
+
+.sky-info{
+  padding-left: 20px;
 }
 
 .card-now-weather-subcard{
@@ -3110,5 +3130,8 @@ span.info-preassure{
 }
 span.info-preassure-2, .info-preassure-subcard-text{
   font-size: 22px !important;
+}
+.sky-info{
+  padding-left: 0px !important;
 }
 }
