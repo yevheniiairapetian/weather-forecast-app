@@ -436,152 +436,210 @@ export const CurrentView = () => {
 
             </Navbar>
 
-            {hourlyWeatherData ? (
-                <>
-                    <Card id="card" className='item main-weather-card card ' >
-
-                        <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
-                            <div className='air-info-container'>
-                                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} as of <span style={{ color: '#fbbc04' }}> <GetDay />, {hourlyWeatherData.location.localtime} </span>
-                                </h2>
-                                </Card.Title>
-                                <div className='weather-air-uv-container'>
-                                    <Card.Title className="temp-info-container text-center pb-1" >
-                                        {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_c) + '°C'}</p>}  {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_f) + '°F'}</p>}
-
-                                        {(isDayTime) &&
-                                            <Card.Img className='w-100 card-image' variant='top'
-                                                type="image/svg"
-                                                src={hourlyWeatherData.current.condition.icon}
-
-                                            />
-                                        }
-
-                                        {(!isDayTime) &&
-                                            <Card.Img className='w-100 card-image' variant='top'
-                                                type="image/svg"
-                                                src={hourlyWeatherData.current.condition.icon}
-                                            />
-                                        }
-
-
-                                    </Card.Title>
-
-                                    <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
-                                    <Card.Title className="item-info text-center pb-1" ><p className="humidity-info" style={{ color: "whitesmoke" }}>Humidity : <FontAwesomeIcon title="Humidity icon" icon={faHandHoldingDroplet} style={{ color: "#FFD43B", }} /> {hourlyWeatherData.current.humidity}%</p></Card.Title>
-                                    <Card.Title className="item-info text-center" >
-                                        {(isCelcToggled) && <p className="pressure-info" style={{ color: "whitesmoke" }}>Pressure: <img className="barometer-icon" title="Barometer icon" src={barometer} alt="Barometer icon" /> {Math.round(hourlyWeatherData.current.pressure_mb) + ' mbar'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Pressure: <img className="barometer-icon" src={barometer} alt="Barometer icon" /> {Math.round(hourlyWeatherData.current.pressure_in) + ' inHg'}</p>}
-
-                                    </Card.Title>
-                                    <Card.Title className="item-info text-center pb-1" >
-                                        {(isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{ color: "#e3db0d", }} /> {Math.round(hourlyWeatherData.current.wind_kph) + ' km/h'}</p>} {(!isCelcToggled) && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Speed: <FontAwesomeIcon icon={faWind} fade style={{ color: "#e3db0d", }} /> {Math.round(hourlyWeatherData.current.wind_mph) + ' Mi/h'}</p>}
-
-
-
-                                    </Card.Title>
-                                    <Card.Title className="item-info text-center pb-1" >
-                                        {(hourlyWeatherData.current.wind_dir === "N") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North<img src={north} className="wind-info wind-north" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "E") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: East<img src={east} className="wind-info wind-east" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "W") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: West<img src={west} className="wind-info wind-west" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "S") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South<img src={south} className="wind-info wind-south" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "NW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North-West<img src={northWest} className="wind-info wind-nw" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "SW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South-West<img src={southWest} className="wind-info wind-sw" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "NE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North-East<img src={northEast} className="wind-info wind-ne" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "SE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South-East<img src={southEast} className="wind-info wind-se" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "ENE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: East-Northeast<img src={northEast} className="wind-info wind-ene" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "WSW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: West-Southwest<img src={southWest} className="wind-info wind-wsw" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "SSW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South-Southwest<img src={southWest} className="wind-info wind-ssw" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "NNE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North-Northeast<img src={northEast} className="wind-info wind-nne" style={{ color: "whitesmoke" }}></img> </p>}
-
-
-                                        {/*  */}
-
-                                        {(hourlyWeatherData.current.wind_dir === "NNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: North-Northwest<img src={northWest} className="wind-info wind-nw" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "SSE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: South-Southeast<img src={southEast} className="wind-info wind-se" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "ESE") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: East-Southeast<img src={southEast} className="wind-info wind-se" style={{ color: "whitesmoke" }}></img> </p>}
-                                        {(hourlyWeatherData.current.wind_dir === "WNW") && <p className="wind-speed-info" style={{ color: "whitesmoke" }}>Wind Direction: West-Northwest<img src={northWest} className="wind-info wind-nw" style={{ color: "whitesmoke" }}></img> </p>}
-
-                                        {/*  */}
-
-
-                                    </Card.Title>
-                                    <Card.Title className="item-info text-center pb-1" ><p className="uv-info" style={{ color: "whitesmoke" }}>UV Index :
-                                        {hourlyWeatherData.current.uv <= 2 && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-good '> <span >🌞</span> Good </span></>}
-                                        {(hourlyWeatherData.current.uv >= 3 && hourlyWeatherData.current.uv <= 5) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={sunglasses} alt="Sun with sunglasses icon" /> Moderate</span></>}
-                                        {(hourlyWeatherData.current.uv >= 6 && hourlyWeatherData.current.uv <= 7) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={umbrella} alt="Sun umbrella icon" /> High</span></>}
-                                        {(hourlyWeatherData.current.uv >= 8 && hourlyWeatherData.current.uv <= 10) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={cactus} alt="Cactus icon" /> Very High</span></>}
-                                        {(hourlyWeatherData.current.uv >= 11) && <><span className=''>{" " + (Math.round(hourlyWeatherData.current.uv))}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={fire} alt="Fire icon" /> Extreme</span></>}
-                                    </p>
-                                    </Card.Title>
-                                    <Card.Title className="item-info text-center pb-1 air-polution-header"><h4 className="air-polution-heading" >Air Polution</h4></Card.Title>
-
-                                    <Card.Title className="item-info text-center" ><p className="co-info" style={{ color: "whitesmoke" }}>CO<sub>2</sub>:
-                                        {hourlyWeatherData.current.air_quality.co <= 700 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-good'><img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good
-
-                                        </span></>}
-                                        {(hourlyWeatherData.current.air_quality.co >= 701 && hourlyWeatherData.current.air_quality.co <= 800) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Yellow leaf icon" /> Moderate</span></>}
-                                        {(hourlyWeatherData.current.air_quality.co >= 801 && hourlyWeatherData.current.air_quality.co <= 1100) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-poor'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Poor</span></>}
-                                        {(hourlyWeatherData.current.air_quality.co >= 1101 && hourlyWeatherData.current.air_quality.co <= 1500) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-unhealthy'><img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Unhealthy</span></>}
-                                        {(hourlyWeatherData.current.air_quality.co >= 1501 && hourlyWeatherData.current.air_quality.co <= 2000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Unhealthy</span></>}
-                                        {(hourlyWeatherData.current.air_quality.co >= 2001 && hourlyWeatherData.current.air_quality.co <= 3000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Hazardous</span></>}
-                                        {(hourlyWeatherData.current.air_quality.co >= 3001 && hourlyWeatherData.current.air_quality.co <= 5000) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.co)}</span><span className='co2-polution-extreme'> <img className="air-uv-icons" src={violetLeaf} alt="Violet leaf icon" /> Extreme</span></>}
-                                    </p>
-                                    </Card.Title>
-
-                                    <Card.Title className="item-info text-center pb-1" ><p className="pm25-info" style={{ color: "whitesmoke" }}>PM2.5:
-                                        {hourlyWeatherData.current.air_quality.pm2_5 <= 12 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-good'> <img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good
-                                        </span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm2_5 > 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 35) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Green leaf icon" /> Moderate</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm2_5 > 35 && hourlyWeatherData.current.air_quality.pm2_5 <= 56) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-poor'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Poor</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Unhealthy</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Unhealthy</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Hazardous</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm2_5)}</span><span className='co2-polution-extreme'> <img className="air-uv-icons" src={violetLeaf} alt="Violet leaf icon" /> Extreme</span></>}
-                                    </p>
-                                    </Card.Title>
-
-
-                                    <Card.Title className="item-info text-center pb-1" ><p className="pm10-info" style={{ color: "whitesmoke" }}>PM10:
-                                        {hourlyWeatherData.current.air_quality.pm10 <= 54 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-good'> <img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good </span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm10 > 54 && hourlyWeatherData.current.air_quality.pm10 <= 154) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Green leaf icon" /> Moderate</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm10 >= 155 && hourlyWeatherData.current.air_quality.pm10 <= 254) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={orangeLeaf} alt="Green leaf icon" /> Unhealthy (certain senstive groups may be affected)</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm10 >= 255 && hourlyWeatherData.current.air_quality.pm10 <= 354) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-unhealthy'><img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" />  Unhealthy</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm10 >= 355 && hourlyWeatherData.current.air_quality.pm10 <= 424) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-hazard'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Unhealthy</span></>}
-                                        {(hourlyWeatherData.current.air_quality.pm10 >= 425) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.pm10)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Hazardous</span></>}
-                                    </p>
-                                    </Card.Title>
-
-                                    <Card.Title className="item-info text-center pb-1" ><p className="no2-info" style={{ color: "whitesmoke" }}>NO2:
-                                        {hourlyWeatherData.current.air_quality.no2 <= 40 && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-good'><img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Good
-                                        </span></>}
-                                        {(hourlyWeatherData.current.air_quality.no2 > 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-satisfactory'> <img className="air-uv-icons" src={leaf} alt="Green leaf icon" /> Satisfactory</span></>}
-                                        {(hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-moderate'> <img className="air-uv-icons" src={fallenLeaf} alt="Green leaf icon" /> Moderate</span></>}
-                                        {(hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-poor'> <img className="air-uv-icons" src={orangeLeaf} alt="Orange leaf icon" /> Poor</span></>}
-                                        {(hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Very Poor</span></>}
-                                        {(hourlyWeatherData.current.air_quality.no2 > 400) && <><span className=''>{" " + Math.round(hourlyWeatherData.current.air_quality.no2)}</span><span className='co2-polution-very-unhealthy'> <img className="air-uv-icons" src={redLeaf} alt="Red leaf icon" /> Severe</span></>}
-                                    </p>
-
-                                    </Card.Title>
-                                </div>
-                            </div>
-                            <UVAlert />
-
-                            <ExtremeUVAlert />
-
-                            <WeatherAlert />
-
-
-
-
-                        </Card.Body>
-
-
-                    </Card>
-
-
-
-
-
+       {hourlyWeatherData ? (
+               <>
+                 <Card id="card" className='item main-weather-card card ' >
+       
+                   <Card.Body
+                     className=""
+                   >
+                     <div className='air-info-container card-now-weather'>
+                       <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} <p style={{ color: '#fbbc04' }}>as of <GetDay />, {hourlyWeatherData.location.localtime} </p>
+                       </h2>
+                       </Card.Title>
+                       <div className='weather-air-uv-container'>
+                         <div className='info-sky-temp-icon'>
+                           <Card.Title className="temp-info-container text-center pb-1" >
+       
+       
+                             {(isDayTime) &&
+                               <Card.Img className='w-100 card-image' variant='top'
+                                 type="image/svg"
+                                 src={hourlyWeatherData.current.condition.icon}
+       
+                               />
+                             }
+       
+                             {(!isDayTime) &&
+                               <Card.Img className='w-100 card-image' variant='top'
+                                 type="image/svg"
+                                 src={hourlyWeatherData.current.condition.icon}
+                               />
+                             }
+       
+       
+                           </Card.Title>
+                           <div className='info-sky-temp'>
+                             {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_c) + '°C'}</p>}  {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_f) + '°F'}</p>}
+                             <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
+                           </div>
+                         </div>
+                         <div className="card-now-weather-subcard">
+                           <div className='info-humidity-preassure-wind'>
+                             <Card.Title className="item-info text-center pb-1" ><p className="pressure-info pressure-info-1" ><div className='info-preassure-subcard info-preassure-subcard-1'><span className="info-preassure-subcard-text">Humidity</span>
+                               {/* <FontAwesomeIcon title="Humidity icon" icon={faHandHoldingDroplet} style={{ color: "#FFD43B", }} />  */}
+                               <div className='info-mbar-subcard-text'><span className='info-preassure'>{hourlyWeatherData.current.humidity}</span><span className='info-preassure-2'>%</span></div></div></p></Card.Title>
+                             <Card.Title className="item-info text-center" >
+                               <div>
+                                 {(isCelcToggled) &&
+                                   <p className="pressure-info"><div className='info-preassure-subcard'><span className="info-preassure-subcard-text">Pressure</span>
+                                     {/* <img className="barometer-icon" title="Barometer icon" src={barometer} alt="Barometer icon" />  */}
+                                     <div className='info-mbar-subcard-text'><span className="info-preassure">{Math.round(hourlyWeatherData.current.pressure_mb)}</span><span className='info-preassure-2'> mbar</span></div></div></p>
+                                 } {(!isCelcToggled) &&
+                                   <p className="pressure-info" ><div className='info-preassure-subcard'><span className='info-preassure-subcard-text'>Pressure</span><div className='info-mbar-subcard-text'>
+                                     {/* <img className="barometer-icon" src={barometer} alt="Barometer icon" />  */}
+                                     <div className='info-mbar-subcard-text'><span className="info-preassure">{Math.round(hourlyWeatherData.current.pressure_in)}</span><span className='info-preassure-2'> inHg</span></div></div>
+                                   </div></p>
+                                 }
+                               </div>
+                             </Card.Title>
+                             <Card.Title className="item-info text-center pb-1" >
+                               {(isCelcToggled) && <p className="pressure-info wind-information"><div className='info-preassure-subcard'><span className="info-preassure-subcard-text">Wind</span>
+                                 {/* <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{ color: "#e3db0d", }} />  */}
+                                 <div className='info-mbar-subcard-text'><span className='info-preassure'>{Math.round(hourlyWeatherData.current.wind_kph)}</span><span className='info-preassure-2'> km/h</span></div></div></p>} {(!isCelcToggled) && <p className="pressure-info"><div className='info-preassure-subcard'><span className='info-preassure-subcard-text'>Wind</span><div className='info-mbar-subcard-text'>
+                                   {/* <FontAwesomeIcon icon={faWind} fade style={{ color: "#e3db0d", }} />  */}
+                                   <span className='info-preassure'>{Math.round(hourlyWeatherData.current.wind_mph)}</span><span className='info-preassure-2'> Mi/h</span></div></div></p>}
+       
+       
+       
+                             </Card.Title>
+                           </div>
+                           
+       
+       
+                          
+                           <div className='info-uv-air'>
+                             <Card.Title className="item-info text-center pb-1">
+                               <p className="pressure-info">
+                                 <div className="info-uv-subcard">
+                                   <span className="info-uv-subcard-text uv-index">UV Index</span>
+                                   {hourlyWeatherData.current?.uv !== undefined ? (
+         <>
+           <div className="info-uv-subcard-text">
+             <span className="info-uv">
+               {" " + Math.round(hourlyWeatherData.current.uv)}
+             </span>
+       
+             {hourlyWeatherData.current.uv >= 11 ? (
+               <span className="info-uv-text-extreme">Extreme</span>
+             ) : hourlyWeatherData.current.uv >= 8 ? (
+               <span className="info-uv-text-very-high">Very High</span>
+             ) : hourlyWeatherData.current.uv >= 6 ? (
+               <span className="info-uv-text-high">High</span>
+             ) : hourlyWeatherData.current.uv >= 3 ? (
+               <span className="info-uv-text-moderate">Moderate</span>
+             ) : (
+               <span className="info-uv-text-good">Good</span>
+             )}
+           </div>
+         </>
+       ) : (
+         <div className="info-uv-subcard-text">
+           <span className="info-uv">--</span>
+           <span className="info-uv-text-unavailable">UV Index Data Unavailable</span>
+         </div>
+       )}
+       
+       
+                                 </div>
+                               </p>
+                             </Card.Title>
+       
+                             <Card.Title className="item-info text-center pb-1 air-polution-header">
+                               <p className="pressure-info pressure-info-1">
+                                 <div className="info-uv-subcard">
+                                   <span className="info-uv-subcard-text air-quality-index">Air Quality</span>
+                                   {hourlyWeatherData.current?.air_quality ? (
+                                     <>
+                                       <div className="info-uv-subcard-text">
+                                         {/* CO<sub>2</sub>: */}
+                                         {(hourlyWeatherData.current.air_quality.co > 3000 ||
+                                           hourlyWeatherData.current.air_quality.pm2_5 > 500 ||
+                                           hourlyWeatherData.current.air_quality.pm10 > 500 ||
+                                           hourlyWeatherData.current.air_quality.no2 > 400) && (
+                                             <span className="co2-polution-extreme">Extreme</span>
+                                           )}
+       
+                                         {(hourlyWeatherData.current.air_quality.co > 2000 && hourlyWeatherData.current.air_quality.co <= 3000 ||
+                                           hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500 ||
+                                           hourlyWeatherData.current.air_quality.pm10 > 425 && hourlyWeatherData.current.air_quality.pm10 <= 500 ||
+                                           hourlyWeatherData.current.air_quality.no2 > 400) && (
+                                             <span className="co2-polution-hazard">Hazardous</span>
+                                           )}
+       
+                                         {(hourlyWeatherData.current.air_quality.co > 1500 && hourlyWeatherData.current.air_quality.co <= 2000 ||
+                                           hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300 ||
+                                           hourlyWeatherData.current.air_quality.pm10 > 355 && hourlyWeatherData.current.air_quality.pm10 <= 425 ||
+                                           hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && (
+                                             <span className="co2-polution-very-unhealthy">Very Unhealthy</span>
+                                           )}
+       
+                                         {(hourlyWeatherData.current.air_quality.co > 1100 && hourlyWeatherData.current.air_quality.co <= 1500 ||
+                                           hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250||
+                                           hourlyWeatherData.current.air_quality.pm10 > 255 && hourlyWeatherData.current.air_quality.pm10 <= 355 ||
+                                           hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && (
+                                             <span className="co2-polution-unhealthy">Unhealthy</span>
+                                           )}
+       
+                                         {(hourlyWeatherData.current.air_quality.co > 800 && hourlyWeatherData.current.air_quality.co <= 1100||
+                                           hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150 ||
+                                           hourlyWeatherData.current.air_quality.pm10 > 155 && hourlyWeatherData.current.air_quality.pm10 <= 255 ||
+                                           hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && (
+                                             <span className="co2-polution-poor">Poor</span>
+                                           )}
+       
+                                         {(hourlyWeatherData.current.air_quality.co >= 700 && hourlyWeatherData.current.air_quality.co <= 800 ||
+                                           hourlyWeatherData.current.air_quality.pm2_5 >= 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 56 ||
+                                           hourlyWeatherData.current.air_quality.pm10 >= 54 && hourlyWeatherData.current.air_quality.pm10 <= 155 ||
+                                           hourlyWeatherData.current.air_quality.no2 >= 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && (
+                                             <span className="co2-polution-moderate">Moderate</span>
+                                           )}
+       
+                                         {(hourlyWeatherData.current.air_quality.co <= 700 &&
+                                           hourlyWeatherData.current.air_quality.pm2_5 <= 12 &&
+                                           hourlyWeatherData.current.air_quality.pm10 <= 54 &&
+                                           hourlyWeatherData.current.air_quality.no2 <= 40) && (
+                                             <span className="co2-polution-good">Good</span>
+                                           )}
+       
+                                       </div>
+                                     </>
+                                   ) : (
+                                     <div className="info-uv-subcard-text">
+                                       <span className="info-uv">--</span>
+                                       <span className="info-uv-text-unavailable">Air Quality Data Unavailable</span>
+                                     </div>
+                                   )}
+                                 </div>
+                               </p>
+                             </Card.Title>
+       
+                           </div>
+       
+       
+       
+                         </div>
+                       </div>
+                     </div>
+                     <UVAlert />
+       
+                     <ExtremeUVAlert />
+       
+                     <WeatherAlert />
+       
+       
+       
+       
+                   </Card.Body>
+       
+       
+                 </Card>
+       
+       
+       
+       
+       
+       
 
 
                 </>

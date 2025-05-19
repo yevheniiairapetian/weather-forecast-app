@@ -1717,6 +1717,12 @@ div.weather-air-uv-container {
   justify-self: center;
 }
 
+.info-uv-air .pressure-info,
+.info-uv-air .pressure-info-1{
+  padding-top: 28px;
+}
+
+
 .info-humidity-preassure-wind{
   border-bottom: 1px solid #d8dee3;
 
@@ -3083,7 +3089,47 @@ div.toggle-location-container {
 }
 }
 
-@media screen and (max-width:718px) {
+@media screen and (max-width:500px) {
+  .info-sky-temp-icon{
+  flex-direction: column;
+}
+.info-sky-temp{
+  align-items: center !important;
+}
+
+.temperature-info{
+  padding-top: 0px;
+}
+img.card-image {
+        height: 160px !important;
+        width: 160px !important;
+        margin-top: 30px;
+    }
+.info-uv-air{
+  flex-direction: column !important;
+}
+.info-uv-air .pressure-info, .info-uv-air .pressure-info-1{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 22px !important;
+
+}
+
+.info-uv-air .pressure-info-1{
+  padding-top: 2px !important;
+
+}
+
+.co2-polution-good, .co2-polution-satisfactory, .co2-polution-moderate, .co2-polution-poor, .co2-polution-unhealthy, .co2-polution-very-unhealthy, .co2-polution-hazard{
+  margin-left: auto;
+  margin-right: auto;
+}
+}
+
+
+
+
+@media screen and (max-width:749px) {
 h2.weather-city{
   font-size: 32px;
 }
@@ -3112,6 +3158,7 @@ h2.weather-city p{
   padding-top: 22px;
 }
 
+
 .wind-information{
   /* padding-right: 20px; */
 
@@ -3132,6 +3179,11 @@ span.info-preassure-2, .info-preassure-subcard-text{
   font-size: 22px !important;
 }
 .sky-info{
+  font-size: 30px !important;
+
   padding-left: 0px !important;
+}
+.temperature-info{
+  font-size: 42px !important;
 }
 }
