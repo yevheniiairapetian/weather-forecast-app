@@ -130,24 +130,36 @@ const Weather = () => {
     }
   };
 
+  // Function to save the selected system to localStorage
+function saveSelectedSystem(system) {
+  localStorage.setItem("selectedSystem", system);
+}
 
-
-  function toggleCelcBGColor() {
-
-    document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "yellow";
-    document.querySelector(".temp-measure-select-button:first-child").style.transition = "all 0.2s ease-in";
-    document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "lightgrey";
-    document.querySelector(".temp-measure-select-button:last-child").style.transition = "all 0.2s ease-in";
-
+// Function to load the stored system on page load
+function loadSelectedSystem() {
+  const system = localStorage.getItem("selectedSystem");
+  if (system === "SI") {
+    toggleCelcBGColor();
+  } else if (system === "IMP") {
+    toggleFahrBGColor();
   }
+}
 
-  function toggleFahrBGColor() {
-    document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "lightgrey";
-    document.querySelector(".temp-measure-select-button:first-child").style.transition = "all 0.2s ease-in";
-    document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "yellow";
-    document.querySelector(".temp-measure-select-button:last-child").style.transition = "all 0.2s ease-in";
+// Modified toggle functions to include saving to localStorage
+function toggleCelcBGColor() {
+  document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "yellow";
+  document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "lightgrey";
+  saveSelectedSystem("SI");
+}
 
-  }
+function toggleFahrBGColor() {
+  document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "lightgrey";
+  document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "yellow";
+  saveSelectedSystem("IMP");
+}
+
+// Call the function when the page loads to restore the selection
+window.addEventListener("load", loadSelectedSystem);
 
   const fetchHourly = async () => {
     try {
@@ -498,6 +510,82 @@ const Weather = () => {
                 </Card.Title>
                 <div className='weather-air-uv-container'>
                   <div className='info-sky-temp-icon'>
+                    <div className='am-pm-cards-container'>
+
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+
+                      {(isDayTime) &&
+                        <div className="">
+                          <p className="pressure-info am-paragraph"><div className='am-pm-container'>
+                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                            <Card.Img className='w-100 card-image-7' variant='top'
+                              // type="image/svg"
+                              src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                            />
+                            <span className="info-preassure-subcard-text">AM</span>
+
+                          </div></p>
+                        </div>
+
+                      }
+
+                      {(!isDayTime) &&
+                        <div className="am-pm-container">
+                          <p className="pressure-info am-paragraph"><div className='am-pm-container'>
+                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                            <Card.Img className='w-100 card-image-7' variant='top'
+                              // type="image/svg"
+                              src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                            />
+                            <span className="info-preassure-subcard-text">AM</span>
+
+                          </div></p>
+                        </div>
+                      }
+
+                    </Card.Title>
+
+
+
+
+                    <Card.Title className="temp-7-info-container text-center pb-1" >
+
+                      {(isDayTime) &&
+                        <div className="am-pm-container">
+                          <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
+                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                            <Card.Img className='w-100 card-image-7' variant='top'
+                              // type="image/svg"
+                              src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                            />
+                            <span className="info-preassure-subcard-text">PM</span>
+
+                          </div></p>
+                        </div>
+                      }
+
+                      {(!isDayTime) &&
+                        <div className="am-pm-container">
+                          <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
+                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                            <Card.Img className='w-100 card-image-7' variant='top'
+                              // type="image/svg"
+                              src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                            />
+                            <span className="info-preassure-subcard-text">PM</span>
+                          </div>
+                          </p>
+
+                        </div>
+                      }
+
+                    </Card.Title>
+                    </div>
+
                     <Card.Title className="temp-info-container text-center pb-1" >
 
 
@@ -518,6 +606,11 @@ const Weather = () => {
 
 
                     </Card.Title>
+
+
+
+
+
                     <div className='info-sky-temp'>
                       {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_c) + '°C'}</p>}  {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_f) + '°F'}</p>}
                       <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />
@@ -553,41 +646,41 @@ const Weather = () => {
 
                       </Card.Title>
                     </div>
-                    
 
 
-                   
+
+
                     <div className='info-uv-air'>
                       <Card.Title className="item-info text-center pb-1">
                         <p className="pressure-info">
                           <div className="info-uv-subcard">
                             <span className="info-uv-subcard-text uv-index">UV Index</span>
                             {hourlyWeatherData.current?.uv !== undefined ? (
-  <>
-    <div className="info-uv-subcard-text">
-      <span className="info-uv">
-        {" " + Math.round(hourlyWeatherData.current.uv)}
-      </span>
+                              <>
+                                <div className="info-uv-subcard-text">
+                                  <span className="info-uv">
+                                    {" " + Math.round(hourlyWeatherData.current.uv)}
+                                  </span>
 
-      {hourlyWeatherData.current.uv >= 11 ? (
-        <span className="info-uv-text-extreme">Extreme</span>
-      ) : hourlyWeatherData.current.uv >= 8 ? (
-        <span className="info-uv-text-very-high">Very High</span>
-      ) : hourlyWeatherData.current.uv >= 6 ? (
-        <span className="info-uv-text-high">High</span>
-      ) : hourlyWeatherData.current.uv >= 3 ? (
-        <span className="info-uv-text-moderate">Moderate</span>
-      ) : (
-        <span className="info-uv-text-good">Good</span>
-      )}
-    </div>
-  </>
-) : (
-  <div className="info-uv-subcard-text">
-    <span className="info-uv">--</span>
-    <span className="info-uv-text-unavailable">UV Index Data Unavailable</span>
-  </div>
-)}
+                                  {hourlyWeatherData.current.uv >= 11 ? (
+                                    <span className="info-uv-text-extreme">Extreme</span>
+                                  ) : hourlyWeatherData.current.uv >= 8 ? (
+                                    <span className="info-uv-text-very-high">Very High</span>
+                                  ) : hourlyWeatherData.current.uv >= 6 ? (
+                                    <span className="info-uv-text-high">High</span>
+                                  ) : hourlyWeatherData.current.uv >= 3 ? (
+                                    <span className="info-uv-text-moderate">Moderate</span>
+                                  ) : (
+                                    <span className="info-uv-text-good">Good</span>
+                                  )}
+                                </div>
+                              </>
+                            ) : (
+                              <div className="info-uv-subcard-text">
+                                <span className="info-uv">--</span>
+                                <span className="info-uv-text-unavailable">UV Index Data Unavailable</span>
+                              </div>
+                            )}
 
 
                           </div>
@@ -624,13 +717,13 @@ const Weather = () => {
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co > 1100 && hourlyWeatherData.current.air_quality.co <= 1500 ||
-                                    hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250||
+                                    hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 255 && hourlyWeatherData.current.air_quality.pm10 <= 355 ||
                                     hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && (
                                       <span className="co2-polution-unhealthy">Unhealthy</span>
                                     )}
 
-                                  {(hourlyWeatherData.current.air_quality.co > 800 && hourlyWeatherData.current.air_quality.co <= 1100||
+                                  {(hourlyWeatherData.current.air_quality.co > 800 && hourlyWeatherData.current.air_quality.co <= 1100 ||
                                     hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 155 && hourlyWeatherData.current.air_quality.pm10 <= 255 ||
                                     hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && (

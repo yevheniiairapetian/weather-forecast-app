@@ -449,6 +449,82 @@ export const CurrentView = () => {
                        </Card.Title>
                        <div className='weather-air-uv-container'>
                          <div className='info-sky-temp-icon'>
+                           <div className='am-pm-cards-container'>
+       
+                           <Card.Title className="temp-7-info-container text-center pb-1" >
+       
+                             {(isDayTime) &&
+                               <div className="">
+                                 <p className="pressure-info am-paragraph"><div className='am-pm-container'>
+                                   {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+       
+                                   <Card.Img className='w-100 card-image-7' variant='top'
+                                     // type="image/svg"
+                                     src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                                   />
+                                   <span className="info-preassure-subcard-text">AM</span>
+       
+                                 </div></p>
+                               </div>
+       
+                             }
+       
+                             {(!isDayTime) &&
+                               <div className="am-pm-container">
+                                 <p className="pressure-info am-paragraph"><div className='am-pm-container'>
+                                   {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+       
+                                   <Card.Img className='w-100 card-image-7' variant='top'
+                                     // type="image/svg"
+                                     src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                                   />
+                                   <span className="info-preassure-subcard-text">AM</span>
+       
+                                 </div></p>
+                               </div>
+                             }
+       
+                           </Card.Title>
+       
+       
+       
+       
+                           <Card.Title className="temp-7-info-container text-center pb-1" >
+       
+                             {(isDayTime) &&
+                               <div className="am-pm-container">
+                                 <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
+                                   {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+       
+                                   <Card.Img className='w-100 card-image-7' variant='top'
+                                     // type="image/svg"
+                                     src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                                   />
+                                   <span className="info-preassure-subcard-text">PM</span>
+       
+                                 </div></p>
+                               </div>
+                             }
+       
+                             {(!isDayTime) &&
+                               <div className="am-pm-container">
+                                 <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
+                                   {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+       
+                                   <Card.Img className='w-100 card-image-7' variant='top'
+                                     // type="image/svg"
+                                     src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                                   />
+                                   <span className="info-preassure-subcard-text">PM</span>
+                                 </div>
+                                 </p>
+       
+                               </div>
+                             }
+       
+                           </Card.Title>
+                           </div>
+       
                            <Card.Title className="temp-info-container text-center pb-1" >
        
        
@@ -469,6 +545,11 @@ export const CurrentView = () => {
        
        
                            </Card.Title>
+       
+       
+       
+       
+       
                            <div className='info-sky-temp'>
                              {(isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_c) + '°C'}</p>}  {(!isCelcToggled) && <p className="temperature-info" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.current.feelslike_f) + '°F'}</p>}
                              <Card.Title className="item-info text-center pb-1" ><h2 className="sky-info" style={{ color: "whitesmoke" }}>{hourlyWeatherData.current.condition.text}</h2></Card.Title><br />

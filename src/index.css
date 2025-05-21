@@ -18,6 +18,57 @@ body {
 
 }
 
+.am-pm-cards-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* padding-left: 40px; */
+  padding-right: 40px;
+}
+
+.am-pm-cards-container .am-paragraph{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+  /* padding-right: 40px; */
+}
+
+.am-pm-cards-container .pm-paragraph{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-left: 40px;
+  /* padding-right: 40px; */
+}
+
+.am-pm-container{
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.am-pm-container .temperature-info-7{
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0px;
+}
+
+
+
+.am-pm-container .info-preassure-subcard-text{
+  margin-top: 10px;
+
+}
+
+.dark .am-pm-container .info-preassure-subcard-text{
+  color: #36618f !important;
+}
+
 .weather-forecast-options {
   display: flex;
   flex-direction: row;
@@ -1149,7 +1200,7 @@ color: whitesmoke !important;
 
 .weather-city {
   color: #1d3147;
-  font-size: 35px;
+  font-size: 26px;
   padding: 10px 20px;
   text-align: left;
   background-color: transparent;
@@ -1167,6 +1218,8 @@ color: whitesmoke !important;
 .weather-city p{
  color: #000411 !important;
  font-weight: 200;
+  font-size: 18px;
+
 }
 
 
@@ -1421,8 +1474,9 @@ div.week-container {
 }
 
 .card-image {
-  height: 250px !important;
-  width: 250px !important;
+  height: 220px !important;
+  width: 220px !important;
+  padding-right: 10px;
 }
 
 .week-container {
@@ -1647,7 +1701,7 @@ div.weather-air-uv-container {
 }
 
 .sky-info {
-  font-size: 40px;
+  font-size: 30px;
   text-transform: capitalize;
   text-align: left;
   /* padding: 10px 0 14px 90px; */
@@ -1666,7 +1720,7 @@ div.weather-air-uv-container {
 }
 
 .info-sky-temp .temperature-info{
-  font-size: 70px;
+  font-size: 52px;
 }
 
 .temperature-info{
@@ -2102,6 +2156,10 @@ p.pressure-info-1{
     padding-left: 10px;
 
   }
+
+  .am-pm-container .temperature-info-7{
+  font-size: 23px !important;
+}
 
   .hstack {
     display: block !important;
@@ -3089,7 +3147,21 @@ div.toggle-location-container {
 }
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:768px) {
+
+  .am-pm-cards-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    padding-right: 0;
+    padding-top: 30px;
+}
+
+.am-pm-cards-container .pressure-info{
+  padding-left: 40px;
+  padding-right: 40px;
+}
   .info-sky-temp-icon{
   flex-direction: column;
 }
@@ -3104,6 +3176,7 @@ img.card-image {
         height: 160px !important;
         width: 160px !important;
         margin-top: 30px;
+        margin-right: 0;
     }
 .info-uv-air{
   flex-direction: column !important;
@@ -3131,7 +3204,7 @@ img.card-image {
 
 @media screen and (max-width:749px) {
 h2.weather-city{
-  font-size: 32px;
+  font-size: 26px;
 }
 h2.weather-city p{
   font-size: 18px;
@@ -3141,6 +3214,9 @@ h2.weather-city p{
   justify-self: left;
   align-items: left;
 }
+
+
+
 .card-image {
     height: 200px !important;
     width: 200px !important;
