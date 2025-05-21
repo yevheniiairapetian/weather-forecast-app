@@ -17,6 +17,7 @@ import north from './img/north.svg';
 import south from './img/south.svg';
 import west from './img/west.svg';
 import east from './img/east.svg';
+import { TempMeasureSelect } from '../temp-measure-select/temp-measure-select';
 import northEast from './img/northEast.svg';
 import southEast from './img/southEast.svg';
 import northWest from './img/northWest.svg';
@@ -88,10 +89,7 @@ const Weather = () => {
       },
       userDecisionTimeout: 5000,
     });
-  const [isCelcToggled, setIsCelcToggled] = useState(() => {
-    const saved = localStorage.getItem('isCelcToggled');
-    return saved !== null ? JSON.parse(saved) : false;
-  });
+ const [isCelcToggled, setIsCelcToggled] = useState(true);
 
   function clearInput() {
 
@@ -130,36 +128,15 @@ const Weather = () => {
     }
   };
 
-  // Function to save the selected system to localStorage
-function saveSelectedSystem(system) {
-  localStorage.setItem("selectedSystem", system);
-}
-
-// Function to load the stored system on page load
-function loadSelectedSystem() {
-  const system = localStorage.getItem("selectedSystem");
-  if (system === "SI") {
-    toggleCelcBGColor();
-  } else if (system === "IMP") {
-    toggleFahrBGColor();
-  }
-}
-
-// Modified toggle functions to include saving to localStorage
-function toggleCelcBGColor() {
-  document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "yellow";
-  document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "lightgrey";
-  saveSelectedSystem("SI");
-}
-
-function toggleFahrBGColor() {
-  document.querySelector(".temp-measure-select-button:first-child").style.backgroundColor = "lightgrey";
-  document.querySelector(".temp-measure-select-button:last-child").style.backgroundColor = "yellow";
-  saveSelectedSystem("IMP");
-}
-
-// Call the function when the page loads to restore the selection
-window.addEventListener("load", loadSelectedSystem);
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
   const fetchHourly = async () => {
     try {
@@ -457,11 +434,8 @@ window.addEventListener("load", loadSelectedSystem);
               </form>
               <div className="measurement-systems">
 
-                <div className="temp-measure-select">
-                  <button title="Switch to the metric system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(true); toggleCelcBGColor(); handleShowMetricModal() }}>SI</button>
-                  <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor(); handleShowImperialModal() }}>IMP</button>
+               <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
 
-                </div>
               </div>
               <div className='toggle-location-container'>
                 <SetMyLocation />

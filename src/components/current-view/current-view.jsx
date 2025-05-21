@@ -33,7 +33,7 @@ import { ScrollToAnchor } from "../scroll-to-anchor/scroll-to-anchor";
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
-
+import { TempMeasureSelect } from '../temp-measure-select/temp-measure-select';
 import { Footer } from '../footer/footer';
 import { GetDay } from '../get-day/get-day';
 import { GetTodayDay } from '../get-today-day copy/get-today-day';
@@ -86,10 +86,8 @@ export const CurrentView = () => {
             },
             userDecisionTimeout: 5000,
         });
-    const [isCelcToggled, setIsCelcToggled] = useState(() => {
-        const saved = localStorage.getItem('isCelcToggled');
-        return saved !== null ? JSON.parse(saved) : false;
-    });
+     const [isCelcToggled, setIsCelcToggled] = useState(true);
+    
 
     function clearInput() {
 
@@ -396,11 +394,7 @@ export const CurrentView = () => {
                             </form>
                             <div className="measurement-systems">
 
-                                <div className="temp-measure-select">
-                                    <button title="Switch to the metric system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(true); toggleCelcBGColor(); handleShowMetricModal() }}>SI</button>
-                                    <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor(); handleShowImperialModal() }}>IMP</button>
-
-                                </div>
+                                <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
                             </div>
                             <div className='toggle-location-container'>
 

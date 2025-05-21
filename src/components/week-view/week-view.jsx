@@ -4,6 +4,7 @@ import { WeatherAlert } from '../weather-alert/weather-alert';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 import imgLogo from './img/img-logo.png';
 import Cookies from "js-cookie";
+import { TempMeasureSelect } from '../temp-measure-select/temp-measure-select';
 import { useGeolocated } from "react-geolocated";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faLocationDot, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
@@ -86,10 +87,8 @@ export const WeekView = () => {
       },
       userDecisionTimeout: 5000,
     });
-  const [isCelcToggled, setIsCelcToggled] = useState(() => {
-    const saved = localStorage.getItem('isCelcToggled');
-    return saved !== null ? JSON.parse(saved) : false;
-  });
+   const [isCelcToggled, setIsCelcToggled] = useState(true);
+  
 
   function clearInput() {
 
@@ -328,11 +327,8 @@ export const WeekView = () => {
               </form>
               <div className="measurement-systems">
 
-                <div className="temp-measure-select">
-                  <button title="Switch to the metric system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(true); toggleCelcBGColor(); handleShowMetricModal() }}>SI</button>
-                  <button title="Switch to the imperial system" className="temp-measure-select-button" onClick={() => { setIsCelcToggled(false); toggleFahrBGColor(); handleShowImperialModal() }}>IMP</button>
-
-                </div>
+                               <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
+                
               </div>
               <div className='toggle-location-container'>
 
