@@ -37,6 +37,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "npmConfig": {
+    "strictPeerDependencies": false
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
