@@ -183,9 +183,14 @@ button.location.toggle_btn {
   background-color: #337cb4;
 }
 
-.measurement-systems.dark {
+.dark .measurement-systems{
   background-color: #272626;
 
+}
+
+
+.switcher{
+  margin-left: 24px;
 }
 
 .day-24-heading,
@@ -2657,27 +2662,13 @@ p.pressure-info-1{
 
 }
 
-@media screen and (max-width:400px) {
-  .form-heading-container {
-    flex-direction: column;
-    padding: 4px 0px 18px 0px;
-    width: 98%;
-    margin-left: 4px;
-  }
+@media screen and (max-width:777px) {
 
-  .weather-forecast-option {
-    /* font-size: 18px; */
-    padding-right: 5px !important;
-    padding-left: 5px !important;
-    /* margin-top: 14px; */
-    /* text-decoration: none; */
-  
-  }
 
-  div.toggle-location-container {
+div.toggle-location-container {
     background-color: #938f8f !important;
-    height: 110px !important;
-    width: 35px !important;
+    height: 130px !important;
+    width: 42px !important;
     display: block;
     position: fixed;
     display: flex !important;
@@ -2695,6 +2686,36 @@ p.pressure-info-1{
     opacity: 1;
     transition: all 0.2s ease-in;
   }
+
+  .lang-choose{
+    width:42px;
+  }
+.toggle_btn{
+  margin-right: 5px;
+}
+.toggle_btn.location{
+  margin-right: 9px;
+}
+}
+
+@media screen and (max-width:400px) {
+  .form-heading-container {
+    flex-direction: column;
+    padding: 4px 0px 18px 0px;
+    width: 98%;
+    margin-left: 4px;
+  }
+
+  .weather-forecast-option {
+    /* font-size: 18px; */
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    /* margin-top: 14px; */
+    /* text-decoration: none; */
+  
+  }
+
+  
 
   .temp-measure-select {
     display: flex;

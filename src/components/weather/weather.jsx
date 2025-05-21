@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 import { WeatherAlert } from '../weather-alert/weather-alert';
 import { Navbar, Container, Row, Col, Nav, Image } from "react-bootstrap";
 import imgLogo from './img/img-logo.png';
@@ -50,6 +51,8 @@ import Click from './src/click.mp3';
 
 
 const Weather = () => {
+	const { t, i18n } = useTranslation();
+
   const [userLocation, setUserLocation] = useState(null);
   const [isDarkMode, setDarkMode] = useDarkMode();
   const [showDarkModal, setShowDarkModal] = useState(false);
@@ -89,6 +92,36 @@ const Weather = () => {
       },
       userDecisionTimeout: 5000,
     });
+
+const languages = [
+		{ name: "EN", code: "en" },
+		// { name: "DE", code: "de" },
+		// { name: "ES", code: "es" },
+		// { name: "PT", code: "pt" },
+		// { name: "IT", code: "it" },
+		// { name: "FR", code: "fr" },
+		// { name: "UK", code: "uk" },
+		// { name: "RU", code: "ru" },
+		// { name: "MK", code: "mk" },
+		// { name: "PL", code: "pl" },
+		// { name: "日本語", code: "ja" },
+		// { name: "中文", code: "zh" },
+		// { name: "한국어", code: "ko_KR" },
+		// { name: "TR", code: "tr" },
+		// { name: "العربية", code: "ar", dir: "rtl" },
+
+	];
+	const currentLocale = Cookies.get("i18next") || "en";
+	const currentLangObj = languages.find((lang) => lang.code === currentLocale);
+
+	const [language, setLanguage] = useState(currentLocale);
+
+	const handleChangeLocale = (e) => {
+		const lang = e.target.value;
+		setLanguage(lang);
+		i18n.changeLanguage(lang);
+	};
+  
  const [isCelcToggled, setIsCelcToggled] = useState(true);
 
   function clearInput() {
@@ -169,7 +202,12 @@ const Weather = () => {
     };
 
     // if (!isVisible) return null;
+useEffect(() => {
 
+
+		document.body.dir = 'ltr';
+		document.title = t("app_title");
+	}, [currentLangObj, t]);
     return (
       <>
 
@@ -178,8 +216,8 @@ const Weather = () => {
           <Alert variant="danger" onClose={handleClose} dismissible>
 
 
-            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> Air Quality Alert</Alert.Heading>
-            <p>Air quality in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> is currently high in pollutants. While it’s advisable to limit outdoor activities, taking simple precautions can help. If possible, keep windows closed and use air purifiers to maintain indoor air quality. Those with respiratory conditions or sensitivities may want to take extra care.</p>
+            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> {t("air-quality-alert")}</Alert.Heading>
+            <p>{t("air-quality-in")} <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> {t("air-quality-in-text")}</p>
 
             <div className="d-flex justify-content-end">
               {/* <Button onClick={handleClose} variant="outline-danger">
@@ -217,19 +255,19 @@ const Weather = () => {
           <Alert className="alert-modal" variant="danger" onClose={handleUVClose} dismissible>
 
 
-            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /><img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /> UV Index Alert <img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /></Alert.Heading>
-            <p>The UV index in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> is currently <strong><em>{hourlyWeatherData.current.uv}</em></strong>, indicating high levels of UV radiation. </p>
+            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /><img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /> {t("uv-alert")} <img className="air-uv-icons" src={umbrella} alt="Umbrella icon" /></Alert.Heading>
+            <p>{t("uv-index-in")}  <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong>{t("uv-atm")}<strong><em>{hourlyWeatherData.current.uv}</em></strong>{t("uv-index-text")}</p>
 
-            <p>Please take the following protective measures:</p>
+            <p>{t("uv-measures")}</p>
             <ol>
-              <li>Wear protective clothing, including a wide-brimmed hat and sunglasses.</li>
-              <li>Apply broad-spectrum sunscreen with SPF 30 or higher every 2 hours.
+              <li>{t("uv-measure-1")}</li>
+              <li>{t("uv-measure-2")}
               </li>
-              <li>Limit outdoor activities during peak sun hours (10 AM - 4 PM).
+              <li>{t("uv-measure-3")}
               </li>
 
             </ol>
-            <p>Stay safe and protect your skin! 🌤️</p>
+            <p>{t("uv-stay-safe")}</p>
 
 
 
@@ -267,20 +305,20 @@ const Weather = () => {
           <Alert variant="danger" onClose={handleExtremeUVClose} dismissible>
 
 
-            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} /> ⚠️ UV Alert: Very High UV Index! ⚠️</Alert.Heading>
-            <p>The UV index in <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong> is currently at 10 or higher, indicating a very high risk of harm from unprotected sun exposure. </p>
+            <Alert.Heading> <FontAwesomeIcon icon={faCircleInfo} beatFade size="md" style={{ color: "#337cb4", }} />{t("uv-alert-high")}</Alert.Heading>
+            <p>{t("uv-index-in")} <strong><em>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</em></strong>{t("uv-index-high-text")}</p>
 
-            <p>Please take the following precautions:</p>
+            <p>{t("uv-high-measures")}</p>
             <ol>
-              <li>Wear protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.</li>
-              <li>Apply broad-spectrum sunscreen with SPF 30+ every 2 hours, even on cloudy days.
+              <li>{t("uv-high-measure-1")}</li>
+              <li>{t("uv-high-measure-2")}
               </li>
-              <li>Seek shade between 10 a.m. and 4 p.m.
+              <li>{t("uv-high-measure-3")}
               </li>
-              <li>Stay hydrated and avoid strenuous outdoor activities.</li>
+              <li>{t("uv-high-measure-4")}</li>
 
             </ol>
-            <p>Stay safe and protect your skin! 🌤️</p>
+            <p>{t("uv-stay-safe")}</p>
 
 
 
@@ -367,7 +405,7 @@ const Weather = () => {
     return <button title="Save the city" onClick={() => { saveCity(); }
     } className="button-save-city">
       <FontAwesomeIcon className="save-icon" style={{ "--fa-animation-iteration-count": "1" }} icon={faFloppyDisk} fade size="lg" />
-      <span className='save-city-span'>Save City</span></button>
+      <span className='save-city-span'>{t("save-city")}</span></button>
 
   };
 
@@ -375,16 +413,31 @@ const Weather = () => {
     const [play] = useSound(Click);
     return <button className="toggle_btn pl-3" onClick={() => { play(); setDarkMode(!isDarkMode); handleShowLightModal(); setExpanded(false) }}>
 
-      <FontAwesomeIcon size="2xl" className="sun" title='Switch the light mode on' icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
+      <FontAwesomeIcon size="2xl" className="sun" title={t("light-theme-title")} icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
     </button>
     // onClick={() => {setVisible(!visible)}}
   };
+
+  const ClickLanguage = () => {
+		const [play] = useSound(Click);
+		// const { soundsEnabled } = useSoundSettings();
+
+		return <div className="lang-wrapper">
+		<select title={t("langHint")} className="lang-choose" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
+    {languages.map(({ name, code }) => (
+      <option className="lang-option-text" key={code} value={code}> {name}</option>
+    ))}
+  </select>
+  <div className="custom-dropdown"></div> {/* Fake styled option */}
+		</div>
+	};
+
 
 
   const ClickThemeLight = () => {
     const [play] = useSound(Click);
     return <button className="toggle_btn pl-3" onClick={() => { play(); setDarkMode(!isDarkMode); handleShowDarkModal(); setExpanded(false) }}>
-      <FontAwesomeIcon size="2xl" className="moon" title='Switch the dark mode on' icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
+      <FontAwesomeIcon size="2xl" className="moon" title={t("dark-theme-title")} icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
     </button>
     // onClick={() => {setVisible(!visible)}}
   };
@@ -392,7 +445,7 @@ const Weather = () => {
   const SetMyLocation = () => {
     const [play] = useSound(Click);
     return <button className="toggle_btn location pl-3" onClick={() => { play(); FetchUserLocation(); handleShowLocationModal(); setExpanded(false) }}>
-      <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
+      <FontAwesomeIcon size="2xl" className="moon location_btn" title={t("set-location-title")} icon={faLocationDot} style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
     </button>
 
   }
@@ -420,13 +473,13 @@ const Weather = () => {
                 <input
                   className="city-search-input"
                   type="text"
-                  placeholder="Search by city name"
+                  placeholder={t("search-placeholder")}
                   value={city}
                   onChange={handleInputChange}
                 />
                 <SaveMyCity />
 
-                <button title="Clear the search field" onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
+                <button title={t("search-clear-title")} onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
                 {/* <Nav.Link title="User guide" onClick={() => setExpanded(false)} className="text-light pe-4" as={Link} to='/guide'>
       <FontAwesomeIcon className='question-icon' icon={faCircleQuestion} size="lg" />
 							</Nav.Link> */}
@@ -439,7 +492,10 @@ const Weather = () => {
               </div>
               <div className='toggle-location-container'>
                 <SetMyLocation />
+<div className="switcher pl-3 lang-active">
 
+								<ClickLanguage />
+							</div>
                 {isDarkMode ? (
                   <ClickThemeDark />) : (
                   <ClickThemeLight />
@@ -449,15 +505,15 @@ const Weather = () => {
             </div>
             <div className='weather-forecast-options'>
               <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
-                <span className="weather-forecast-option-text">All</span></Link>
+                <span className="weather-forecast-option-text">{t("menu-all")}</span></Link>
               <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
-                <span className="weather-forecast-option-text">Now</span></Link>
+                <span className="weather-forecast-option-text">{t("menu-now")}</span></Link>
 
               <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../complete-day-view"}  >
-                <span className="weather-forecast-option-text">Today</span></Link>
+                <span className="weather-forecast-option-text">{t("menu-today")}</span></Link>
 
               <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../week-view"}  >
-                <span className="weather-forecast-option-text">Week</span></Link>
+                <span className="weather-forecast-option-text">{t("menu-week")}</span></Link>
 
 
             </div>
@@ -798,7 +854,7 @@ const Weather = () => {
               </div>
 
               <div className="text">
-                CHECKING THE WEATHER FOR YOU... JUST A MOMENT
+                {t("loader-text")}
               </div>
             </div>
           }
@@ -807,8 +863,8 @@ const Weather = () => {
 
               <div className="pre-request-text">
                 <FontAwesomeIcon icon={faCircleInfo} beatFade size="lg" style={{ color: "#337cb4", }} />
-                <span className='pre-request-text-span'>Start by typing a <span className='city-name-pre'>city name</span>, a <span className='postal-code-pre'>postal code</span> or a <span className='postal-code-pre'>latitude / longitude pair</span> in the search field or clicking on the <em className='city-name-pre'>map icon </em>above. </span><br />
-                <span className='pre-request-text-example'>For example:</span><br />
+                <span className='pre-request-text-span'>{t("start-by")}<span className='city-name-pre'>{t("start-city-name")}</span>{t("start-text-1")}<span className='postal-code-pre'>{t("start-code")}</span>{t("start-text-2")}<span className='postal-code-pre'>{t("start-lat-lon")}</span>{t("start-text-3")}<em className='city-name-pre'>{t("start-map")}</em>{t("start-text-4")}</span><br />
+                <span className='pre-request-text-example'>{t("start-eg")}</span><br />
                 <p>
                   <ol className='pre-request-text-list'>
                     <li><em className="city-name-pre">Berlin</em></li>
@@ -835,8 +891,8 @@ const Weather = () => {
       {
         hourlyWeatherData ? (
           <>
-            <h3 className='day-24-heading'>24-hour weather forecast for <span className='day-7-location-span'>{hourlyWeatherData.location.name}  {hourlyWeatherData.location.country}</span></h3>
-            <h4 className='before-midday'>Before Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+            <h3 className='day-24-heading'>{t("forecast-24-text")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}  {hourlyWeatherData.location.country}</span></h3>
+            <h4 className='before-midday'>{t("before-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
 
 
             <div className='weather-7-container'>
@@ -1339,7 +1395,7 @@ const Weather = () => {
             {/*  */}
             {/*  */}
             {/*  */}
-            <h4 className='before-midday'>After Midday, <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+            <h4 className='before-midday'>{t("after-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
 
 
             <div className='weather-7-container'>
@@ -1857,7 +1913,7 @@ const Weather = () => {
       {
         weekWeatherData ? (
           <>
-            <h3 className='week-7-heading'>One week weather forecast for <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
+            <h3 className='week-7-heading'>{t("one-week-forecast-text")} <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
 
             <Carousel className="weekly-carousel " fade>
               <CarouselItem className="week-4-days">

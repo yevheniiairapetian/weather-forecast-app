@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CarouselItem, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from "react-i18next";
+
 import { faMagnifyingGlass, faX, faCircleInfo, faCircleQuestion, faLocationDot, faFloppyDisk, faGear, faSun, faMoon, faWind, faHandHoldingDroplet } from '@fortawesome/free-solid-svg-icons';
 export const TempMeasureSelect = ({ setIsCelcToggled }) => {
+  const { t, i18n } = useTranslation();
 
     const [showImperialModal, setShowImperialModal] = useState(false);
   const handleShowImperialModal = () => setShowImperialModal(true);
@@ -43,11 +46,11 @@ export const TempMeasureSelect = ({ setIsCelcToggled }) => {
   return (
     <div className="measurement-systems">
     <div className="temp-measure-select">
-      <button title="Switch to the metric system" className="temp-measure-select-button"
+      <button title={t("switch-si-title")} className="temp-measure-select-button"
         onClick={() => { setIsCelcToggled(true); toggleCelcBGColor(); handleShowMetricModal() }}>
         SI
       </button>
-      <button title="Switch to the imperial system" className="temp-measure-select-button"
+      <button title={t("switch-imp-title")} className="temp-measure-select-button"
         onClick={() => { setIsCelcToggled(false); toggleFahrBGColor(); handleShowImperialModal() }}>
         IMP
       </button>

@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import "./i18n";
+
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
 import { MainView } from './components/main-view/main-view';
