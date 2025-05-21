@@ -356,7 +356,7 @@ export const CurrentView = () => {
     const SetMyLocation = () => {
         const [play] = useSound(Click);
         return <button className="toggle_btn location pl-3" onClick={() => { play(); FetchUserLocation(); handleShowLocationModal(); setExpanded(false) }}>
-            <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} bounce style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
+            <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
         </button>
 
     }
