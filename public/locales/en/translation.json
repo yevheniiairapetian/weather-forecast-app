@@ -9,6 +9,7 @@
   "menu-week":"Week",
   "search-placeholder":"Search by city name",
   "save-city":"Save City",
+  "save-city-title":"Save the city",
   "rights-reserved":"All rights reserved, 2025",
   "privacy-policy":"Privacy Policy",
   "imprint":"Imprint",
@@ -51,7 +52,33 @@
   "switch-imp-title":"Switch to the imperial system",
   "switch-si-title":"Switch to the metric system",
   "search-clear-title":"Clear the search field",
-  "app_title":"Better Wetter App"
+  "app_title":"Better Wetter App",
 
+
+  "humidity":"Humidity",
+  "pressure":"Pressure",
+  "wind":"Wind",
+  "mbar":"mbar",
+  "inHg":"inHg",
+  "kmh":"km/h",
+  "Mih":"Mi/h",
+  "air-quality":"Air Quality",
+  "uv-index":"UV Index",
+  "rain-chance":"Chance of rain:",
+  "uv-extreme":"Extreme",
+  "uv-very-high":"Very High",
+  "uv-high":"High",
+  "uv-moderate":"Moderate",
+  "uv-good":"Good",
+  "uv-no-data":"UV Index Data Unavailable",
+  "air-extreme":"Extreme",
+  "air-hazardous":"Hazardous",
+  "air-very-unhealthy":"Very Unhealthy",
+  "air-unhealthy":"Unhealthy",
+  "air-poor":"Poor",
+  "air-moderate":"Moderate",
+  "air-good":"Good",
+  "am":"AM",
+  "pm":"PM"
 
 }

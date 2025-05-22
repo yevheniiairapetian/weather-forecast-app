@@ -95,12 +95,12 @@ const Weather = () => {
 
 const languages = [
 		{ name: "EN", code: "en" },
-		// { name: "DE", code: "de" },
-		// { name: "ES", code: "es" },
+		{ name: "DE", code: "de" },
+		{ name: "ES", code: "es" },
 		// { name: "PT", code: "pt" },
 		// { name: "IT", code: "it" },
 		// { name: "FR", code: "fr" },
-		// { name: "UK", code: "uk" },
+		{ name: "UK", code: "uk" },
 		// { name: "RU", code: "ru" },
 		// { name: "MK", code: "mk" },
 		// { name: "PL", code: "pl" },
@@ -402,7 +402,7 @@ useEffect(() => {
   };
 
   const SaveMyCity = () => {
-    return <button title="Save the city" onClick={() => { saveCity(); }
+    return <button title={t("save-city-title")} onClick={() => { saveCity(); }
     } className="button-save-city">
       <FontAwesomeIcon className="save-icon" style={{ "--fa-animation-iteration-count": "1" }} icon={faFloppyDisk} fade size="lg" />
       <span className='save-city-span'>{t("save-city")}</span></button>
@@ -553,7 +553,7 @@ useEffect(() => {
                               // type="image/svg"
                               src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
                             />
-                            <span className="info-preassure-subcard-text">AM</span>
+                            <span className="info-preassure-subcard-text">{t("am")}</span>
 
                           </div></p>
                         </div>
@@ -569,7 +569,7 @@ useEffect(() => {
                               // type="image/svg"
                               src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
                             />
-                            <span className="info-preassure-subcard-text">AM</span>
+                            <span className="info-preassure-subcard-text">{t("am")}</span>
 
                           </div></p>
                         </div>
@@ -591,7 +591,7 @@ useEffect(() => {
                               // type="image/svg"
                               src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
                             />
-                            <span className="info-preassure-subcard-text">PM</span>
+                            <span className="info-preassure-subcard-text">{t("pm")}</span>
 
                           </div></p>
                         </div>
@@ -606,7 +606,7 @@ useEffect(() => {
                               // type="image/svg"
                               src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
                             />
-                            <span className="info-preassure-subcard-text">PM</span>
+                            <span className="info-preassure-subcard-text">{t("pm")}</span>
                           </div>
                           </p>
 
@@ -648,29 +648,29 @@ useEffect(() => {
                   </div>
                   <div className="card-now-weather-subcard">
                     <div className='info-humidity-preassure-wind'>
-                      <Card.Title className="item-info text-center pb-1" ><p className="pressure-info pressure-info-1" ><div className='info-preassure-subcard info-preassure-subcard-1'><span className="info-preassure-subcard-text">Humidity</span>
+                      <Card.Title className="item-info text-center pb-1" ><p className="pressure-info pressure-info-1" ><div className='info-preassure-subcard info-preassure-subcard-1'><span className="info-preassure-subcard-text">{t("humidity")}</span>
                         {/* <FontAwesomeIcon title="Humidity icon" icon={faHandHoldingDroplet} style={{ color: "#FFD43B", }} />  */}
                         <div className='info-mbar-subcard-text'><span className='info-preassure'>{hourlyWeatherData.current.humidity}</span><span className='info-preassure-2'>%</span></div></div></p></Card.Title>
                       <Card.Title className="item-info text-center" >
                         <div>
                           {(isCelcToggled) &&
-                            <p className="pressure-info"><div className='info-preassure-subcard'><span className="info-preassure-subcard-text">Pressure</span>
+                            <p className="pressure-info"><div className='info-preassure-subcard'><span className="info-preassure-subcard-text">{t("pressure")}</span>
                               {/* <img className="barometer-icon" title="Barometer icon" src={barometer} alt="Barometer icon" />  */}
-                              <div className='info-mbar-subcard-text'><span className="info-preassure">{Math.round(hourlyWeatherData.current.pressure_mb)}</span><span className='info-preassure-2'> mbar</span></div></div></p>
+                              <div className='info-mbar-subcard-text'><span className="info-preassure">{Math.round(hourlyWeatherData.current.pressure_mb)}</span><span className='info-preassure-2'> {t("mbar")}</span></div></div></p>
                           } {(!isCelcToggled) &&
-                            <p className="pressure-info" ><div className='info-preassure-subcard'><span className='info-preassure-subcard-text'>Pressure</span><div className='info-mbar-subcard-text'>
+                            <p className="pressure-info" ><div className='info-preassure-subcard'><span className='info-preassure-subcard-text'>{t("pressure")}</span><div className='info-mbar-subcard-text'>
                               {/* <img className="barometer-icon" src={barometer} alt="Barometer icon" />  */}
-                              <div className='info-mbar-subcard-text'><span className="info-preassure">{Math.round(hourlyWeatherData.current.pressure_in)}</span><span className='info-preassure-2'> inHg</span></div></div>
+                              <div className='info-mbar-subcard-text'><span className="info-preassure">{Math.round(hourlyWeatherData.current.pressure_in)}</span><span className='info-preassure-2'> {t("inHg")}</span></div></div>
                             </div></p>
                           }
                         </div>
                       </Card.Title>
                       <Card.Title className="item-info text-center pb-1" >
-                        {(isCelcToggled) && <p className="pressure-info wind-information"><div className='info-preassure-subcard'><span className="info-preassure-subcard-text">Wind</span>
+                        {(isCelcToggled) && <p className="pressure-info wind-information"><div className='info-preassure-subcard'><span className="info-preassure-subcard-text">{t("wind")}</span>
                           {/* <FontAwesomeIcon title="Wind icon" icon={faWind} fade style={{ color: "#e3db0d", }} />  */}
-                          <div className='info-mbar-subcard-text'><span className='info-preassure'>{Math.round(hourlyWeatherData.current.wind_kph)}</span><span className='info-preassure-2'> km/h</span></div></div></p>} {(!isCelcToggled) && <p className="pressure-info"><div className='info-preassure-subcard'><span className='info-preassure-subcard-text'>Wind</span><div className='info-mbar-subcard-text'>
+                          <div className='info-mbar-subcard-text'><span className='info-preassure'>{Math.round(hourlyWeatherData.current.wind_kph)}</span><span className='info-preassure-2'> {t("kmh")}</span></div></div></p>} {(!isCelcToggled) && <p className="pressure-info"><div className='info-preassure-subcard'><span className='info-preassure-subcard-text'>{t("wind")}</span><div className='info-mbar-subcard-text'>
                             {/* <FontAwesomeIcon icon={faWind} fade style={{ color: "#e3db0d", }} />  */}
-                            <span className='info-preassure'>{Math.round(hourlyWeatherData.current.wind_mph)}</span><span className='info-preassure-2'> Mi/h</span></div></div></p>}
+                            <span className='info-preassure'>{Math.round(hourlyWeatherData.current.wind_mph)}</span><span className='info-preassure-2'> {t("Mih")}</span></div></div></p>}
 
 
 
@@ -684,7 +684,7 @@ useEffect(() => {
                       <Card.Title className="item-info text-center pb-1">
                         <p className="pressure-info">
                           <div className="info-uv-subcard">
-                            <span className="info-uv-subcard-text uv-index">UV Index</span>
+                            <span className="info-uv-subcard-text uv-index">{t("uv-index")}</span>
                             {hourlyWeatherData.current?.uv !== undefined ? (
                               <>
                                 <div className="info-uv-subcard-text">
@@ -693,22 +693,22 @@ useEffect(() => {
                                   </span>
 
                                   {hourlyWeatherData.current.uv >= 11 ? (
-                                    <span className="info-uv-text-extreme">Extreme</span>
+                                    <span className="info-uv-text-extreme">{t("uv-extreme")}</span>
                                   ) : hourlyWeatherData.current.uv >= 8 ? (
-                                    <span className="info-uv-text-very-high">Very High</span>
+                                    <span className="info-uv-text-very-high">{t("uv-very-high")}</span>
                                   ) : hourlyWeatherData.current.uv >= 6 ? (
-                                    <span className="info-uv-text-high">High</span>
+                                    <span className="info-uv-text-high">{t("uv-high")}</span>
                                   ) : hourlyWeatherData.current.uv >= 3 ? (
-                                    <span className="info-uv-text-moderate">Moderate</span>
+                                    <span className="info-uv-text-moderate">{t("uv-moderate")}</span>
                                   ) : (
-                                    <span className="info-uv-text-good">Good</span>
+                                    <span className="info-uv-text-good">{t("uv-good")}</span>
                                   )}
                                 </div>
                               </>
                             ) : (
                               <div className="info-uv-subcard-text">
                                 <span className="info-uv">--</span>
-                                <span className="info-uv-text-unavailable">UV Index Data Unavailable</span>
+                                <span className="info-uv-text-unavailable">{t("uv-no-data")}</span>
                               </div>
                             )}
 
@@ -720,7 +720,7 @@ useEffect(() => {
                       <Card.Title className="item-info text-center pb-1 air-polution-header">
                         <p className="pressure-info pressure-info-1">
                           <div className="info-uv-subcard">
-                            <span className="info-uv-subcard-text air-quality-index">Air Quality</span>
+                            <span className="info-uv-subcard-text air-quality-index">{t("air-quality")}</span>
                             {hourlyWeatherData.current?.air_quality ? (
                               <>
                                 <div className="info-uv-subcard-text">
@@ -729,49 +729,49 @@ useEffect(() => {
                                     hourlyWeatherData.current.air_quality.pm2_5 > 500 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 500 ||
                                     hourlyWeatherData.current.air_quality.no2 > 400) && (
-                                      <span className="co2-polution-extreme">Extreme</span>
+                                      <span className="co2-polution-extreme">{t("air-extreme")}</span>
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co > 2000 && hourlyWeatherData.current.air_quality.co <= 3000 ||
                                     hourlyWeatherData.current.air_quality.pm2_5 > 300 && hourlyWeatherData.current.air_quality.pm2_5 <= 500 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 425 && hourlyWeatherData.current.air_quality.pm10 <= 500 ||
                                     hourlyWeatherData.current.air_quality.no2 > 400) && (
-                                      <span className="co2-polution-hazard">Hazardous</span>
+                                      <span className="co2-polution-hazard">{t("air-hazardous")}</span>
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co > 1500 && hourlyWeatherData.current.air_quality.co <= 2000 ||
                                     hourlyWeatherData.current.air_quality.pm2_5 > 250 && hourlyWeatherData.current.air_quality.pm2_5 <= 300 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 355 && hourlyWeatherData.current.air_quality.pm10 <= 425 ||
                                     hourlyWeatherData.current.air_quality.no2 > 280 && hourlyWeatherData.current.air_quality.no2 <= 400) && (
-                                      <span className="co2-polution-very-unhealthy">Very Unhealthy</span>
+                                      <span className="co2-polution-very-unhealthy">{t("air-very-unhealthy")}</span>
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co > 1100 && hourlyWeatherData.current.air_quality.co <= 1500 ||
                                     hourlyWeatherData.current.air_quality.pm2_5 > 150 && hourlyWeatherData.current.air_quality.pm2_5 <= 250 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 255 && hourlyWeatherData.current.air_quality.pm10 <= 355 ||
                                     hourlyWeatherData.current.air_quality.no2 > 180 && hourlyWeatherData.current.air_quality.no2 <= 280) && (
-                                      <span className="co2-polution-unhealthy">Unhealthy</span>
+                                      <span className="co2-polution-unhealthy">{t("air-unhealthy")}</span>
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co > 800 && hourlyWeatherData.current.air_quality.co <= 1100 ||
                                     hourlyWeatherData.current.air_quality.pm2_5 > 56 && hourlyWeatherData.current.air_quality.pm2_5 <= 150 ||
                                     hourlyWeatherData.current.air_quality.pm10 > 155 && hourlyWeatherData.current.air_quality.pm10 <= 255 ||
                                     hourlyWeatherData.current.air_quality.no2 > 80 && hourlyWeatherData.current.air_quality.no2 <= 180) && (
-                                      <span className="co2-polution-poor">Poor</span>
+                                      <span className="co2-polution-poor">{t("air-poor")}</span>
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co >= 700 && hourlyWeatherData.current.air_quality.co <= 800 ||
                                     hourlyWeatherData.current.air_quality.pm2_5 >= 12 && hourlyWeatherData.current.air_quality.pm2_5 <= 56 ||
                                     hourlyWeatherData.current.air_quality.pm10 >= 54 && hourlyWeatherData.current.air_quality.pm10 <= 155 ||
                                     hourlyWeatherData.current.air_quality.no2 >= 40 && hourlyWeatherData.current.air_quality.no2 <= 80) && (
-                                      <span className="co2-polution-moderate">Moderate</span>
+                                      <span className="co2-polution-moderate">{t("air-moderate")}</span>
                                     )}
 
                                   {(hourlyWeatherData.current.air_quality.co <= 700 &&
                                     hourlyWeatherData.current.air_quality.pm2_5 <= 12 &&
                                     hourlyWeatherData.current.air_quality.pm10 <= 54 &&
                                     hourlyWeatherData.current.air_quality.no2 <= 40) && (
-                                      <span className="co2-polution-good">Good</span>
+                                      <span className="co2-polution-good">{t("air-good")}</span>
                                     )}
 
                                 </div>
@@ -940,7 +940,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[0].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[0].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
                       </Card.Body>
                     </Card>
@@ -977,7 +977,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[1].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[1].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1013,7 +1013,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[2].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[2].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1058,7 +1058,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[3].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[3].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1095,7 +1095,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[4].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[4].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1132,7 +1132,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[5].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[5].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1177,7 +1177,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[6].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[6].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1216,7 +1216,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[7].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[7].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1253,7 +1253,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[8].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[8].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1300,7 +1300,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[9].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[9].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1337,7 +1337,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[10].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[10].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1374,7 +1374,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[11].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[11].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1439,7 +1439,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[12].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[12].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1476,7 +1476,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[13].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[13].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1513,7 +1513,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[14].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[14].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1560,7 +1560,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[15].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[15].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1598,7 +1598,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[16].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[16].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1635,7 +1635,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[17].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[17].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1682,7 +1682,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[18].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[18].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1719,7 +1719,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[19].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[19].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1756,7 +1756,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[20].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[20].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1803,7 +1803,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[21].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[21].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1840,7 +1840,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[22].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[22].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1877,7 +1877,7 @@ useEffect(() => {
                           }
 
                         </Card.Title>
-                        <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[23].chance_of_rain}%</span>
+                        <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{hourlyWeatherData.forecast.forecastday[0].hour[23].chance_of_rain}%</span>
                         <img className="rain-icon" src={rain} alt="rain" />
 
                       </Card.Body>
@@ -1955,7 +1955,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
@@ -1991,7 +1991,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[1].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[1].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
@@ -2030,7 +2030,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[2].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[2].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
@@ -2074,7 +2074,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[3].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[3].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
@@ -2122,7 +2122,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[4].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[4].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
@@ -2164,7 +2164,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[5].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[5].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
@@ -2206,7 +2206,7 @@ useEffect(() => {
                         }
 
                       </Card.Title>
-                      <h4 className="chance-of-rain">Chance of rain: </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[6].day.daily_chance_of_rain}%</span>
+                      <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[6].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
 
                     </Card.Body>
