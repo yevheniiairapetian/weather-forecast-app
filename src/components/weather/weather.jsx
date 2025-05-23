@@ -20,6 +20,7 @@ import west from './img/west.svg';
 import east from './img/east.svg';
 import { TempMeasureSelect } from '../temp-measure-select/temp-measure-select';
 import northEast from './img/northEast.svg';
+import rainDrops from './img/rain-drops.svg';
 import southEast from './img/southEast.svg';
 import northWest from './img/northWest.svg';
 import southWest from './img/southWest.svg';
@@ -51,7 +52,7 @@ import Click from './src/click.mp3';
 
 
 const Weather = () => {
-	const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [userLocation, setUserLocation] = useState(null);
   const [isDarkMode, setDarkMode] = useDarkMode();
@@ -93,36 +94,36 @@ const Weather = () => {
       userDecisionTimeout: 5000,
     });
 
-const languages = [
-		{ name: "EN", code: "en" },
-		{ name: "DE", code: "de" },
-		{ name: "ES", code: "es" },
-		// { name: "PT", code: "pt" },
-		// { name: "IT", code: "it" },
-		// { name: "FR", code: "fr" },
-		{ name: "UK", code: "uk" },
-		// { name: "RU", code: "ru" },
-		// { name: "MK", code: "mk" },
-		// { name: "PL", code: "pl" },
-		// { name: "日本語", code: "ja" },
-		// { name: "中文", code: "zh" },
-		// { name: "한국어", code: "ko_KR" },
-		// { name: "TR", code: "tr" },
-		// { name: "العربية", code: "ar", dir: "rtl" },
+  const languages = [
+    { name: "EN", code: "en" },
+    { name: "DE", code: "de" },
+    { name: "ES", code: "es" },
+    // { name: "PT", code: "pt" },
+    // { name: "IT", code: "it" },
+    // { name: "FR", code: "fr" },
+    { name: "UK", code: "uk" },
+    // { name: "RU", code: "ru" },
+    // { name: "MK", code: "mk" },
+    // { name: "PL", code: "pl" },
+    // { name: "日本語", code: "ja" },
+    // { name: "中文", code: "zh" },
+    // { name: "한국어", code: "ko_KR" },
+    // { name: "TR", code: "tr" },
+    // { name: "العربية", code: "ar", dir: "rtl" },
 
-	];
-	const currentLocale = Cookies.get("i18next") || "en";
-	const currentLangObj = languages.find((lang) => lang.code === currentLocale);
+  ];
+  const currentLocale = Cookies.get("i18next") || "en";
+  const currentLangObj = languages.find((lang) => lang.code === currentLocale);
 
-	const [language, setLanguage] = useState(currentLocale);
+  const [language, setLanguage] = useState(currentLocale);
 
-	const handleChangeLocale = (e) => {
-		const lang = e.target.value;
-		setLanguage(lang);
-		i18n.changeLanguage(lang);
-	};
-  
- const [isCelcToggled, setIsCelcToggled] = useState(true);
+  const handleChangeLocale = (e) => {
+    const lang = e.target.value;
+    setLanguage(lang);
+    i18n.changeLanguage(lang);
+  };
+
+  const [isCelcToggled, setIsCelcToggled] = useState(true);
 
   function clearInput() {
 
@@ -161,15 +162,15 @@ const languages = [
     }
   };
 
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
   const fetchHourly = async () => {
     try {
@@ -202,12 +203,12 @@ const languages = [
     };
 
     // if (!isVisible) return null;
-useEffect(() => {
+    useEffect(() => {
 
 
-		document.body.dir = 'ltr';
-		document.title = t("app_title");
-	}, [currentLangObj, t]);
+      document.body.dir = 'ltr';
+      document.title = t("app_title");
+    }, [currentLangObj, t]);
     return (
       <>
 
@@ -419,18 +420,18 @@ useEffect(() => {
   };
 
   const ClickLanguage = () => {
-		const [play] = useSound(Click);
-		// const { soundsEnabled } = useSoundSettings();
+    const [play] = useSound(Click);
+    // const { soundsEnabled } = useSoundSettings();
 
-		return <div className="lang-wrapper">
-		<select title={t("langHint")} className="lang-choose" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
-    {languages.map(({ name, code }) => (
-      <option className="lang-option-text" key={code} value={code}> {name}</option>
-    ))}
-  </select>
-  <div className="custom-dropdown"></div> {/* Fake styled option */}
-		</div>
-	};
+    return <div className="lang-wrapper">
+      <select title={t("langHint")} className="lang-choose" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
+        {languages.map(({ name, code }) => (
+          <option className="lang-option-text" key={code} value={code}> {name}</option>
+        ))}
+      </select>
+      <div className="custom-dropdown"></div> {/* Fake styled option */}
+    </div>
+  };
 
 
 
@@ -487,15 +488,15 @@ useEffect(() => {
               </form>
               <div className="measurement-systems">
 
-               <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
+                <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
 
               </div>
               <div className='toggle-location-container'>
                 <SetMyLocation />
-<div className="switcher pl-3 lang-active">
+                <div className="switcher pl-3 lang-active">
 
-								<ClickLanguage />
-							</div>
+                  <ClickLanguage />
+                </div>
                 {isDarkMode ? (
                   <ClickThemeDark />) : (
                   <ClickThemeLight />
@@ -542,78 +543,80 @@ useEffect(() => {
                   <div className='info-sky-temp-icon'>
                     <div className='am-pm-cards-container'>
 
-                    <Card.Title className="temp-7-info-container text-center pb-1" >
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
 
-                      {(isDayTime) &&
-                        <div className="">
-                          <p className="pressure-info am-paragraph"><div className='am-pm-container'>
-                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+                        {(isDayTime) &&
+                          <div className="">
+                            <p className="pressure-info am-paragraph">
+                              <div className='am-pm-container'>
+                                {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
 
-                            <Card.Img className='w-100 card-image-7' variant='top'
-                              // type="image/svg"
-                              src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
-                            />
-                            <span className="info-preassure-subcard-text">{t("am")}</span>
+                                <Card.Img className='w-100 card-image-7' variant='top'
+                                  // type="image/svg"
+                                  src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                                />
+                                <span className="info-preassure-subcard-text">{t("am")}</span>
 
-                          </div></p>
-                        </div>
-
-                      }
-
-                      {(!isDayTime) &&
-                        <div className="am-pm-container">
-                          <p className="pressure-info am-paragraph"><div className='am-pm-container'>
-                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
-
-                            <Card.Img className='w-100 card-image-7' variant='top'
-                              // type="image/svg"
-                              src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
-                            />
-                            <span className="info-preassure-subcard-text">{t("am")}</span>
-
-                          </div></p>
-                        </div>
-                      }
-
-                    </Card.Title>
-
-
-
-
-                    <Card.Title className="temp-7-info-container text-center pb-1" >
-
-                      {(isDayTime) &&
-                        <div className="am-pm-container">
-                          <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
-                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
-
-                            <Card.Img className='w-100 card-image-7' variant='top'
-                              // type="image/svg"
-                              src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
-                            />
-                            <span className="info-preassure-subcard-text">{t("pm")}</span>
-
-                          </div></p>
-                        </div>
-                      }
-
-                      {(!isDayTime) &&
-                        <div className="am-pm-container">
-                          <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
-                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
-
-                            <Card.Img className='w-100 card-image-7' variant='top'
-                              // type="image/svg"
-                              src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
-                            />
-                            <span className="info-preassure-subcard-text">{t("pm")}</span>
+                              </div>
+                            </p>
                           </div>
-                          </p>
 
-                        </div>
-                      }
+                        }
 
-                    </Card.Title>
+                        {(!isDayTime) &&
+                          <div className="am-pm-container">
+                            <p className="pressure-info am-paragraph"><div className='am-pm-container'>
+                              {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={hourlyWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                              />
+                              <span className="info-preassure-subcard-text">{t("am")}</span>
+
+                            </div></p>
+                          </div>
+                        }
+
+                      </Card.Title>
+
+
+
+
+                      <Card.Title className="temp-7-info-container text-center pb-1" >
+
+                        {(isDayTime) &&
+                          <div className="am-pm-container">
+                            <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
+                              {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                              />
+                              <span className="info-preassure-subcard-text">{t("pm")}</span>
+
+                            </div></p>
+                          </div>
+                        }
+
+                        {(!isDayTime) &&
+                          <div className="am-pm-container">
+                            <p className="pressure-info pm-paragraph"><div className='am-pm-container'>
+                              {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(hourlyWeatherData.forecast.forecastday[0].hour[7].temp_f) + '°F'}</p>}
+
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={hourlyWeatherData.forecast.forecastday[0].hour[20].condition.icon}
+                              />
+                              <span className="info-preassure-subcard-text">{t("pm")}</span>
+                            </div>
+                            </p>
+
+                          </div>
+                        }
+
+                      </Card.Title>
                     </div>
 
                     <Card.Title className="temp-info-container text-center pb-1" >
@@ -1915,7 +1918,7 @@ useEffect(() => {
           <>
             <h3 className='week-7-heading'>{t("one-week-forecast-text")} <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
 
-            <Carousel className="weekly-carousel " fade>
+            <Carousel className="weekly-carousel day7-carousel" fade>
               <CarouselItem className="week-4-days">
                 <Stack
                   direction="horizontal"
@@ -1923,7 +1926,7 @@ useEffect(() => {
                   gap={4}
                 >
                   {/* <ExampleCarouselImage text="First slide" /> */}
-                  <Card id="" className=' card-7-forecast week-forecast' >
+                  <Card id="" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -1937,30 +1940,51 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[0].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[0].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[0].day.avgtemp_f) + '°F'}</p>}
+                        <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
 
+                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[0].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[0].hour[8].temp_f) + '°F'}</p>}
+                            {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[0].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[0].hour[21].temp_f) + '°F'}</p>}
+                          </div>
+                          <div className='week-condition-icon-container'>
+                            {(isDayTime) &&
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={weekWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                              />
+                            }
 
-                        {(isDayTime) &&
-                          <Card.Img className='w-100 card-image-7' variant='top'
-                            // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[0].day.condition.icon}
-                          />
-                        }
+                            {(!isDayTime) &&
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={weekWeatherData.forecast.forecastday[0].hour[8].condition.icon}
+                              />
+                            }
 
-                        {(!isDayTime) &&
-                          <Card.Img className='w-100 card-image-7' variant='top'
-                            // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[0].day.condition.icon}
-                          />
-                        }
+                            {(isDayTime) &&
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={weekWeatherData.forecast.forecastday[0].hour[21].condition.icon}
+                              />
+                            }
+
+                            {(!isDayTime) &&
+                              <Card.Img className='w-100 card-image-7' variant='top'
+                                // type="image/svg"
+                                src={weekWeatherData.forecast.forecastday[0].hour[21].condition.icon}
+                              />
+                            }
+                          </div>
+                        </div>
+
 
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%</span>
-                      <img className="rain-icon" src={rain} alt="rain" />
+                      <img className="rain-icon" src={{rainDrops}} alt="rain" />
 
                     </Card.Body>
                   </Card>
-                  <Card id="card" className=' card-7-forecast week-forecast' >
+                  <Card id="card" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -1974,21 +1998,41 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[1].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[1].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[1].day.avgtemp_f) + '°F'}</p>}
+                        <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[1].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[1].hour[8].temp_f) + '°F'}</p>}
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[1].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[1].hour[21].temp_f) + '°F'}</p>}
+</div>
+                          <div className='week-condition-icon-container'>
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[1].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[1].hour[8].condition.icon}
                           />
                         }
 
                         {(!isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[1].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[1].hour[8].condition.icon}
                           />
                         }
+                        {(isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[1].hour[21].condition.icon}
+                          />
+                        }
+
+                        {(!isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[1].hour[21].condition.icon}
+                          />
+                        }
+                        </div>
+                        </div>
 
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[1].day.daily_chance_of_rain}%</span>
@@ -1999,7 +2043,7 @@ useEffect(() => {
 
 
 
-                  <Card id="card" className=' card-7-forecast week-forecast' >
+                  <Card id="card" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -2013,22 +2057,42 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[2].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[2].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[2].day.avgtemp_f) + '°F'}</p>}
+                        
+                        <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[2].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[2].hour[8].temp_f) + '°F'}</p>}
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[2].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[2].hour[21].temp_f) + '°F'}</p>}
+</div>
+                          <div className='week-condition-icon-container'>
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[2].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[2].hour[8].condition.icon}
                           />
                         }
 
                         {(!isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[2].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[2].hour[8].condition.icon}
+                          />
+                        }
+                        {(isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[2].hour[21].condition.icon}
                           />
                         }
 
+                        {(!isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[2].hour[21].condition.icon}
+                          />
+                        }
+</div>
+</div>
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[2].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
@@ -2043,7 +2107,7 @@ useEffect(() => {
 
 
 
-                  <Card id="card" className=' card-7-forecast week-forecast' >
+                  <Card id="card" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -2057,22 +2121,41 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[3].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[3].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[3].day.avgtemp_f) + '°F'}</p>}
+                         <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[3].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[3].hour[8].temp_f) + '°F'}</p>}
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[3].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[3].hour[21].temp_f) + '°F'}</p>}
+</div>
+                          <div className='week-condition-icon-container'>
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[3].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[3].hour[8].condition.icon}
                           />
                         }
 
                         {(!isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[3].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[3].hour[8].condition.icon}
+                          />
+                        }
+                        {(isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[3].hour[21].condition.icon}
                           />
                         }
 
+                        {(!isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[3].hour[21].condition.icon}
+                          />
+                        }
+</div>
+</div>
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[3].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
@@ -2091,7 +2174,7 @@ useEffect(() => {
 
 
 
-                  <Card id="card" className=' card-7-forecast week-forecast' >
+                  <Card id="card" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -2105,22 +2188,41 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[4].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[4].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[4].day.avgtemp_f) + '°F'}</p>}
+                       <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[4].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[4].hour[8].temp_f) + '°F'}</p>}
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[4].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[4].hour[21].temp_f) + '°F'}</p>}
+</div>
+                          <div className='week-condition-icon-container'>
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[4].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[4].hour[8].condition.icon}
                           />
                         }
 
                         {(!isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[4].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[4].hour[8].condition.icon}
+                          />
+                        }
+                        {(isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[4].hour[21].condition.icon}
                           />
                         }
 
+                        {(!isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[4].hour[21].condition.icon}
+                          />
+                        }
+</div>
+</div>
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[4].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
@@ -2133,7 +2235,7 @@ useEffect(() => {
 
 
 
-                  <Card id="card" className=' card-7-forecast week-forecast' >
+                  <Card id="card" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -2147,22 +2249,41 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[5].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[5].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[5].day.avgtemp_f) + '°F'}</p>}
+                        <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[5].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[5].hour[8].temp_f) + '°F'}</p>}
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[5].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[5].hour[21].temp_f) + '°F'}</p>}
+</div>
+                          <div className='week-condition-icon-container'>
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[5].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[5].hour[8].condition.icon}
                           />
                         }
 
                         {(!isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[5].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[5].hour[8].condition.icon}
+                          />
+                        }
+                        {(isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[5].hour[21].condition.icon}
                           />
                         }
 
+                        {(!isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[5].hour[21].condition.icon}
+                          />
+                        }
+                        </div>
+                        </div>
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[5].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />
@@ -2175,7 +2296,7 @@ useEffect(() => {
 
 
 
-                  <Card id="card" className=' card-7-forecast week-forecast' >
+                  <Card id="card" className=' card-7-forecast day7 week-forecast' >
 
 
 
@@ -2189,22 +2310,41 @@ useEffect(() => {
                       <Card.Title className="item-info-7 text-center pb-1 " ><p className="sky-info-7" style={{ color: "whitesmoke" }}>{weekWeatherData.forecast.forecastday[6].day.condition.text}</p>
                       </Card.Title>
                       <Card.Title className="temp-7-info-container text-center pb-1" >
-                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[6].day.avgtemp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[6].day.avgtemp_f) + '°F'}</p>}
+                         <div className='week-am-pm-container'>
+                          <div className='week-temp-container'>
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[6].hour[8].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[6].hour[8].temp_f) + '°F'}</p>}
+                        {(isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[6].hour[21].temp_c) + '°C'}</p>} {(!isCelcToggled) && <p className="temperature-info-7" style={{ color: "whitesmoke" }}>{Math.round(weekWeatherData.forecast.forecastday[6].hour[21].temp_f) + '°F'}</p>}
+</div>
+                          <div className='week-condition-icon-container'>
 
                         {(isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[6].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[6].hour[8].condition.icon}
                           />
                         }
 
                         {(!isDayTime) &&
                           <Card.Img className='w-100 card-image-7' variant='top'
                             // type="image/svg"
-                            src={weekWeatherData.forecast.forecastday[6].day.condition.icon}
+                            src={weekWeatherData.forecast.forecastday[6].hour[8].condition.icon}
+                          />
+                        }
+                        {(isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[6].hour[21].condition.icon}
                           />
                         }
 
+                        {(!isDayTime) &&
+                          <Card.Img className='w-100 card-image-7' variant='top'
+                            // type="image/svg"
+                            src={weekWeatherData.forecast.forecastday[6].hour[21].condition.icon}
+                          />
+                        }
+</div>
+</div>
                       </Card.Title>
                       <h4 className="chance-of-rain">{t("rain-chance")} </h4><span className='chance-of-rain-data'>{weekWeatherData.forecast.forecastday[6].day.daily_chance_of_rain}%</span>
                       <img className="rain-icon" src={rain} alt="rain" />

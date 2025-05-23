@@ -459,6 +459,34 @@ nav.page-header.dark {
   animation: windSE 2.6s infinite;
 }
 
+
+.week-am-pm-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.week-temp-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.week-condition-icon-container{
+   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+
+.week-am-pm-container .temperature-info-7{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 @keyframes windSE {
   0% {
     transform: translateX(0) translateY(0);
@@ -516,6 +544,9 @@ nav.page-header.dark {
   animation: windNNE 2.6s infinite;
 }
 
+.dark .sky-info-7{
+  color: whitesmoke;
+}
 @keyframes windNNE {
   0% {
     transform: translateX(0) rotate(-14deg) translateY(0);
@@ -1135,7 +1166,11 @@ color: whitesmoke !important;
 }
 
 .dark .rain-icon {
-  content: url("./components/weather/img/rain-dark.png");
+  content: url("./components/weather/img/rain-drops.svg");
+}
+
+.rain-icon {
+  content: url("./components/weather/img/light-rain-drops.svg");
 }
 
 .got-it-button:hover {
@@ -1315,10 +1350,18 @@ div.week-container {
 }
 
 .carousel .sky-info-7 {
-  position: absolute;
-  top: 116px;
-  left: 10%;
+  display: flex !important;
+  align-self: center !important;
+  width: max-content;
+
   font-size: 20px;
+}
+
+.weekly-carousel p.sky-info-7 {
+  margin-top: 40px;
+  width: max-content;
+  display: flex !important;
+  align-self: center !important;
 }
 
 .carousel-item .card-image-7 {
@@ -1334,26 +1377,26 @@ div.week-container {
 
 .carousel .chance-of-rain {
   position: absolute;
-  top: 170px;
-  left: 12%;
+  top: 253px;
+  left: 20%;
   font-size: 20px;
 }
 
 .carousel .chance-of-rain-data {
   position: absolute;
-  top: 172px;
-  left: 42%;
+  top: 260px;
+    left: 78%;
   font-size: 24px;
 }
 
 .carousel-item {
-  height: 280px;
+  height: 350px;
 }
 
 .week-4-days .chance-of-rain-data {
   position: absolute;
-  top: 176px;
-  left: 52%;
+  top: 266px;
+    left: 78%;
   font-size: 24px;
 }
 
@@ -1977,9 +2020,9 @@ p.pressure-info-1{
 
   .carousel .chance-of-rain-data {
     position: absolute;
-    top: 210px;
-    left: 12%;
-    font-size: 24px;
+    top: 266px;
+    left: 78%;
+    font-size: 18px;
   }
 
 
@@ -2022,8 +2065,8 @@ p.pressure-info-1{
     width: 30px;
     height: 30px;
     position: absolute;
-    top: 220px;
-    left: 34%;
+    top: 240px;
+    left: 30%;
   }
 
   .carousel-item .card-image-7 {
@@ -2044,9 +2087,20 @@ p.pressure-info-1{
   .carousel .sky-info-7,
   .week-3-days .sky-info-7,
   .week-4-days .sky-info-7 {
-    margin: 14px auto !important;
+    margin: -8px auto !important;
     /* position: static !important; */
-    font-size: 18px;
+    font-size: 16px;
+    
+
+  }
+
+  .week-3-days .carousel .sky-info-7,
+  .week-3-days .sky-info-7,
+  .week-4-days .sky-info-7{
+    margin: 25px auto !important;
+    /* display: block !important; */
+    width: max-content;
+    
 
   }
 
@@ -2056,9 +2110,9 @@ p.pressure-info-1{
 
   .carousel .chance-of-rain-data {
     position: absolute;
-    top: 214px;
-    left: 50%;
-    font-size: 24px;
+    top: 240px;
+    left: 63%;
+    font-size: 18px;
   }
 }
 
@@ -2114,14 +2168,37 @@ p.pressure-info-1{
 
   }
 
+  .week-am-pm-container{
+    flex-direction: row;
+  }
+
+  
+
   .weather-city-7 {
     padding: 16px 6px !important;
   }
 
   .chance-of-rain,
-  .sky-info-7 {
+  .sky-info-7,
+  .weekly-carousel p.sky-info-7,
+  .weather-7-container p.sky-info-7 {
     display: none !important;
   }
+
+div.week-condition-icon-container{
+  margin-left: -50px !important;
+}
+
+.week-temp-container{
+  margin-left: -80px !important;
+  margin-right: 60px !important;
+
+}
+
+.week-temp-container .rain-icon, .chance-of-rain-data{
+  margin-left: -60px !important;
+
+}
 
   .gap-4 {
     gap: 0rem !important;
@@ -2186,6 +2263,7 @@ p.pressure-info-1{
     height: 20px;
     top: 12px;
     left: 31%;
+    margin-left: 30px;
   }
 
   .day-24-heading {
@@ -2338,7 +2416,10 @@ p.pressure-info-1{
 
 
   }
-
+ h2.weather-city-7 {
+        font-size: 13px !important;
+        
+    }
 
   .slider-stack-h {
     display: none;
@@ -2698,6 +2779,48 @@ div.toggle-location-container {
 }
 }
 
+@media screen and (max-width:410px) {
+.week-condition-icon-container, .week-temp-container{
+  flex-direction: row;
+}
+
+div.week-condition-icon-container h2.weather-city-7{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  /* width: 40px !important;; */
+}
+
+   
+
+.weather-city-7 span.day-7-week-day{
+  width: 52px !important;;
+
+}
+div.week-condition-icon-container{
+  margin-left: -75px !important;
+}
+div.week-condition-icon-container .week-temp-container p.temperature-info-7{
+  padding: 4px !important;
+}
+
+.carousel:not(.day7-carousel) .chance-of-rain-data, .carousel:not(.day7-carousel) .rain-icon, .card-7-forecast .rain-icon{
+  left: 44%;
+}
+
+
+
+.carousel:not(.day7-carousel) .chance-of-rain-data, .day7-carousel img.rain-icon{
+  left: 50% !important;
+  margin-left: -10px;
+}
+
+.chance-of-rain-data, .day7-carousel img.rain-icon{
+  left: 33% !important;
+  margin-left: -10px;
+}
+}
+
+
 @media screen and (max-width:400px) {
   .form-heading-container {
     flex-direction: column;
@@ -2715,7 +2838,9 @@ div.toggle-location-container {
   
   }
 
-  
+      .weather-city-7 {
+        font-size: 13px !important;
+    }
 
   .temp-measure-select {
     display: flex;
@@ -2761,6 +2886,10 @@ div.toggle-location-container {
     width: 70px;
     height: auto;
   }
+  .chance-of-rain-data, .day7-carousel img.rain-icon{
+  left: 33% !important;
+  margin-left: -10px;
+}
 }
 
 @media screen and (max-width:476px) {
@@ -3217,6 +3346,11 @@ img.card-image {
 .co2-polution-good, .co2-polution-satisfactory, .co2-polution-moderate, .co2-polution-poor, .co2-polution-unhealthy, .co2-polution-very-unhealthy, .co2-polution-hazard{
   margin-left: auto;
   margin-right: auto;
+}
+
+.carousel .weather-city-7{
+  width: 40px;
+    text-align: left;
 }
 }
 
