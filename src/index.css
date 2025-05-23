@@ -1358,7 +1358,14 @@ div.week-container {
 }
 
 .weekly-carousel p.sky-info-7 {
-  margin-top: 40px;
+  margin-top: 50px;
+  width: max-content;
+  display: flex !important;
+  align-self: center !important;
+}
+
+.week-3-days .carousel .sky-info-7, .week-3-days .sky-info-7, .week-4-days .sky-info-7{
+  margin-top: 50px;
   width: max-content;
   display: flex !important;
   align-self: center !important;
@@ -1400,12 +1407,12 @@ div.week-container {
   font-size: 24px;
 }
 
-.week-3-days .chance-of-rain-data {
+/* .week-3-days .chance-of-rain-data {
   position: absolute;
   top: 176px;
   left: 42%;
   font-size: 24px;
-}
+} */
 
 .week-3-days .temperature-info-7,
 .week-4-days .temperature-info-7 {
@@ -2101,9 +2108,11 @@ p.pressure-info-1{
     margin: 25px auto !important;
     /* display: block !important; */
     width: max-content;
-    
+    display: flex !important;
+    align-self: center !important;
 
   }
+
 
   .week-4-days .temperature-info-7 {
     font-size: 30px;
@@ -2312,12 +2321,17 @@ div.week-condition-icon-container{
     width: 91%;
 
   }
+  
 }
 
 @media screen and (max-width:980px) {
   .app-heading {
     font-size: 0px !important;
   }
+
+      .item-title {
+        width: 0px !important;
+    }
 
   .img-logo {
     display: inline-block;
@@ -2403,6 +2417,12 @@ div.week-condition-icon-container{
     font-size: 16px;
 
   }
+div.carousel .sky-info-7, .week-3-days .sky-info-7, .week-4-days .sky-info-7{
+  margin-top: 50px;
+  width: max-content;
+  display: flex !important;
+  align-self: center !important;
+}
 }
 
 
