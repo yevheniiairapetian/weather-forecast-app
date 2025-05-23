@@ -2334,7 +2334,7 @@ div.week-condition-icon-container{
     }
 
     .card-now-weather .item-title{
-    width: 100%;
+    width: 100% !important;
 
     }
 
