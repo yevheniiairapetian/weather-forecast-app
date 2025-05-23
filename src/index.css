@@ -2333,6 +2333,11 @@ div.week-condition-icon-container{
         width: 0px !important;
     }
 
+    .card-now-weather .item-title{
+    width: 100%;
+
+    }
+
   .img-logo {
     display: inline-block;
     width: 70px;
