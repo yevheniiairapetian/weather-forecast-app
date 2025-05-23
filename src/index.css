@@ -2151,7 +2151,16 @@ p.pressure-info-1{
   .app-heading {
     font-size: 0px !important;
   }
+.carousel-control-next-icon,
+.carousel-control-prev-icon{
+  position: absolute !important;
+  bottom: -27px !important;
+}
 
+.carousel-indicators{
+  bottom: -38px !important;
+
+}
   .img-logo {
     display: inline-block;
     width: 70px;
