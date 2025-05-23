@@ -79,8 +79,20 @@
   "air-poor":"Malo",
   "air-moderate":"Moderado",
   "air-good":"Bueno",
-  "am":"Mañana",
-  "pm":"Tarde"
+  
+    "am": "Mañ",
+    "pm": "Tar",
+
+
+
+
+  "day-sunday": "Dom",
+    "day-monday": "Lun",
+    "day-tuesday": "Mar",
+    "day-wednesday": "Mié",
+    "day-thursday": "Jue",
+    "day-friday": "Vie",
+    "day-saturday": "Sáb"
 
 
 }

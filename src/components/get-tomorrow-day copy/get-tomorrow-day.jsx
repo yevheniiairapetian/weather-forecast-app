@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { useTranslation } from "react-i18next";
 
 
  export const GetTomorrowDay = () =>{
+      const { t, i18n } = useTranslation();
+  
   let today = new Date();
 
   // Add one day to the current date
@@ -12,7 +15,15 @@ import React, { Component } from 'react';
   let dayOfWeek = tomorrow.getDay();
 
   // Array of day names
-let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const dayNames = [
+        t("day-sunday"),
+        t("day-monday"),
+        t("day-tuesday"),
+        t("day-wednesday"),
+        t("day-thursday"),
+        t("day-friday"),
+        t("day-saturday")
+    ];
 
 // Get the name of the day
 let tomorrowDayName = dayNames[dayOfWeek];

@@ -916,7 +916,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[0].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[0].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -955,7 +955,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[1].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[1].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -991,7 +991,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[2].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[2].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1036,7 +1036,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[3].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[3].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1073,7 +1073,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[4].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[4].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1110,7 +1110,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[5].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[5].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1155,7 +1155,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[6].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[6].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1193,7 +1193,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[7].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[7].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1231,7 +1231,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[8].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[8].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1278,7 +1278,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[9].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[9].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1315,7 +1315,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[10].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[10].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1352,7 +1352,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[11].time.split(" ")[1]} AM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[11].time.split(" ")[1]} {t("am")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1417,7 +1417,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[12].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[12].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1454,7 +1454,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[13].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[13].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1491,7 +1491,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[14].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[14].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1538,7 +1538,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[15].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[15].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1576,7 +1576,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[16].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[16].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1613,7 +1613,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[17].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[17].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1660,7 +1660,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[18].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[18].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1697,7 +1697,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[19].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[19].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1734,7 +1734,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[20].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[20].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1781,7 +1781,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[21].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[21].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1818,7 +1818,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[22].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[22].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>
@@ -1855,7 +1855,7 @@ const Weather = () => {
 
                       <Card.Body className={isDayTime ? "card-body moving-background-light" : "card-body moving-background-dark"}>
 
-                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time.split(" ")[1]} PM
+                        <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city-7">{hourlyWeatherData.forecast.forecastday[0].hour[23].time.split(" ")[1]} {t("pm")}
 
                           {/* <DisplayDate /> */}
                         </h2>

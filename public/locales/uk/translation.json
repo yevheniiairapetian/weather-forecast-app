@@ -78,8 +78,23 @@
   "air-poor":"Погана",
   "air-moderate":"Помірна",
   "air-good":"Добра",
-  "am":"Ранок",
-  "pm":"Вечір"
+  
+    "am": "Рн",
+    "pm": "Вч",
+
+
+
+
+  
+    "day-sunday": "Нд",
+    "day-monday": "Пн",
+    "day-tuesday": "Вт",
+    "day-wednesday": "Ср",
+    "day-thursday": "Чт",
+    "day-friday": "Пт",
+    "day-saturday": "Сб"
+
+
 
 
 }

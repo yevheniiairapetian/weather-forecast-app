@@ -79,8 +79,18 @@
   "air-poor":"Schlecht",
   "air-moderate":"Mäßig",
   "air-good":"Gut",
-  "am":"Vormittag",
-  "pm":"Nachmittag"
+  "am": "VM",
+  "pm": "NM",
+
+  
+    "day-sunday": "So",
+    "day-monday": "Mo",
+    "day-tuesday": "Di",
+    "day-wednesday": "Mi",
+    "day-thursday": "Do",
+    "day-friday": "Fr",
+    "day-saturday": "Sa"
+
 
 
 
