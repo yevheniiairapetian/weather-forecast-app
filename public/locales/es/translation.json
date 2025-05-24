@@ -92,7 +92,10 @@
     "day-wednesday": "Mié",
     "day-thursday": "Jue",
     "day-friday": "Vie",
-    "day-saturday": "Sáb"
+    "day-saturday": "Sáb",
+
+    "as-of":"a partir de"
+
 
 
 }

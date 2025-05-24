@@ -536,7 +536,7 @@ const Weather = () => {
               className=""
             >
               <div className='air-info-container card-now-weather'>
-                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} <p style={{ color: '#fbbc04' }}>as of <GetDay />, {hourlyWeatherData.location.localtime} </p>
+                <Card.Title id="card-title" className="item-title text-center fs-6 pb-3 pt-3"><h2 className="weather-city">{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country} <p style={{ color: '#fbbc04' }}>{t("as-of")} <GetDay />, {hourlyWeatherData.location.localtime} </p>
                 </h2>
                 </Card.Title>
                 <div className='weather-air-uv-container'>
