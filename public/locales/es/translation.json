@@ -98,7 +98,7 @@
 
 
   "default-city-set": " Ciudad predeterminada establecida en ",
-  "modal-confirm": "Aceptar",
+  "modal-confirm": "OK",
   "type-city-first": " Por favor, primero escriba un nombre de ciudad",
   "info-is-metric": " La información ahora se muestra en el sistema métrico",
   "info-is-imperial": " La información ahora se muestra en el sistema imperial",

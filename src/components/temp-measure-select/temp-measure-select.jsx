@@ -61,9 +61,9 @@ export const TempMeasureSelect = ({ setIsCelcToggled }) => {
             <Modal.Header closeButton>
               {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
             </Modal.Header>
-            <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the metric system</span>  </Modal.Body>
+            <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span style={{paddingRight:"50px"}} className='default-city-note'>{t("info-is-metric")}</span>  </Modal.Body>
     
-            <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>OK</Button>
+            <Button title={t("modal-confirm-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>{t("modal-confirm")}</Button>
     
           </Modal>
     
@@ -73,9 +73,9 @@ export const TempMeasureSelect = ({ setIsCelcToggled }) => {
             <Modal.Header closeButton>
               {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
             </Modal.Header>
-            <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the imperial system</span> </Modal.Body>
+            <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span style={{paddingRight:"50px"}} className='default-city-note'>{t("info-is-imperial")}</span> </Modal.Body>
     
-            <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>OK</Button>
+            <Button title={t("modal-confirm-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>{t("modal-confirm")}</Button>
     
           </Modal>
     </div>
