@@ -324,125 +324,128 @@ export const CompleteDayView = () => {
         // fetchWeekly();
     };
 
-    const SaveMyCity = () => {
-        return <button title="Save the city" onClick={() => { saveCity(); }
+     const SaveMyCity = () => {
+        return <button title={t("save-city-title")} onClick={() => { saveCity(); }
         } className="button-save-city">
-            <FontAwesomeIcon className="save-icon" style={{ "--fa-animation-iteration-count": "1" }} icon={faFloppyDisk} fade size="lg" />
-            <span className='save-city-span'>Save City</span></button>
-
-    };
-
-const ClickLanguage = () => {
-    const [play] = useSound(Click);
-    // const { soundsEnabled } = useSoundSettings();
-
-    return <div className="lang-wrapper">
-      <select title={t("langHint")} className="lang-choose" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
-        {languages.map(({ name, code }) => (
-          <option className="lang-option-text" key={code} value={code}> {name}</option>
-        ))}
-      </select>
-      <div className="custom-dropdown"></div> {/* Fake styled option */}
-    </div>
-  };
-
-    const ClickThemeDark = () => {
+          <FontAwesomeIcon className="save-icon" style={{ "--fa-animation-iteration-count": "1" }} icon={faFloppyDisk} fade size="lg" />
+          <span className='save-city-span'>{t("save-city")}</span></button>
+    
+      };
+    
+      const ClickThemeDark = () => {
         const [play] = useSound(Click);
         return <button className="toggle_btn pl-3" onClick={() => { play(); setDarkMode(!isDarkMode); handleShowLightModal(); setExpanded(false) }}>
-
-            <FontAwesomeIcon size="2xl" className="sun" title='Switch the light mode on' icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
+    
+          <FontAwesomeIcon size="2xl" className="sun" title={t("light-theme-title")} icon={faSun} fade style={{ color: "#FFD43B", "--fa-animation-iteration-count": "2" }} />
         </button>
         // onClick={() => {setVisible(!visible)}}
-    };
-
-
-    const ClickThemeLight = () => {
+      };
+    
+      const ClickLanguage = () => {
+        const [play] = useSound(Click);
+        // const { soundsEnabled } = useSoundSettings();
+    
+        return <div className="lang-wrapper">
+          <select title={t("langHint")} className="lang-choose" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
+            {languages.map(({ name, code }) => (
+              <option className="lang-option-text" key={code} value={code}> {name}</option>
+            ))}
+          </select>
+          <div className="custom-dropdown"></div> {/* Fake styled option */}
+        </div>
+      };
+    
+    
+    
+      const ClickThemeLight = () => {
         const [play] = useSound(Click);
         return <button className="toggle_btn pl-3" onClick={() => { play(); setDarkMode(!isDarkMode); handleShowDarkModal(); setExpanded(false) }}>
-            <FontAwesomeIcon size="2xl" className="moon" title='Switch the dark mode on' icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
+          <FontAwesomeIcon size="2xl" className="moon" title={t("dark-theme-title")} icon={faMoon} fade style={{ color: "#000000", "--fa-animation-iteration-count": "2" }} />
         </button>
         // onClick={() => {setVisible(!visible)}}
-    };
-
-    const SetMyLocation = () => {
+      };
+    
+      const SetMyLocation = () => {
         const [play] = useSound(Click);
         return <button className="toggle_btn location pl-3" onClick={() => { play(); FetchUserLocation(); handleShowLocationModal(); setExpanded(false) }}>
-            <FontAwesomeIcon size="2xl" className="moon location_btn" title='Set my current location' icon={faLocationDot} style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
+          <FontAwesomeIcon size="2xl" className="moon location_btn" title={t("set-location-title")} icon={faLocationDot} style={{ color: "whitesmoke", "--fa-animation-iteration-count": "1" }} />
         </button>
-
-    }
+    
+      }
     return (
         <div className='contain'>
 
-            <Navbar expanded={expanded} className="page-header" expand="xl" id="navigation">
-                <Container className="navigation">
-                    <ScrollToAnchor />
-                    <Navbar.Brand className="p-2 brand" as={Link} to="/" expand="lg">
-                        {/* <Nav.Link className="" as={Link} to='/'> */}
-                        <h1 onClick={() => setExpanded(false)}
-                            className="app-heading">Better Wetter<img className="img-logo" src={imgLogo} alt="Better Wetter App Logo" /></h1>
-
-
-                    </Navbar.Brand>
-                    <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} />
-
-                    <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                        <div className='form-heading-container'>
-                            <form className="weather-form" onSubmit={handleSubmit}>
-
-                                <input
-                                    className="city-search-input"
-                                    type="text"
-                                    placeholder="Search by city name"
-                                    value={city}
-                                    onChange={handleInputChange}
-                                />
-                                <SaveMyCity />
-
-                                <button title="Clear the search field" onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
-
-
-                            </form>
-                            <div className="measurement-systems">
-                            
-                                            <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
-                            
-                                          </div>
-                                          <div className='toggle-location-container'>
-                                            <SetMyLocation />
-                                            <div className="switcher pl-3 lang-active">
-                            
-                                              <ClickLanguage />
-                                            </div>
-                                            {isDarkMode ? (
-                                              <ClickThemeDark />) : (
-                                              <ClickThemeLight />
-                            
-                                            )}
-                                          </div>
-                        </div>
-                        <div className='weather-forecast-options'>
-                            <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
-                                <span className="weather-forecast-option-text">All</span></Link>
-                            <Nav.Link className="weather-forecast-option" as={Link} nClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
-                                <span className="weather-forecast-option-text">Now</span></Nav.Link>
-
-                            <Nav.Link className="weather-forecast-option" as={Link} nClick={() => setExpanded(!expanded)} to={"./"}  >
-                                <span className="weather-forecast-option-text">Today</span></Nav.Link>
-
-                            <Nav.Link className="weather-forecast-option" as={Link} nClick={() => setExpanded(!expanded)} to={"./../week-view"}  >
-                                <span className="weather-forecast-option-text">Week</span></Nav.Link>
-
-
-                        </div>
-
-                    </Navbar.Collapse>
-
-
-
-                </Container>
-
-            </Navbar>
+           <Navbar expanded={expanded} className="page-header" expand="xl" id="navigation">
+                   <Container className="navigation">
+                     <ScrollToAnchor />
+                     <Navbar.Brand className="p-2 brand" as={Link} to="/" expand="lg">
+                       {/* <Nav.Link className="" as={Link} to='/'> */}
+                       <h1 onClick={() => setExpanded(false)}
+                         className="app-heading">Better Wetter<img className="img-logo" src={imgLogo} alt="Better Wetter App Logo" /></h1>
+           
+           
+                     </Navbar.Brand>
+                     <Navbar.Toggle id="tgl" onClick={() => setExpanded(!expanded)} />
+           
+                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                       <div className='form-heading-container'>
+                         <form className="weather-form" onSubmit={handleSubmit}>
+           
+                           <input
+                             className="city-search-input"
+                             type="text"
+                             placeholder={t("search-placeholder")}
+                             value={city}
+                             onChange={handleInputChange}
+                           />
+                           <SaveMyCity />
+           
+                           <button title={t("search-clear-title")} onClick={clearInput} className="clear-input-button" type="button"> <FontAwesomeIcon className="clear-input-icon" icon={faX} fade size="lg" style={{ color: "#fff", "--fa-animation-iteration-count": "2" }} /></button>
+                           {/* <Nav.Link title="User guide" onClick={() => setExpanded(false)} className="text-light pe-4" as={Link} to='/guide'>
+                 <FontAwesomeIcon className='question-icon' icon={faCircleQuestion} size="lg" />
+                        </Nav.Link> */}
+           
+                         </form>
+                         <div className="measurement-systems">
+           
+                           <TempMeasureSelect setIsCelcToggled={setIsCelcToggled} />
+           
+                         </div>
+                         <div className='toggle-location-container'>
+                           <SetMyLocation />
+                           <div className="switcher pl-3 lang-active">
+           
+                             <ClickLanguage />
+                           </div>
+                           {isDarkMode ? (
+                             <ClickThemeDark />) : (
+                             <ClickThemeLight />
+           
+                           )}
+                         </div>
+                       </div>
+                       <div className='weather-forecast-options'>
+                         <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"/"}  >
+                           <span className="weather-forecast-option-text">{t("menu-all")}</span></Link>
+                         <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
+                           <span className="weather-forecast-option-text">{t("menu-now")}</span></Link>
+           
+                         <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../complete-day-view"}  >
+                           <span className="weather-forecast-option-text">{t("menu-today")}</span></Link>
+           
+                         <Link className="weather-forecast-option" onClick={() => setExpanded(!expanded)} to={"./../week-view"}  >
+                           <span className="weather-forecast-option-text">{t("menu-week")}</span></Link>
+           
+           
+                       </div>
+           
+                     </Navbar.Collapse>
+           
+           
+           
+                   </Container>
+           
+                 </Navbar>
 
            
             
@@ -959,7 +962,7 @@ const ClickLanguage = () => {
             
                         <div className='weather-7-container'>
             
-                          <Carousel fade>
+                          <Carousel style={{marginBottom:"50px"}} fade>
                             <Carousel.Item>
                               <Stack
                                 direction="horizontal"
@@ -1527,85 +1530,85 @@ const ClickLanguage = () => {
             }
             <Footer />
             <Modal
-
-                className="favorite-modal" show={showCityModal} onHide={handleCloseCityModal}>
-                <Modal.Header closeButton>
-                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Default city set to </span>
-                    {hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
-                </Modal.Body>
-                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseCityModal}>OK</Button>
-
-            </Modal>
-
-            <Modal
-
-                className="favorite-modal" show={showFailedCityModal} onHide={handleCloseFailedCityModal}>
-                <Modal.Header closeButton>
-                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Please first type a city name</span> </Modal.Body>
-
-                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseFailedCityModal}>OK</Button>
-
-            </Modal><Modal
-
-                className="favorite-modal" show={showMetricModal} onHide={handleCloseMetricModal}>
-                <Modal.Header closeButton>
-                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the metric system</span>  </Modal.Body>
-
-                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>OK</Button>
-
-            </Modal>
-
-            <Modal
-
-                className="favorite-modal" show={showImperialModal} onHide={handleCloseImperialModal}>
-                <Modal.Header closeButton>
-                    {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>Info is now displayed in the imperial system</span> </Modal.Body>
-
-                <Button title="Confirm" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>OK</Button>
-
-            </Modal>
-
-            <Modal
-
-                className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in dark mode</Modal.Body>
-
-                <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>OK</Button>
-
-            </Modal>
-            <Modal
-
-                className="favorite-modal" show={showLocationModal} onHide={handleCloseLocationModal}>
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />
-                    <span className=''> The weather is being shown for your location: </span> <br />{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
-                </Modal.Body>
-
-                <Button title="Close the notification window" className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseLocationModal}>OK</Button>
-
-            </Modal>
-            <Modal
-
-                className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /> You are now in light mode
-
-                </Modal.Body>
-
-                <Button title="Close the notification window" className="got-it-button light-modal-button" onClick={handleCloseLightModal}>OK</Button>
-            </Modal>
+            
+                    className="favorite-modal" show={showCityModal} onHide={handleCloseCityModal}>
+                    <Modal.Header closeButton>
+                      {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>{t("default-city-set")}</span>
+                      {hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+                    </Modal.Body>
+                    <Button title={t("modal-confirm-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseCityModal}>{t("modal-confirm")}</Button>
+            
+                  </Modal>
+            
+                  <Modal
+            
+                    className="favorite-modal" show={showFailedCityModal} onHide={handleCloseFailedCityModal}>
+                    <Modal.Header closeButton>
+                      {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>{t("type-city-first")}</span> </Modal.Body>
+            
+                    <Button title={t("modal-confirm-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseFailedCityModal}>{t("modal-confirm")}</Button>
+            
+                  </Modal><Modal
+            
+                    className="favorite-modal" show={showMetricModal} onHide={handleCloseMetricModal}>
+                    <Modal.Header closeButton>
+                      {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>{t("info-is-metric")}</span>  </Modal.Body>
+            
+                    <Button title={t("modal-confirm-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseMetricModal}>{t("modal-confirm")}</Button>
+            
+                  </Modal>
+            
+                  <Modal
+            
+                    className="favorite-modal" show={showImperialModal} onHide={handleCloseImperialModal}>
+                    <Modal.Header closeButton>
+                      {/* <Modal.Title className="text-success">Favorites</Modal.Title> */}
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" /><span className='default-city-note'>{t("info-is-imperial")}</span> </Modal.Body>
+            
+                    <Button title={t("modal-confirm-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseImperialModal}>{t("modal-confirm")}</Button>
+            
+                  </Modal>
+            
+                  <Modal
+            
+                    className="favorite-modal" show={showDarkModal} onHide={handleCloseDarkModal}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />{t("dark-mode-activated")}</Modal.Body>
+            
+                    <Button title={t("close-modal-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseDarkModal}>{t("modal-confirm")}</Button>
+            
+                  </Modal>
+                  <Modal
+            
+                    className="favorite-modal" show={showLocationModal} onHide={handleCloseLocationModal}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white dark-modal-body"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />
+                      <span className=''>{t("weather-is-for-location")}</span> <br />{hourlyWeatherData && (<span className='default-city'>{hourlyWeatherData.location.name}, {hourlyWeatherData.location.country}</span>)}
+                    </Modal.Body>
+            
+                    <Button title={t("close-modal-title")} className="got-it-button text-dark bg-white dark-modal-button" onClick={handleCloseLocationModal}>{t("modal-confirm")}</Button>
+            
+                  </Modal>
+                  <Modal
+            
+                    className="favorite-modal" show={showLightModal} onHide={handleCloseLightModal}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body className="text-dark bg-white"><FontAwesomeIcon className="pr-2" icon={faCircleInfo} fade style={{ color: "#529fcc", }} size="lg" />{t("light-mode-activated")}
+            
+                    </Modal.Body>
+            
+                    <Button title={t("close-modal-title")} className="got-it-button light-modal-button" onClick={handleCloseLightModal}>{t("modal-confirm")}</Button>
+                  </Modal>
 
         </div >
 

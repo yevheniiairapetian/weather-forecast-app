@@ -90,7 +90,20 @@
   "day-saturday":"Sat",
 
 
-  "as-of":"as of"
+  "as-of":"as of",
 
 
+
+  "default-city-set":" Default city set to ",
+  "modal-confirm":"OK",
+  "type-city-first":" Please first type a city name",
+  "info-is-metric":" Info is now displayed in the metric system",
+  "info-is-imperial":" Info is now displayed in the imperial system",
+  "modal-confirm-title":"Confirm",
+  "dark-mode-activated":" You are now in dark mode",
+  "light-mode-activated":"You are now in light mode",
+  "close-modal-title":"Close",
+  "weather-is-for-location":" The weather is being shown for your location: "
+
+    
 }

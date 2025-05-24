@@ -8,7 +8,7 @@
   "menu-today":"Hoy",
   "menu-week":"7d",
   "search-placeholder":"Buscar por nombre de ciudad",
-  "save-city":"Guardar ciudad",
+  "save-city":"Guardar",
   "save-city-title":"Guardar la ciudad",
   "rights-reserved":"Todos los derechos reservados, 2025",
   "privacy-policy":"Política de privacidad",
@@ -94,7 +94,19 @@
     "day-friday": "Vie",
     "day-saturday": "Sáb",
 
-    "as-of":"a partir de"
+    "as-of":"a partir de",
+
+
+  "default-city-set": " Ciudad predeterminada establecida en ",
+  "modal-confirm": "Aceptar",
+  "type-city-first": " Por favor, primero escriba un nombre de ciudad",
+  "info-is-metric": " La información ahora se muestra en el sistema métrico",
+  "info-is-imperial": " La información ahora se muestra en el sistema imperial",
+  "modal-confirm-title": "Confirmar",
+  "dark-mode-activated": " Ahora estás en el modo oscuro",
+  "light-mode-activated": " Ahora estás en el modo claro",
+  "close-modal-title": "Cerrar",
+  "weather-is-for-location": " El clima se muestra para tu ubicación: "
 
 
 

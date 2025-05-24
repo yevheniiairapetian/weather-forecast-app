@@ -94,7 +94,22 @@
     "day-friday": "Пт",
     "day-saturday": "Сб",
 
-    "as-of":"cтаном на"
+    "as-of":"cтаном на",
+
+
+  
+  "default-city-set": " Місто за замовчуванням встановлено на ",
+  "modal-confirm": "OK",
+  "type-city-first": " Будь ласка, спершу введіть назву міста",
+  "info-is-metric": " Інформація тепер відображається у метричній системі",
+  "info-is-imperial": " Інформація тепер відображається в імперській системі",
+  "modal-confirm-title": "Підтвердити",
+  "dark-mode-activated": " Ви тепер у темному режимі",
+  "light-mode-activated": " Ви тепер у світлому режимі",
+  "close-modal-title": "Закрити",
+  "weather-is-for-location": " Погода показується для вашого розташування: "
+
+
 
 
 
