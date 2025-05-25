@@ -18,6 +18,38 @@ body {
 
 }
 
+.switcher-not-found{
+  display: flex;
+  flex-direction: row;
+  /* justify-self: flex-end; */
+  align-self: flex-end;
+  
+}
+
+div.navigation.not-found-container.container.show{
+  height:150px !important;
+}
+
+div.justify-content-end.navbar-collapse.collapse.show{
+  height:60px !important;
+}
+
+.picture-404 {
+    z-index: -1;
+    border-radius: 10%;
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.nav-link-not-found{
+  color: whitesmoke !important;
+}
+
 .am-pm-cards-container{
   display: flex;
   flex-direction: row;
@@ -619,6 +651,10 @@ nav.page-header.dark {
   animation-timing-function: linear;
 }
 
+.not-found-menu-text.weather-forecast-option-text{
+  color: white !important;
+}
+
 #sun path {
   stroke-width: 0.18;
   fill: #9ea1a4;
@@ -843,7 +879,7 @@ span.pre-request-text-span {
 }
 
 .footer-info-title {
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 16px;
 }
 
@@ -2062,6 +2098,8 @@ p.pressure-info-1{
     font-size: 0px !important;
   }
 
+
+
   .img-logo {
     display: inline-block;
     width: 70px;
@@ -2161,6 +2199,23 @@ p.pressure-info-1{
   .app-heading {
     font-size: 0px !important;
   }
+  
+    .footer-info-title {
+  
+  /* margin-top: 26px !important; */
+}
+.picture-404 {
+    z-index: -1;
+    border-radius: 10%;
+    width: 60%;
+    max-width: 400px;
+    height: auto;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .carousel-control-next-icon,
 .carousel-control-prev-icon{
   position: absolute !important;
@@ -2447,7 +2502,7 @@ div.carousel .sky-info-7, .week-3-days .sky-info-7, .week-4-days .sky-info-7{
 
 @media screen and (max-width:700px) {
   .footer {
-    height: 170px !important;
+    height: 200px !important;
     margin-top: auto;
 
 
@@ -2765,7 +2820,7 @@ margin-bottom: 60px !important;
     padding-top: 25px !important;
     padding-bottom: 25px !important;
     margin-top: auto;
-    height: 170px !important;
+    height: 200px !important;
   }
 
   .weather-7-container {

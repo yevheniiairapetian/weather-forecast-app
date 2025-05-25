@@ -103,7 +103,21 @@
   "dark-mode-activated":" You are now in dark mode",
   "light-mode-activated":"You are now in light mode",
   "close-modal-title":"Close",
-  "weather-is-for-location":" The weather is being shown for your location: "
+  "weather-is-for-location":" The weather is being shown for your location: ",
+
+  "notFound":"The page you were looking for doesn't exist",
+  "returnHomeParagraph":"Let's get you back ",
+  "returnHomeLink":"Home",
+
+  "content-according-to":"Content according to §5 DDG",
+
+
+  
+  "contact": "Contact details",
+  "tel": "Phone number:",
+  "email": "Email:",
+  "powered-by": "Source:"
+
 
     
 }

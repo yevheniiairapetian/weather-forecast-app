@@ -103,7 +103,22 @@
   "dark-mode-activated": " Sie befinden sich jetzt im Dunkelmodus",
   "light-mode-activated": " Sie befinden sich jetzt im Lichtmodus",
   "close-modal-title": "Schließen",
-  "weather-is-for-location": " Das Wetter wird für Ihren Standort angezeigt: "
+  "weather-is-for-location": " Das Wetter wird für Ihren Standort angezeigt: ",
+
+
+  
+  "notFound": "Die Seite, die Sie gesucht haben, existiert nicht",
+  "returnHomeParagraph": "Lassen Sie uns Sie zurück ",
+  "returnHomeLink": "nach Hause bringen",
+
+
+  "content-according-to":"Inhalte gemäß §5 DDG",
+
+
+  "contact":"Kontaktdaten",
+  "tel":"Telefonnummer:",
+  "email":"E-Mail:",
+  "powered-by":"Quelle:"
 
 
 

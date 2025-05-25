@@ -39,8 +39,10 @@ export default () => {
       window.document.querySelector(".footer").classList.add(className);
       window.document.querySelector(".footer-app-name").classList.add(className);
       window.document.querySelector(".clear-input-icon").classList.add(className);
-      // window.document.querySelector(".impressum-section").classList.add(className);
-     
+      // window.document.querySelector(".container-404").classList.add(className);
+      // window.document.querySelector(".main-information_container").classList.add(className);
+
+      
       
       
     } else {
@@ -57,7 +59,10 @@ export default () => {
       window.document.querySelector(".footer").classList.remove(className);
       window.document.querySelector(".footer-app-name").classList.remove(className);
       window.document.querySelector(".clear-input-icon").classList.remove(className);
-      // window.document.querySelector(".impressum-section").classList.remove(className);
+      // window.document.querySelector(".container-404").classList.remove(className);
+      // window.document.querySelector(".main-information_container").classList.remove(className);
+
+      
      
       
       

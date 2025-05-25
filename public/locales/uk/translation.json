@@ -107,7 +107,22 @@
   "dark-mode-activated": " Ви тепер у темному режимі",
   "light-mode-activated": " Ви тепер у світлому режимі",
   "close-modal-title": "Закрити",
-  "weather-is-for-location": " Погода показується для вашого розташування: "
+  "weather-is-for-location": " Погода показується для вашого розташування: ",
+
+
+  
+  "notFound": "Сторінка, яку Ви шукали, не існує",
+  "returnHomeParagraph": "Давайте повернемо вас назад на ",
+  "returnHomeLink": "Головну",
+
+  "content-according-to":"Зміст відповідно до §5 DDG",
+
+
+
+  "contact": "Контактні дані",
+  "tel": "Номер телефону:",
+  "email": "Електронна пошта:",
+  "powered-by": "Джерело:"
 
 
 

@@ -12,6 +12,7 @@ import { ImpressumView } from './../impressum-view/impressum-view';
 import { CurrentView } from '../current-view/current-view';
 import { WeekView } from '../week-view/week-view';
 import { CompleteDayView } from '../complete-day-view/complete-day-view';
+import { PageNotFoundView } from '../page-not-found-view/page-not-found-view';
 
 export const MainView = () => {
 
@@ -153,6 +154,25 @@ export const MainView = () => {
             </>
           }
         />
+
+        <Route
+        
+              path="/*"
+              
+              element={
+              <>
+              <Col>
+              <PageNotFoundView  />
+              {/* <Snowfall/> */}
+
+          </Col>
+              <ScrollToTop />
+<ScrollToTopButton/>
+            
+              </>
+            }
+            
+            />
 
       </Routes>
 

@@ -106,7 +106,25 @@
   "dark-mode-activated": " Ahora estás en el modo oscuro",
   "light-mode-activated": " Ahora estás en el modo claro",
   "close-modal-title": "Cerrar",
-  "weather-is-for-location": " El clima se muestra para tu ubicación: "
+  "weather-is-for-location": " El clima se muestra para tu ubicación: ",
+
+
+  
+  "notFound": "La página que estabas buscando no existe",
+  "returnHomeParagraph": "Vamos a llevarte de vuelta a ",
+  "returnHomeLink": "Casa",
+
+  "content-according-to":"Contenido conforme al §5 DDG",
+
+
+  
+  "contact": "Datos de contacto",
+  "tel": "Número de teléfono:",
+  "email": "Correo electrónico:",
+  "powered-by": "Fuente:"
+
+
+
 
 
 
