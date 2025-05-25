@@ -99,14 +99,14 @@ export const ImpressumView = () => {
 
 
               </div>
-              <div className='toggle-location-container'>
+              <div className='toggle-location-container not-found-toggle-location'>
                 {/* <SetMyLocation /> */}
                 
                 
               </div>
 
 
-                        <div className='weather-forecast-options'>
+                        <div className='weather-forecast-options not-found-options'>
                                       <Link className="weather-forecast-option nav-link-not-found" onClick={() => setExpanded(!expanded)} to={"/"}  >
                                         <span  className="weather-forecast-option-text not-found-menu-text">{t("menu-all")}</span></Link>
                                       <Link className="weather-forecast-option nav-link-not-found" onClick={() => setExpanded(!expanded)} to={"./../current-view"}  >

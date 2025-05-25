@@ -27,10 +27,10 @@ body {
 }
 
 div.navigation.not-found-container.container.show{
-  height:150px !important;
+  height:180px !important;
 }
 
-div.justify-content-end.navbar-collapse.collapse.show{
+div.justify-content-end.navbar-collapse.collapse.not-found-nav.show{
   height:60px !important;
 }
 
@@ -649,6 +649,8 @@ nav.page-header.dark {
 #cloud path {
   fill: #efefef;
 }
+
+
 
 #sun {
   margin-left: -10px;
@@ -2036,6 +2038,11 @@ p.pressure-info-1{
     margin-left: 40px;
   }
 
+  .not-found-options{
+    margin-left: 48px !important;
+
+} 
+
   .form-heading-container {
     width: 92.5%;
     margin-left: 46px;
@@ -2513,6 +2520,10 @@ div.carousel .sky-info-7, .week-3-days .sky-info-7, .week-4-days .sky-info-7{
     margin-left: 22px !important;
 
   }
+  .not-found-options{
+    margin-left: 48px !important;
+
+} 
 }
 
 
@@ -2691,7 +2702,10 @@ margin-bottom: 60px !important;
     /* width: 80px; */
     /* height: 42px; */
   }
+.not-found-options{
+    left: 10px !important;
 
+} 
   .weather-form {
     border: none;
     padding: 0px 8px;
@@ -2881,13 +2895,16 @@ div.toggle-location-container {
     opacity: 0.8;
   }
 
+  div.not-found-toggle-location.toggle-location-container{
+  background-color: transparent !important;
+}
   div.toggle-location-container:hover {
     opacity: 1;
     transition: all 0.2s ease-in;
   }
 
   .lang-choose{
-    width:42px;
+    width:48px;
   }
 .toggle_btn{
   margin-right: 5px;
@@ -3179,6 +3196,11 @@ bottom: -38px;
     position: relative;
     top: -11px !important;
     left: 97px !important;
+  }
+
+  .not-found-options{
+    left: 12px !important;
+
   }
 
   .toogle_btn {

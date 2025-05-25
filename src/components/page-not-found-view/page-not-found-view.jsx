@@ -78,7 +78,7 @@ export const PageNotFoundView = () => {
         <div >
 
       <Navbar expanded={expanded} className="page-header" expand="xl" id="navigation">
-                 <Container className="navigation not-found-container">
+                       <Container className="navigation not-found-container">
                           <ScrollToAnchor />
                           <Navbar.Brand className="p-2 brand" as={Link} to="/" expand="lg">
                             {/* <Nav.Link className="" as={Link} to='/'> */}
@@ -95,14 +95,14 @@ export const PageNotFoundView = () => {
 
 
               </div>
-              <div className='toggle-location-container'>
+              <div className='toggle-location-container not-found-toggle-location'>
                 {/* <SetMyLocation /> */}
                 
                 
               </div>
 
 
-                        <div className='weather-forecast-options'>
+                        <div className='weather-forecast-options not-found-options'>
                                       <Link className="weather-forecast-option nav-link-not-found" onClick={() => setExpanded(!expanded)} to={"/"}  >
                                         <span  className="weather-forecast-option-text not-found-menu-text">{t("menu-all")}</span></Link>
                                       <Link className="weather-forecast-option nav-link-not-found" onClick={() => setExpanded(!expanded)} to={"./../current-view"}  >
