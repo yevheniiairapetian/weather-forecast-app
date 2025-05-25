@@ -1,8 +1,7 @@
 {
-  "forecast-24-text":"24-hour weather forecast for",
-  "before-midday":"Before Midday, ",
-  "after-midday":"After Midday, ",
-  "one-week-forecast-text":"One week weather forecast for",
+  "forecast-24-text":"24-hour weather forecast for today, ",
+  "forecasts":"Weather forecasts for ",
+  "one-week-forecast-text":"One week forecast",
   "menu-all":"All",
   "menu-now":"Now",
   "menu-today":"Today",

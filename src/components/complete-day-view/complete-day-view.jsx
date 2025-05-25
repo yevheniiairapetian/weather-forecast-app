@@ -453,13 +453,13 @@ export const CompleteDayView = () => {
                   {
                     hourlyWeatherData ? (
                       <>
-                        <h3 className='day-24-heading'>{t("forecast-24-text")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}  {hourlyWeatherData.location.country}</span></h3>
-                        <h4 className='before-midday'>{t("before-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+                        <h3 className='day-24-heading'>{t("forecasts")} <span className='day-7-location-span'>{hourlyWeatherData.location.name},  {hourlyWeatherData.location.country}</span></h3>
+                        <h4 className='before-midday'>{t("forecast-24-text")} <span className='day-7-location-span'> <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
             
             
                         <div className='weather-7-container'>
             
-                          <Carousel
+                          <Carousel style={{marginBottom:"50px"}}
             
                             fade>
                             <CarouselItem>
@@ -943,11 +943,11 @@ export const CompleteDayView = () => {
                                 </Card>
                               </Stack>
                             </CarouselItem>
-                          </Carousel>
+                          {/* </Carousel> */}
             
             
             
-                        </div>
+                        {/* </div> */}
             
             
             
@@ -957,12 +957,12 @@ export const CompleteDayView = () => {
                         {/*  */}
                         {/*  */}
                         {/*  */}
-                        <h4 className='before-midday'>{t("after-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+                        {/* <h4 className='before-midday'>{t("after-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4> */}
             
             
-                        <div className='weather-7-container'>
+                        {/* <div className='weather-7-container'> */}
             
-                          <Carousel style={{marginBottom:"50px"}} fade>
+                          {/* <Carousel style={{marginBottom:"50px"}} fade> */}
                             <Carousel.Item>
                               <Stack
                                 direction="horizontal"

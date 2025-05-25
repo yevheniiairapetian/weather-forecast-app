@@ -1,8 +1,10 @@
 {
-  "forecast-24-text":"Прогноз погоди на 24 години для",
-  "before-midday":"До полудня, ",
-  "after-midday":"Після полудня, ",
-  "one-week-forecast-text":"Прогноз погоди на тиждень для",
+  
+  "forecast-24-text": "24-годинний прогноз погоди на сьогодні, ",
+  "forecasts": "Прогнози погоди для ",
+  "one-week-forecast-text": "Прогноз на один тиждень",
+
+
   "menu-all":"Все",
   "menu-now":"Зараз",
   "menu-today":"Нині",

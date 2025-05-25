@@ -894,8 +894,8 @@ const Weather = () => {
       {
         hourlyWeatherData ? (
           <>
-            <h3 className='day-24-heading'>{t("forecast-24-text")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}  {hourlyWeatherData.location.country}</span></h3>
-            <h4 className='before-midday'>{t("before-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+            <h3 className='day-24-heading'>{t("forecasts")} <span className='day-7-location-span'>{hourlyWeatherData.location.name},  {hourlyWeatherData.location.country}</span></h3>
+                        <h4 className='before-midday'>{t("forecast-24-text")} <span className='day-7-location-span'> <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
 
 
             <div className='weather-7-container'>
@@ -1384,11 +1384,11 @@ const Weather = () => {
                     </Card>
                   </Stack>
                 </CarouselItem>
-              </Carousel>
+              {/* </Carousel> */}
 
 
 
-            </div>
+            {/* </div> */}
 
 
 
@@ -1398,12 +1398,12 @@ const Weather = () => {
             {/*  */}
             {/*  */}
             {/*  */}
-            <h4 className='before-midday'>{t("after-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4>
+            {/* <h4 className='before-midday'>{t("after-midday")} <span className='day-7-location-span'>{hourlyWeatherData.location.name}, <GetDay />, {hourlyWeatherData.forecast.forecastday[0].date}</span></h4> */}
 
 
-            <div className='weather-7-container'>
+            {/* <div className='weather-7-container'> */}
 
-              <Carousel fade>
+              {/* <Carousel fade> */}
                 <Carousel.Item>
                   <Stack
                     direction="horizontal"
@@ -1916,7 +1916,7 @@ const Weather = () => {
       {
         weekWeatherData ? (
           <>
-            <h3 className='week-7-heading'>{t("one-week-forecast-text")} <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
+            <h3 className='week-7-heading'>{t("one-week-forecast-text")} <span className='day-7-location-span'></span></h3>
 
             <Carousel className="weekly-carousel day7-carousel" fade>
               <CarouselItem className="week-4-days">

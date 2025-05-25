@@ -2405,7 +2405,7 @@ div.week-condition-icon-container{
   
 }
 
-@media screen and (max-width:980px) {
+@media screen and (min-width: 701px) and (max-width:980px) {
   .app-heading {
     font-size: 0px !important;
   }
@@ -2537,6 +2537,8 @@ div.carousel .sky-info-7, .week-3-days .sky-info-7, .week-4-days .sky-info-7{
 
 
   }
+
+ 
   .day7-carousel{
 margin-bottom: 60px !important;
   }

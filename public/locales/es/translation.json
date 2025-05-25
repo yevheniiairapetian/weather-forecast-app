@@ -1,8 +1,10 @@
 {
-  "forecast-24-text":"Pronóstico del tiempo para 24 horas en",
-  "before-midday":"Antes del mediodía, ",
-  "after-midday":"Después del mediodía, ",
-  "one-week-forecast-text":"Pronóstico del tiempo para una semana en",
+  
+  "forecast-24-text": "Pronóstico del tiempo para hoy durante 24 horas, ",
+  "forecasts": "Pronósticos del tiempo para ",
+  "one-week-forecast-text": "Pronóstico de una semana",
+
+
   "menu-all":"Todo",
   "menu-now":"Ahora",
   "menu-today":"Hoy",

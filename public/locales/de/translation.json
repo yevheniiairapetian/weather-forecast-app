@@ -1,8 +1,10 @@
 {
-  "forecast-24-text":"24-Stunden-Wettervorhersage für",
-  "before-midday":"Vor Mittag, ",
-  "after-midday":"Nach Mittag, ",
-  "one-week-forecast-text":"Wettervorhersage für eine Woche für",
+  
+  "forecast-24-text": "24-Stunden-Wettervorhersage für heute, ",
+  "forecasts": "Wettervorhersagen für ",
+  "one-week-forecast-text": "Ein-Wochen-Vorhersage",
+
+
   "menu-all":"Alle",
   "menu-now":"Jetzt",
   "menu-today":"Heute",

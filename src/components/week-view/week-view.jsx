@@ -419,13 +419,13 @@ export const WeekView = () => {
        {
               weekWeatherData ? (
                 <>
-                  <h3 className='week-7-heading'>{t("one-week-forecast-text")} <span className='day-7-location-span'>{weekWeatherData.location.name}, {weekWeatherData.location.country}</span></h3>
+                  <h3 className='week-7-heading'>{t("one-week-forecast-text")} <span className='day-7-location-span'></span></h3>
       
                   <Carousel className="weekly-carousel day7-carousel" fade>
                     <CarouselItem className="week-4-days">
-                      <Stack
+                      <Stack  
                         direction="horizontal"
-                        className="h-100 justify-content-center align-items-center"
+                        className="h-100 justify-content-center align-items-center week-stack-small-screen"
                         gap={4}
                       >
                         {/* <ExampleCarouselImage text="First slide" /> */}
@@ -670,9 +670,9 @@ export const WeekView = () => {
                     </CarouselItem>
                     <Carousel.Item className='week-3-days'>
       
-                      <Stack
+                      <Stack 
                         direction="horizontal"
-                        className="h-100 justify-content-center align-items-center"
+                        className="h-100 justify-content-center align-items-center week-stack-small-screen"
                         gap={3}>
       
       
