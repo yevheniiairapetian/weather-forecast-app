@@ -358,6 +358,22 @@ nav.page-header.dark {
   }
 }
 
+.toggle_btn .fa-sun:hover{
+  transform: rotate(280deg);
+  transition: all 2.8s ease-in-out;
+}
+
+@keyframes moonRotation {
+  0% { transform: rotate(0deg); }
+  35% { transform: rotate(-40deg); }
+  65% { transform: rotate(20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.toggle_btn .fa-moon:hover {
+  animation: moonRotation 3s ease-in-out;
+}
+
 .wind-south {
   animation: windSouth 2.6s infinite;
 }
