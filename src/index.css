@@ -18,6 +18,8 @@ body {
 
 }
 
+
+
 .switcher-not-found{
   display: flex;
   flex-direction: row;
@@ -27,7 +29,7 @@ body {
 }
 
 div.navigation.not-found-container.container.show{
-  height:180px !important;
+  height:150px !important;
 }
 
 div.justify-content-end.navbar-collapse.collapse.not-found-nav.show{
@@ -2904,7 +2906,12 @@ div.toggle-location-container {
   }
 
   .lang-choose{
+    width:42px;
+  }
+
+  .lang-choose-not-found{
     width:48px;
+
   }
 .toggle_btn{
   margin-right: 5px;
@@ -2982,6 +2989,7 @@ div.carousel-inner, .weather-7-container div.carousel-inner{
 .carousel-indicators {
 bottom: -38px;
 }
+
 }
 
 @media screen and (max-width:400px) {
@@ -2991,6 +2999,8 @@ bottom: -38px;
     width: 98%;
     margin-left: 4px;
   }
+
+  
 
   div.carousel-inner, .weather-7-container div.carousel-inner{
   height: 260px !important;
@@ -3095,6 +3105,8 @@ bottom: -38px;
     margin-left: auto !important;
     margin-right: auto !important;
   }
+
+  
 
   .clear-input-button {
     padding-left: 13px;

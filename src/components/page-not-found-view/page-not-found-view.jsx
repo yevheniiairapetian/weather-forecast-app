@@ -64,7 +64,7 @@ export const PageNotFoundView = () => {
         // const { soundsEnabled } = useSoundSettings();
     
         return <div className="lang-wrapper">
-          <select title={t("langHint")} className="lang-choose" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
+          <select title={t("langHint")} className="lang-choose-not-found" onChange={handleChangeLocale} onClick={() => { play() }} value={language}>
             {languages.map(({ name, code }) => (
               <option className="lang-option-text" key={code} value={code}> {name}</option>
             ))}
