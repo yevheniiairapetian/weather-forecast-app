@@ -102,7 +102,7 @@
   "type-city-first": " Por favor, primero escriba un nombre de ciudad",
   "info-is-metric": " La información ahora se muestra en el sistema métrico",
   "info-is-imperial": " La información ahora se muestra en el sistema imperial",
-  "modal-confirm-title": "Confirmar",
+  "modal-confirm-title": "Cerrar",
   "dark-mode-activated": " Ahora estás en el modo oscuro",
   "light-mode-activated": " Ahora estás en el modo claro",
   "close-modal-title": "Cerrar",

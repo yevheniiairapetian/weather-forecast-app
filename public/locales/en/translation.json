@@ -99,7 +99,7 @@
   "type-city-first":" Please first type a city name",
   "info-is-metric":" Info is now displayed in the metric system",
   "info-is-imperial":" Info is now displayed in the imperial system",
-  "modal-confirm-title":"Confirm",
+  "modal-confirm-title":"Close",
   "dark-mode-activated":" You are now in dark mode",
   "light-mode-activated":"You are now in light mode",
   "close-modal-title":"Close",
