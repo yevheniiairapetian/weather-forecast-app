@@ -15,7 +15,7 @@ root.render(
   <HashRouter>
     <MainView />
     <CookieComponent/>
-
+ 
     </HashRouter>
 );
 
